@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="xechy.work.dao.UserMapper">
+    <resultMap id="BaseResultMap" type="xechy.work.model.User">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="mail" property="mail" jdbcType="VARCHAR" />
+        <result column="address" property="address" jdbcType="VARCHAR" />
+        <result column="date" property="date" jdbcType="DATE" />
+        <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="sex" property="sex" jdbcType="VARCHAR" />
+    </resultMap>
+
+
+    <update id="updateUser" parameterType="xechy.work.model.User">
+        UPDATE work_user SET aid=#{aid},name=#{name},sex=#{sex},garde=#{garde},
+        depart=#{depart},major=#{major},s_class=#{s_class},phone_number=#{phone_number},bank_card=#{bank_card} WHERE id=#{id};
+    </update>
+
+    <update id="updatePassword" parameterType="xechy.work.model.User">
+        UPDATE work_user SET apassword=#{apassword}
+        WHERE id=#{id};
+    </update>
+
+    <select id="login" resultMap="BaseResultMap" parameterType="xechy.work.model.User">
+        SELECT id,name FROM user where name = #{name} and password = #{password}
+    </select>
+
+    <insert id="saveUser" parameterType="xechy.work.model.User">
+        INSERT INTO user (name,password,phone,mail,date)
+        VALUES (#{name},#{password},#{phone},#{mail},#{date});
+    </insert>
+
+    <select id="show" resultMap="BaseResultMap" parameterType="Long">
+        SELECT id,aid,name,sex,garde,depart,major,s_class,phone_number,bank_card from work_user where id=#{id};
+    </select>
+
+    <select id="selectByAid" resultType="Long" parameterType="Long">
+        SELECT aid FROM work_user where aid = #{aid}
+    </select>
+
+    <select id="selectByAid2" resultMap="BaseResultMap" parameterType="Long">
+        SELECT * FROM work_user where aid = #{aid}
+    </select>
+
+    <parameterMap type="java.util.Map" id="getPageBean">
+        <parameter property="pageOffset" mode="IN" jdbcType="INTEGER"/>
+        <parameter property="size" mode="IN" jdbcType="INTEGER"/>
+        <parameter property="searchText" mode="IN" jdbcType="VARCHAR"/>
+        <parameter property="sort" mode="IN" jdbcType="VARCHAR"/>
+        <parameter property="order" mode="IN" jdbcType="VARCHAR"/>
+    </parameterMap>
+
+
+
+</mapper>
