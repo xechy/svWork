@@ -314,7 +314,7 @@
     <!-- 通用Mapper end -->
   </dependencies>
   <build>
-    <!--&lt;!&ndash; 把mybatis的mapper XML 文件放到编译目录 &ndash;&gt;-->
+    <!-- 把mybatis的mapper XML 文件放到编译目录 -->
     <resources>
       <resource>
         <directory>src/main/java</directory>

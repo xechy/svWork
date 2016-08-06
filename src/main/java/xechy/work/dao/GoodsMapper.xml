@@ -3,15 +3,14 @@
 
 
 <mapper namespace="xechy.work.dao.UserMapper">
-    <resultMap id="BaseResultMap" type="xechy.work.model.User">
-        <id column="id" property="id" jdbcType="BIGINT" />
-        <result column="name" property="name" jdbcType="VARCHAR" />
-        <result column="password" property="password" jdbcType="VARCHAR" />
-        <result column="mail" property="mail" jdbcType="VARCHAR" />
-        <result column="address" property="address" jdbcType="VARCHAR" />
-        <result column="date" property="date" jdbcType="DATE" />
-        <result column="phone" property="phone" jdbcType="VARCHAR" />
-        <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <resultMap id="BaseResultMap" type="xechy.work.model.Goods">
+        <id column="gid" property="gid" jdbcType="BIGINT" />
+        <result column="gname" property="gname" jdbcType="VARCHAR" />
+        <result column="describe" property="describe" jdbcType="VARCHAR" />
+        <result column="price" property="price" jdbcType="DOUBLE" />
+        <result column="number" property="number" jdbcType="INT" />
+        <result column="gdate" property="gdate" jdbcType="DATE" />
+        <result column="gbusiness" property="bid" jdbcType="INT" />
     </resultMap>
 
 

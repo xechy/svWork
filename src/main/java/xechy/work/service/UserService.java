@@ -8,6 +8,11 @@ import xechy.work.model.User;
 public interface UserService {
 
     public User login(User user);
-    public void saveUser(User user);
+    void saveUser(User user);
+    void updateUser(User user);
+
+    User showUser(long id);
+    void updatePassword(User user);
+
 
 }

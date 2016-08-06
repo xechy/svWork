@@ -16,16 +16,32 @@ import java.util.Date;
 public class UserServiceImpl extends BaseServiceImpl implements UserService{
 
     @Autowired
-    private UserMapper UserMapper;
+    private UserMapper userMapper;
 
     @Override
     public User login(User user) {
-        return this.UserMapper.login(user);
+        return this.userMapper.login(user);
     }
 
     @Override
     public void saveUser(User user) {
-       this.UserMapper.saveUser(user);
+       this.userMapper.saveUser(user);
+    }
+
+    @Override
+    public void updateUser(User user) {
+        this.userMapper.updateUser(user);
+    }
+
+
+    @Override
+    public User showUser(long id) {
+        return this.userMapper.show(id);
+    }
+
+    @Override
+    public void updatePassword(User user) {
+        this.userMapper.updatePassword(user);
     }
 
 }

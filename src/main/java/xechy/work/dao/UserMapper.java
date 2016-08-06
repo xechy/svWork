@@ -12,4 +12,12 @@ public interface UserMapper extends BaseService<User>{
     public User login(User user);
 
     public void saveUser(User user);
+
+    User show(long id);
+
+    void updatePassword(User user);
+
+    void updateUser(User user);
+
+
 }
