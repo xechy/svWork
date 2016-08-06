@@ -12,6 +12,15 @@
         <result column="date" property="date" jdbcType="DATE" />
         <result column="phone" property="phone" jdbcType="VARCHAR" />
         <result column="sex" property="sex" jdbcType="VARCHAR" />
+
+        <!--一对多的关系-->
+        <collection property="uorder" ofType="Order">
+            <id column="oid" property="oid" jdbcType="BIGINT" />
+            <result column="state" property="state" jdbcType="VARCHAR" />
+            <result column="odate" property="odate" jdbcType="DATE" />
+            <result column="obusiness" property="bid" jdbcType="INT" />
+            <result column="ogoods" property="oid" jdbcType="INT" />
+        </collection>
     </resultMap>
 
 

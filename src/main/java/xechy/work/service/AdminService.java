@@ -10,9 +10,18 @@ import java.util.List;
  */
 public interface AdminService extends BaseService<Admin>{
 
-    public List<T> searchAll(); //管理员查询所有信息；
+    @Override
+    Admin login(Admin admin);
 
-    public void deleteById(long id); //根据ID删除信息
+    @Override
+    void update(Admin admin);
+
+    @Override
+    void updatePassword(Admin admin);
+
+    List<T> searchAll(); //管理员查询所有信息；
+
+    void deleteById(long id); //根据ID删除信息
 
 
 

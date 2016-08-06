@@ -3,6 +3,7 @@ package xechy.work.model;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Japa xie on 2016/8/4.
@@ -28,7 +29,9 @@ public class Business {
     //商家的注册日期
     private Date bdate;
     //商家商店旗下的外卖
-    private Goods bgoods;
+    private List<Goods> bgoods;
+
+    private List<Order> border;
 
     public long getBid() {
         return bid;
@@ -94,11 +97,19 @@ public class Business {
         this.bdate = bdate;
     }
 
-    public Goods getBgoods() {
+    public List<Goods> getBgoods() {
         return bgoods;
     }
 
-    public void setBgoods(Goods bgoods) {
+    public void setBgoods(List<Goods> bgoods) {
         this.bgoods = bgoods;
+    }
+
+    public List<Order> getBorder() {
+        return border;
+    }
+
+    public void setBorder(List<Order> border) {
+        this.border = border;
     }
 }

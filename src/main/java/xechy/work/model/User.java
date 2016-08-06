@@ -3,6 +3,7 @@ package xechy.work.model;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Japa xie on 2016/7/30.
@@ -27,6 +28,8 @@ public class User {
     private String address;
     //用户性别
     private char sex;
+
+    private List<Order> uOrder;
 
     public long getId() {
         return id;
@@ -90,5 +93,13 @@ public class User {
 
     public void setSex(char sex) {
         this.sex = sex;
+    }
+
+    public List<Order> getuOrder() {
+        return uOrder;
+    }
+
+    public void setuOrder(List<Order> uOrder) {
+        this.uOrder = uOrder;
     }
 }

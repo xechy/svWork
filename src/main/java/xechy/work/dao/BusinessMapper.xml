@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 
-<mapper namespace="xechy.work.dao.UserMapper">
+<mapper namespace="xechy.work.dao.BusinessMapper">
     <resultMap id="BaseResultMap" type="xechy.work.model.Business">
         <id column="bid" property="bid" jdbcType="BIGINT" />
         <result column="bname" property="bname" jdbcType="VARCHAR" />
@@ -12,6 +12,24 @@
         <result column="bdate" property="bdate" jdbcType="DATE" />
         <result column="bphone" property="bphone" jdbcType="VARCHAR" />
         <result column="bgoods" property="bid" jdbcType="INT"/>
+
+        <!--一对多的关系-->
+        <collection property="border" ofType="Order">
+            <id column="oid" property="oid" jdbcType="BIGINT" />
+            <result column="state" property="state" jdbcType="VARCHAR" />
+            <result column="odate" property="odate" jdbcType="DATE" />
+            <result column="ouser" property="id" jdbcType="INT" />
+            <result column="ogoods" property="oid" jdbcType="INT" />
+        </collection>
+
+        <collection property="bgoods" ofType="Goods">
+            <id column="gid" property="gid" jdbcType="BIGINT" />
+            <result column="gname" property="gname" jdbcType="VARCHAR" />
+            <result column="describe" property="describe" jdbcType="VARCHAR" />
+            <result column="price" property="price" jdbcType="DOUBLE" />
+            <result column="number" property="number" jdbcType="INT" />
+            <result column="gdate" property="gdate" jdbcType="DATE" />
+        </collection>
     </resultMap>
 
 

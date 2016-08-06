@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 
-<mapper namespace="xechy.work.dao.UserMapper">
+<mapper namespace="xechy.work.dao.GoodsMapper">
     <resultMap id="BaseResultMap" type="xechy.work.model.Goods">
         <id column="gid" property="gid" jdbcType="BIGINT" />
         <result column="gname" property="gname" jdbcType="VARCHAR" />
@@ -11,6 +11,17 @@
         <result column="number" property="number" jdbcType="INT" />
         <result column="gdate" property="gdate" jdbcType="DATE" />
         <result column="gbusiness" property="bid" jdbcType="INT" />
+
+        <!--多对一的关系-->
+        <association property="gbusiness" javaType="Business">
+            <id column="bid" property="bid" jdbcType="BIGINT" />
+            <result column="bname" property="bname" jdbcType="VARCHAR" />
+            <result column="bpassword" property="bpassword" jdbcType="VARCHAR" />
+            <result column="bmail" property="bmail" jdbcType="VARCHAR" />
+            <result column="baddress" property="baddress" jdbcType="VARCHAR" />
+            <result column="bdate" property="bdate" jdbcType="DATE" />
+            <result column="bphone" property="bphone" jdbcType="VARCHAR" />
+        </association>
     </resultMap>
 
 

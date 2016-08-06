@@ -13,7 +13,7 @@ import java.util.Date;
  * Created by Japa xie on 2016/7/30.
  */
 @Service
-public class UserServiceImpl extends BaseServiceImpl implements UserService{
+public class UserServiceImpl extends BaseServiceImpl<User> implements UserService{
 
     @Autowired
     private UserMapper userMapper;
@@ -44,4 +44,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService{
         this.userMapper.updatePassword(user);
     }
 
+    public void receivePassowrd(User user){
+        this.userMapper.receivePassowrd(user);
+    }
 }

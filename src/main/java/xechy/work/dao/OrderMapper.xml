@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 
-<mapper namespace="xechy.work.dao.UserMapper">
+<mapper namespace="xechy.work.dao.OrderMapper">
     <resultMap id="BaseResultMap" type="xechy.work.model.Order">
         <id column="oid" property="oid" jdbcType="BIGINT" />
         <result column="state" property="state" jdbcType="VARCHAR" />
@@ -10,6 +10,27 @@
         <result column="obusiness" property="bid" jdbcType="INT" />
         <result column="ouser" property="id" jdbcType="INT" />
         <result column="ogoods" property="oid" jdbcType="INT" />
+        
+        <!--多对一的关系-->
+        <association property="obusiness" javaType="Business">
+            <id column="bid" property="bid" jdbcType="BIGINT" />
+            <result column="bname" property="bname" jdbcType="VARCHAR" />
+            <result column="bpassword" property="bpassword" jdbcType="VARCHAR" />
+            <result column="bmail" property="bmail" jdbcType="VARCHAR" />
+            <result column="baddress" property="baddress" jdbcType="VARCHAR" />
+            <result column="bdate" property="bdate" jdbcType="DATE" />
+            <result column="bphone" property="bphone" jdbcType="VARCHAR" />
+        </association>
+        <association property="ouser" javaType="User">
+            <id column="id" property="id" jdbcType="BIGINT" />
+            <result column="name" property="name" jdbcType="VARCHAR" />
+            <result column="password" property="password" jdbcType="VARCHAR" />
+            <result column="mail" property="mail" jdbcType="VARCHAR" />
+            <result column="address" property="address" jdbcType="VARCHAR" />
+            <result column="date" property="date" jdbcType="DATE" />
+            <result column="phone" property="phone" jdbcType="VARCHAR" />
+            <result column="sex" property="sex" jdbcType="VARCHAR" />
+        </association>
     </resultMap>
 
 
