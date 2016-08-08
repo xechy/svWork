@@ -7,65 +7,42 @@
         <id column="oid" property="oid" jdbcType="BIGINT" />
         <result column="state" property="state" jdbcType="VARCHAR" />
         <result column="odate" property="odate" jdbcType="DATE" />
-        <result column="obusiness" property="bid" jdbcType="INT" />
-        <result column="ouser" property="id" jdbcType="INT" />
-        <result column="ogoods" property="oid" jdbcType="INT" />
+        <!--<result column="obusiness" property="bid" jdbcType="INT" />-->
+        <!--<result column="ouser" property="id" jdbcType="INT" />-->
+        <!--<result column="ogoods" property="gid" jdbcType="INT" />-->
         
         <!--多对一的关系-->
         <association property="obusiness" javaType="Business">
             <id column="bid" property="bid" jdbcType="BIGINT" />
-            <result column="bname" property="bname" jdbcType="VARCHAR" />
-            <result column="bpassword" property="bpassword" jdbcType="VARCHAR" />
-            <result column="bmail" property="bmail" jdbcType="VARCHAR" />
-            <result column="baddress" property="baddress" jdbcType="VARCHAR" />
-            <result column="bdate" property="bdate" jdbcType="DATE" />
-            <result column="bphone" property="bphone" jdbcType="VARCHAR" />
         </association>
         <association property="ouser" javaType="User">
             <id column="id" property="id" jdbcType="BIGINT" />
-            <result column="name" property="name" jdbcType="VARCHAR" />
-            <result column="password" property="password" jdbcType="VARCHAR" />
-            <result column="mail" property="mail" jdbcType="VARCHAR" />
-            <result column="address" property="address" jdbcType="VARCHAR" />
-            <result column="date" property="date" jdbcType="DATE" />
-            <result column="phone" property="phone" jdbcType="VARCHAR" />
-            <result column="sex" property="sex" jdbcType="VARCHAR" />
         </association>
     </resultMap>
 
 
-    <update id="updateUser" parameterType="xechy.work.model.User">
-        UPDATE user SET name=#{name},mail=#{mail},address=#{address},
-        phone=#{phone},sex=#{sex} WHERE id=#{id};
-    </update>
-
-    <update id="updatePassword" parameterType="xechy.work.model.User">
-        UPDATE user SET password=#{password}
-        WHERE id=#{id};
-    </update>
-
-    <select id="login" resultMap="BaseResultMap" parameterType="xechy.work.model.User">
-        SELECT id,name FROM user where name = #{name} and password = #{password}
+    <delete id="deleteBooking" parameterType="Long">
+        DELETE FROM order WHERE oid=#{oid};
+    </delete>
+    
+    <select id="show" resultMap="BaseResultMap" parameterType="Long">
+        SELECT * FROM order WHERE oid=#{oid};
     </select>
 
-    <insert id="saveUser" parameterType="xechy.work.model.User">
-        INSERT INTO user (name,password,phone,mail,date)
-        VALUES (#{name},#{password},#{phone},#{mail},#{date});
+    <insert id="overBooking" parameterType="xechy.work.model.Order">
+        INSERT INTO order (state,odate,bid,id,gid) WHERE (#{state},#{odate},#{bid},#{gid});
     </insert>
 
-    <select id="show" resultMap="BaseResultMap" parameterType="Long">
-        SELECT id,name,mail.address,phone,date,sex from user where id=#{id};
+    <update id="updateBooking" parameterType="xechy.work.model.Order">
+        UPDATE order SET state=#{state} WHERE oid=#{oid} AND (id=#{id} OR bid=#{bid});
+    </update>
+
+    <select id="searchById" resultMap="BaseResultMap" parameterType="Long">
+        SELECT * FROM order WHERE id=#{id}
     </select>
 
-
-    <parameterMap type="java.util.Map" id="getPageBean">
-        <parameter property="pageOffset" mode="IN" jdbcType="INTEGER"/>
-        <parameter property="size" mode="IN" jdbcType="INTEGER"/>
-        <parameter property="searchText" mode="IN" jdbcType="VARCHAR"/>
-        <parameter property="sort" mode="IN" jdbcType="VARCHAR"/>
-        <parameter property="order" mode="IN" jdbcType="VARCHAR"/>
-    </parameterMap>
-
-
+    <delete id="deleteById" parameterType="Long">
+        DELETE * FROM order WHERE oid=#{oid};
+    </delete>
 
 </mapper>

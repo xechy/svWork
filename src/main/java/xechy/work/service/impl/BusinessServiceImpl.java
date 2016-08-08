@@ -15,39 +15,49 @@ import java.util.List;
 public class BusinessServiceImpl extends BaseServiceImpl<Business> implements BusinessService {
 
     @Autowired
-    private BusinessMapper BusinessMapper;
+    private BusinessMapper businessMapper;
 
     @Override
     public Business login(Business business) {
-        return this.BusinessMapper.login(business);
+        return this.businessMapper.login(business);
     }
 
     @Override
     public void save(Business business) {
-        this.BusinessMapper.save(business);
+        this.businessMapper.save(business);
     }
 
     @Override
     public void update(Business business) {
-        this.BusinessMapper.update(business);
+        this.businessMapper.update(business);
     }
 
     @Override
     public Business show(long id) {
-        return this.BusinessMapper.show(id);
+        return this.businessMapper.show(id);
     }
 
     @Override
     public void updatePassword(Business business) {
-        this.BusinessMapper.updatePassword(business);
+        this.businessMapper.updatePassword(business);
     }
 
     @Override
-    public List<Business> searchByNames(String name) {
-        return this.BusinessMapper.searchByNames(name);
+    public List<Business> searchByNames(String storeName) {
+        return this.businessMapper.searchByNames(storeName);
     }
 
     public void receivePassowrd(Business business){
-        this.BusinessMapper.receivePassword(business);
+        this.businessMapper.receivePassword(business);
+    }
+
+    @Override
+    public List<Business> searchAll() {
+        return this.businessMapper.searchAll();
+    }
+
+    @Override
+    public void deleteById(long id) {
+        this.businessMapper.deleteById(id);
     }
 }

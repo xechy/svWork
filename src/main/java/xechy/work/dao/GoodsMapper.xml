@@ -8,55 +8,39 @@
         <result column="gname" property="gname" jdbcType="VARCHAR" />
         <result column="describe" property="describe" jdbcType="VARCHAR" />
         <result column="price" property="price" jdbcType="DOUBLE" />
-        <result column="number" property="number" jdbcType="INT" />
+        <result column="number" property="number" jdbcType="INTEGER" />
         <result column="gdate" property="gdate" jdbcType="DATE" />
-        <result column="gbusiness" property="bid" jdbcType="INT" />
+        <!--<result column="gbusiness" property="bid" jdbcType="INT" />-->
 
         <!--多对一的关系-->
         <association property="gbusiness" javaType="Business">
             <id column="bid" property="bid" jdbcType="BIGINT" />
-            <result column="bname" property="bname" jdbcType="VARCHAR" />
-            <result column="bpassword" property="bpassword" jdbcType="VARCHAR" />
-            <result column="bmail" property="bmail" jdbcType="VARCHAR" />
-            <result column="baddress" property="baddress" jdbcType="VARCHAR" />
-            <result column="bdate" property="bdate" jdbcType="DATE" />
-            <result column="bphone" property="bphone" jdbcType="VARCHAR" />
         </association>
     </resultMap>
 
+    <delete id="deleteById" parameterType="Long">
+          DELETE FROM goods WHERE gid=#{gid};
+    </delete>
 
-    <update id="updateUser" parameterType="xechy.work.model.User">
-        UPDATE user SET name=#{name},mail=#{mail},address=#{address},
-        phone=#{phone},sex=#{sex} WHERE id=#{id};
-    </update>
-
-    <update id="updatePassword" parameterType="xechy.work.model.User">
-        UPDATE user SET password=#{password}
-        WHERE id=#{id};
-    </update>
-
-    <select id="login" resultMap="BaseResultMap" parameterType="xechy.work.model.User">
-        SELECT id,name FROM user where name = #{name} and password = #{password}
-    </select>
-
-    <insert id="saveUser" parameterType="xechy.work.model.User">
-        INSERT INTO user (name,password,phone,mail,date)
-        VALUES (#{name},#{password},#{phone},#{mail},#{date});
+    <insert id="save" parameterType="xechy.work.model.Goods">
+        INSERT INTO goods (gname,describe,price,number,gdate,gbuiness.gid)
+        VALUES (#{gname},#{describe},#{price},#{number},#{gdate},#{gid});
     </insert>
 
-    <select id="show" resultMap="BaseResultMap" parameterType="Long">
-        SELECT id,name,mail.address,phone,date,sex from user where id=#{id};
+    <update id="update" parameterType="xechy.work.model.Goods">
+        UPDATE goods SET * WHERE gid=#{gid} AND gbusiness.id=#{bid};
+    </update>
+
+    <select id="show" resultMap="BaseResultMap" parameterType="xechy.work.model.Goods">
+        SELECT * FROM goods WHERE gid=#{gid};
     </select>
 
+    <select id="searchByNames" resultMap="BaseResultMap" parameterType="String">
+        SELECT * FROM goods WHERE gname LIKE % #{gname} %;
+    </select>
 
-    <parameterMap type="java.util.Map" id="getPageBean">
-        <parameter property="pageOffset" mode="IN" jdbcType="INTEGER"/>
-        <parameter property="size" mode="IN" jdbcType="INTEGER"/>
-        <parameter property="searchText" mode="IN" jdbcType="VARCHAR"/>
-        <parameter property="sort" mode="IN" jdbcType="VARCHAR"/>
-        <parameter property="order" mode="IN" jdbcType="VARCHAR"/>
-    </parameterMap>
-
-
+    <select id="searchAll" resultMap="BaseResultMap" >
+        SELECT * FROM goods;
+    </select>
 
 </mapper>

@@ -3,6 +3,8 @@ package xechy.work.dao;
 import xechy.work.model.Goods;
 import xechy.work.model.Order;
 
+import java.util.List;
+
 /**
  * Created by Japa xie on 2016/8/5.
  */
@@ -16,4 +18,9 @@ public interface OrderMapper {
     void updateBooking(Goods goods);
 
     Order searchById(long id);
+
+    List<Order> searchAll();
+
+    void deleteById(long id);
+
 }

@@ -18,7 +18,11 @@ public interface BusinessMapper {
 
     void updatePassword(Business business);
 
-    List<Business> searchByNames(String name);
+    List<Business> searchByNames(String storeName);
 
     void receivePassword(Business business);
+
+    List<Business> searchAll();
+
+    void deleteById(long id);
 }

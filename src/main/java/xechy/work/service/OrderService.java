@@ -19,4 +19,7 @@ public interface OrderService extends BaseService<Order> {
     Order searchById(long id); //查询外卖
 
     void deleteBooking(long id); //删除订单
+
+    @Override
+    void deleteById(long id);
 }

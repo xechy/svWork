@@ -138,5 +138,8 @@
         <property name="maxUploadSize" value="10485760000"/>
         <property name="maxInMemorySize" value="40960"/>
     </bean>
+
+    <!--解决静态资源文件的访问问题-->
     <mvc:default-servlet-handler/>
+
 </beans>

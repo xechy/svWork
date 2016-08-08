@@ -1,20 +1,16 @@
 package xechy.work.service.impl;
 
-import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xechy.work.dao.AdminMapper;
 import xechy.work.model.Admin;
 import xechy.work.service.AdminService;
 
-import javax.annotation.Resource;
-import java.util.List;
-
 /**
  * Created by Japa xie on 2016/8/5.
  */
 @Service
-public class AdminServiceImpl extends BaseServiceImpl<Admin> implements AdminService{
+public class AdminServiceImpl extends BaseServiceImpl<Admin> implements AdminService {
 
     @Autowired
     private AdminMapper adminMapper;
@@ -35,13 +31,4 @@ public class AdminServiceImpl extends BaseServiceImpl<Admin> implements AdminSer
         this.adminMapper.updatePassword(admin);
     }
 
-    @Override
-    public List<T> searchAll() {
-        return this.adminMapper.searchAll();
-    }
-
-    @Override
-    public void deleteById(long id) {
-        this.adminMapper.deleteById(id);
-    }
 }

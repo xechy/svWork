@@ -7,38 +7,50 @@ import xechy.work.model.Goods;
 import xechy.work.model.Order;
 import xechy.work.service.OrderService;
 
+import java.util.List;
+
 /**
  * Created by Japa xie on 2016/8/5.
  */
 
 @Service
-public class OrderServiceImpl extends BaseServiceImpl<Order> implements OrderService{
+public class OrderServiceImpl extends BaseServiceImpl<Order> implements OrderService {
 
     @Autowired
-    private OrderMapper OrderMapper;
+    private OrderMapper orderMapper;
 
     @Override
     public void deleteBooking(long id) {
-        this.OrderMapper.deleteBooking(id);
+        this.orderMapper.deleteBooking(id);
     }
 
     @Override
     public Order show(long id) {
-        return this.OrderMapper.show(id);
+        return this.orderMapper.show(id);
     }
 
     @Override
     public void overBooking(Goods goods) {
-        this.OrderMapper.overBooking(goods);
+        this.orderMapper.overBooking(goods);
     }
 
     @Override
     public void updateBooking(Goods goods) {
-        this.OrderMapper.updateBooking(goods);
+        this.orderMapper.updateBooking(goods);
     }
 
     @Override
     public Order searchById(long id) {
-        return this.OrderMapper.searchById(id);
+        return this.orderMapper.searchById(id);
+    }
+
+    @Override
+    public List<Order> searchAll() {
+        return this.orderMapper.searchAll();
+    }
+
+    @Override
+    public void deleteById(long id) {
+        this.orderMapper.deleteById(id);
     }
 }

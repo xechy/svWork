@@ -23,4 +23,7 @@ public interface GoodsService extends BaseService<Goods> {
 
     @Override
     void deleteById(long id);//删除商品
+
+    @Override
+    List<Goods> searchAll();
 }

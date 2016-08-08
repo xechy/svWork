@@ -64,11 +64,11 @@ public class Order {
         this.state = state;
     }
 
-    public Goods getOgoods() {
-        return ogoods;
-    }
-
-    public void setOgoods(Goods ogoods) {
-        this.ogoods = ogoods;
-    }
+//    public Goods getOgoods() {
+//        return ogoods;
+//    }
+//
+//    public void setOgoods(Goods ogoods) {
+//        this.ogoods = ogoods;
+//    }
 }

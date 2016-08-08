@@ -6,65 +6,60 @@
     <resultMap id="BaseResultMap" type="xechy.work.model.Business">
         <id column="bid" property="bid" jdbcType="BIGINT" />
         <result column="bname" property="bname" jdbcType="VARCHAR" />
+        <result column="storeName" property="storeName" jdbcType="VARCHAR" />
         <result column="bpassword" property="bpassword" jdbcType="VARCHAR" />
         <result column="bmail" property="bmail" jdbcType="VARCHAR" />
         <result column="baddress" property="baddress" jdbcType="VARCHAR" />
         <result column="bdate" property="bdate" jdbcType="DATE" />
         <result column="bphone" property="bphone" jdbcType="VARCHAR" />
-        <result column="bgoods" property="bid" jdbcType="INT"/>
 
         <!--一对多的关系-->
         <collection property="border" ofType="Order">
             <id column="oid" property="oid" jdbcType="BIGINT" />
-            <result column="state" property="state" jdbcType="VARCHAR" />
-            <result column="odate" property="odate" jdbcType="DATE" />
-            <result column="ouser" property="id" jdbcType="INT" />
-            <result column="ogoods" property="oid" jdbcType="INT" />
         </collection>
 
         <collection property="bgoods" ofType="Goods">
             <id column="gid" property="gid" jdbcType="BIGINT" />
-            <result column="gname" property="gname" jdbcType="VARCHAR" />
-            <result column="describe" property="describe" jdbcType="VARCHAR" />
-            <result column="price" property="price" jdbcType="DOUBLE" />
-            <result column="number" property="number" jdbcType="INT" />
-            <result column="gdate" property="gdate" jdbcType="DATE" />
         </collection>
     </resultMap>
 
-
-    <update id="updateUser" parameterType="xechy.work.model.User">
-        UPDATE user SET name=#{name},mail=#{mail},address=#{address},
-        phone=#{phone},sex=#{sex} WHERE id=#{id};
-    </update>
-
-    <update id="updatePassword" parameterType="xechy.work.model.User">
-        UPDATE user SET password=#{password}
-        WHERE id=#{id};
-    </update>
-
-    <select id="login" resultMap="BaseResultMap" parameterType="xechy.work.model.User">
-        SELECT id,name FROM user where name = #{name} and password = #{password}
+    <select id="login" resultMap="BaseResultMap" parameterType="xechy.work.model.Business">
+        SELECT id,name FROM business where bname = #{bname} and bpassword = #{bpassword}
     </select>
 
-    <insert id="saveUser" parameterType="xechy.work.model.User">
-        INSERT INTO user (name,password,phone,mail,date)
-        VALUES (#{name},#{password},#{phone},#{mail},#{date});
+    <insert id="save" parameterType="xechy.work.model.Business">
+        INSERT INTO business (bname,storeName,bpassword,bphone,bmail,bdate,baddress)
+        VALUES (#{bname},#{storeName},#{bpassword},#{bphone},#{bmail},#{bdate},#{baddress});
     </insert>
 
     <select id="show" resultMap="BaseResultMap" parameterType="Long">
-        SELECT id,name,mail.address,phone,date,sex from user where id=#{id};
+        SELECT * from business where bid=#{bid};
     </select>
 
+    <update id="updatePassword" parameterType="xechy.work.model.Business">
+        UPDATE business SET bpassword=#{bpassword}
+        WHERE bid=#{bid};
+    </update>
 
-    <parameterMap type="java.util.Map" id="getPageBean">
-        <parameter property="pageOffset" mode="IN" jdbcType="INTEGER"/>
-        <parameter property="size" mode="IN" jdbcType="INTEGER"/>
-        <parameter property="searchText" mode="IN" jdbcType="VARCHAR"/>
-        <parameter property="sort" mode="IN" jdbcType="VARCHAR"/>
-        <parameter property="order" mode="IN" jdbcType="VARCHAR"/>
-    </parameterMap>
+    <update id="update" parameterType="xechy.work.model.Business">
+        UPDATE business SET bname=#{bname},bmail=#{bmail},baddress=#{baddress},
+        bphone=#{bphone} WHERE bid=#{bid};
+    </update>
 
+    <select id="receivePassword" resultMap="BaseResultMap" parameterType="xechy.work.model.Business">
+        SELECT bid from business where bmail=#{bmail} AND bphone=#{bphone};
+    </select>
 
+    <select id="searchByNames" resultMap="BaseResultMap" parameterType="String">
+        SELECT id,storeName,bdate FROM business WHERE storeName LIKE %#{storeName}%;
+    </select>
+
+    <select id="searchAll" resultMap="BaseResultMap" >
+        SELECT * FROM business;
+    </select>
+
+    <delete id="deleteById" parameterType="Long">
+        DELETE * FROM business WHERE bid=#{bid};
+    </delete>
 
 </mapper>

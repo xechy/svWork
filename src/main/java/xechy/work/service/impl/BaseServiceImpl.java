@@ -13,6 +13,11 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 
 
     @Override
+    public List<T> searchAll() {
+        return null;
+    }
+
+    @Override
     public T login(T t) {
         return null;
     }

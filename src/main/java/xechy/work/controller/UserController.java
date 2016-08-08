@@ -25,8 +25,12 @@ public class UserController extends BaseController<User> {
     private UserService userService;
 
     @RequestMapping("/login")
-    public String login(@Valid User user, HttpSession session, Model model){
+    public String login(@Valid User user, HttpSession session,RedirectAttributes redirectAttributes){
         User u = this.userService.login(user);
+        if(u == null){
+            redirectAttributes.addFlashAttribute("msg","账号或者密码错误！");
+            return TEMPLATE_PATH+"loginUI";
+        }
         session.setAttribute("loginUser",u);
         return TEMPLATE_PATH+"listUI";
     }

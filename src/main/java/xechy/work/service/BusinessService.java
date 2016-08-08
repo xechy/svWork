@@ -25,8 +25,13 @@ public interface BusinessService extends BaseService<Business> {
     void updatePassword(Business business);//更改密码
 
     @Override
-    List<Business> searchByNames(String name);//搜索商家
+    List<Business> searchByNames(String storeName);//搜索商家
 
     void receivePassowrd(Business business);//找回密码
 
+    @Override
+    List<Business> searchAll();
+
+    @Override
+    void deleteById(long id);
 }

@@ -15,30 +15,30 @@ import java.util.List;
 public class GoodsServiceImpl extends BaseServiceImpl<Goods> implements GoodsService {
 
     @Autowired
-    private GoodsMapper GoodsMapper;
+    private GoodsMapper goodsMapper;
 
     @Override
     public void deleteById(long id) {
-        this.GoodsMapper.deleteById(id);
+        this.goodsMapper.deleteById(id);
     }
 
     @Override
     public void save(Goods goods) {
-        this.GoodsMapper.save(goods);
+        this.goodsMapper.save(goods);
     }
 
     @Override
     public void update(Goods goods) {
-        this.GoodsMapper.update(goods);
+        this.goodsMapper.update(goods);
     }
 
     @Override
     public Goods show(long id) {
-        return this.GoodsMapper.show(id);
+        return this.goodsMapper.show(id);
     }
 
     @Override
     public List<Goods> searchByNames(String name) {
-        return this.GoodsMapper.searchByNames(name);
+        return this.goodsMapper.searchByNames(name);
     }
 }

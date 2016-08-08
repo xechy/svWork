@@ -12,30 +12,13 @@
         <result column="date" property="date" jdbcType="DATE" />
         <result column="phone" property="phone" jdbcType="VARCHAR" />
         <result column="sex" property="sex" jdbcType="VARCHAR" />
-
         <!--一对多的关系-->
-        <collection property="uorder" ofType="Order">
+        <collection property="uOrder" ofType="Order">
             <id column="oid" property="oid" jdbcType="BIGINT" />
-            <result column="state" property="state" jdbcType="VARCHAR" />
-            <result column="odate" property="odate" jdbcType="DATE" />
-            <result column="obusiness" property="bid" jdbcType="INT" />
-            <result column="ogoods" property="oid" jdbcType="INT" />
         </collection>
     </resultMap>
-
-
-    <update id="updateUser" parameterType="xechy.work.model.User">
-        UPDATE user SET name=#{name},mail=#{mail},address=#{address},
-        phone=#{phone},sex=#{sex} WHERE id=#{id};
-    </update>
-
-    <update id="updatePassword" parameterType="xechy.work.model.User">
-        UPDATE user SET password=#{password}
-        WHERE id=#{id};
-    </update>
-
     <select id="login" resultMap="BaseResultMap" parameterType="xechy.work.model.User">
-        SELECT id,name FROM user where name = #{name} and password = #{password}
+        SELECT id,name FROM user where name=#{name} and password=#{password}
     </select>
 
     <insert id="saveUser" parameterType="xechy.work.model.User">
@@ -47,15 +30,26 @@
         SELECT id,name,mail.address,phone,date,sex from user where id=#{id};
     </select>
 
+    <update id="updatePassword" parameterType="xechy.work.model.User">
+        UPDATE user SET password=#{password}
+        WHERE id=#{id};
+    </update>
 
-    <parameterMap type="java.util.Map" id="getPageBean">
-        <parameter property="pageOffset" mode="IN" jdbcType="INTEGER"/>
-        <parameter property="size" mode="IN" jdbcType="INTEGER"/>
-        <parameter property="searchText" mode="IN" jdbcType="VARCHAR"/>
-        <parameter property="sort" mode="IN" jdbcType="VARCHAR"/>
-        <parameter property="order" mode="IN" jdbcType="VARCHAR"/>
-    </parameterMap>
+    <update id="updateUser" parameterType="xechy.work.model.User">
+        UPDATE user SET name=#{name},mail=#{mail},address=#{address},
+        phone=#{phone},sex=#{sex} WHERE id=#{id};
+    </update>
 
+    <select id="receivePassword" resultMap="BaseResultMap" parameterType="xechy.work.model.User">
+         SELECT id from user where mail=#{mail} AND phone=#{phone};
+    </select>
 
+    <select id="searchAll" resultMap="BaseResultMap" >
+        SELECT * FROM uesr;
+    </select>
+
+    <delete id="deleteById" parameterType="Long">
+        DELETE * FROM user WHERE id=#{id};
+    </delete>
 
 </mapper>

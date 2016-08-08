@@ -18,9 +18,9 @@ public class Goods {
     //外卖描述
     private String describe;
     //外卖价格
-    private double price;
+    private Double price;
     //外卖数量
-    private int number;
+    private Integer number;
     //关联对应的商家
     private Business gbusiness;
     //外卖上架日期
@@ -50,23 +50,22 @@ public class Goods {
         this.describe = describe;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    public int getNumber() {
+    public Integer getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(Integer number) {
         this.number = number;
     }
-
-    public Business getGbusiness() {
+        public Business getGbusiness() {
         return gbusiness;
     }
 

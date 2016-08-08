@@ -8,6 +8,7 @@ import xechy.work.model.User;
 import xechy.work.service.UserService;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Japa xie on 2016/7/30.
@@ -46,5 +47,15 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 
     public void receivePassowrd(User user){
         this.userMapper.receivePassowrd(user);
+    }
+
+    @Override
+    public List<User> searchAll() {
+        return this.userMapper.searchAll();
+    }
+
+    @Override
+    public void deleteById(long id) {
+        this.userMapper.deleteById(id);
     }
 }
