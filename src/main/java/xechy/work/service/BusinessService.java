@@ -34,4 +34,6 @@ public interface BusinessService extends BaseService<Business> {
 
     @Override
     void deleteById(long id);
+
+    Business checkName(String bname);
 }

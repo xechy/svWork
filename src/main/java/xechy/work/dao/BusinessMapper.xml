@@ -24,7 +24,7 @@
     </resultMap>
 
     <select id="login" resultMap="BaseResultMap" parameterType="xechy.work.model.Business">
-        SELECT id,name FROM business where bname = #{bname} and bpassword = #{bpassword}
+        SELECT bid,bname FROM business where bname = #{bname} and bpassword = #{bpassword}
     </select>
 
     <insert id="save" parameterType="xechy.work.model.Business">
@@ -61,5 +61,9 @@
     <delete id="deleteById" parameterType="Long">
         DELETE * FROM business WHERE bid=#{bid};
     </delete>
+
+    <select id="checkName" resultMap="BaseResultMap" parameterType="String">
+        SELECT * FROM business WHERE bname=#{bname};
+    </select>
 
 </mapper>

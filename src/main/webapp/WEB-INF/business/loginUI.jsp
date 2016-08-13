@@ -173,43 +173,75 @@
 	<body>
 
 	<script type="text/javascript">
+		$(document).ready(function () {
+
+			$('#txtName').bind('input',function () {
+				$.ajax({
+					type:"GET",
+					url:"${pageContext.request.contextPath}/business/checkName/"+$("#txtName").val(),
+
+					beforeSend:function(XMLHttpRequest)
+					{
+						$("#showResult").text("正在查询");
+						//Pause(this,100000);
+					},
+					success:function(msg)
+					{
+						$("#showResult").html(msg);
+						$("#showResult").css("color","red");
+					},
+					complete:function(XMLHttpRequest,textStatus)
+					{
+						//隐藏正在查询图片
+					},
+					error:function()
+					{
+						//错误处理
+					}
+				});
+			})
+		});
+
+	</script>
+	<script type="text/javascript">
 		function check(f){//检测函数
-			if(f.name.value==""){//如果用户名为空
+			if(f.bname.value==""){//如果用户名为空
 				alert("请输入用户名！");//弹出提示框
-				f.name.focus();//文本框获取焦点
+				f.bname.focus();//文本框获取焦点
 				return false;//返回错误
 			}
-			if(f.password.value=="") {
+			if(f.bpassword.value=="") {
 				alert("请输入密码！");
-				f.password.focus();
+				f.bpassword.focus();
 				return false;
 			}
-			if (f.password_1.value==""){
+			if (f.bpassword_1.value==""){
 				alert("请再次输入密码！");
-				f.password_1.focus();
+				f.bpassword_1.focus();
 				return false;
 			}
-			if(f.password.value!=f.password_1.value){
+			if(f.bpassword.value!=f.bpassword_1.value){
 				alert("请输入相同密码！");
-				f.password_1.focus();
+				f.bpassword_1.focus();
 				return false;
 			}else{
 				return true;
 			}
-			if (f.phone.value==""){
+			if (f.bphone.value==""){
 				alert("请输入电话号码！");
-				f.phone.focus();
+				f.bphone.focus();
 				return false;
 			}
-			if (f.mail.value==""){
+			if (f.bmail.value==""){
 				alert("请输入邮箱！");
-				f.mail.focus();
+				f.bmail.focus();
 				return false;
 			}
 
 			return false;
 		}
 	</script>
+
 
 		<div class="form">
 			<div id="landing">登录</div>
@@ -218,20 +250,21 @@
 			<div id="landing-content">
 				<div id="photo"><img src="${pageContext.request.contextPath}/img/photo.jpg" />
 				</div>
-				<form onsubmit="return check(this)" action="${pageContext.request.contextPath}/user/login" method="post">
-					<div class="inp"><input type="text" placeholder="用户名" name="name"/></div>
-					<div class="inp"><input type="password" placeholder="密码" name="password"/></div>
+				<form onsubmit="return check(this)" action="${pageContext.request.contextPath}/business/login" method="post">
+					<div class="inp"><input type="text" placeholder="用户名" name="bname"/></div>
+					<div class="inp"><input type="password" placeholder="密码" name="bpassword"/></div>
 					<input class="login" type="submit" value="登录"/>
 					</form>
 				<div id="bottom"><span id="forgotpassword">忘记密码</span></div>
 			</div>
 			<div id="registered-content">
-				<form  action="${pageContext.request.contextPath}/user/saveUser" method="post" onsubmit="return check(this)">
-					<div class="inp"><input type="text" placeholder="请输入用户名" name="name"/></div>
-					<div class="inp"><input type="password" placeholder="请输入密码" name="password"/></div>
-					<div class="inp"><input type="password" placeholder="请输入密码" name="password_1"/></div>
-					<div class="inp"><input type="text" placeholder="请输入手机号码" name="phone"/></div>
-					<div class="inp"><input type="text" placeholder="电子邮箱" name="mail"/></div>
+				<form name="regfrom" action="${pageContext.request.contextPath}/business/saveBusiness" method="post" onsubmit="return check(this)">
+					<div class="inp"><input id="txtName" type="text" placeholder="请输入用户名" name="bname" onkeyup="JudgeUserName()"/></div>
+					<div class="inp" id="showResult" style="float:right" style="font-size: 0.5px" ></div>
+					<div class="inp"><input type="password" placeholder="请输入密码" name="bpassword"/></div>
+					<div class="inp"><input type="password" placeholder="请输入密码" name="bpassword_1"/></div>
+					<div class="inp"><input type="text" placeholder="请输入手机号码" name="bphone"/></div>
+					<div class="inp"><input type="text" placeholder="电子邮箱" name="bmail"/></div>
 					<input class="login" type="submit" value="立即注册"/>
 				</form>
 			</div>

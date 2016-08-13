@@ -60,4 +60,9 @@ public class BusinessServiceImpl extends BaseServiceImpl<Business> implements Bu
     public void deleteById(long id) {
         this.businessMapper.deleteById(id);
     }
+
+    @Override
+    public Business checkName(String bname) {
+        return this.businessMapper.checkName(bname);
+    }
 }

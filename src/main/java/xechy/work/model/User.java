@@ -1,5 +1,7 @@
 package xechy.work.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
@@ -71,6 +73,7 @@ public class User {
         this.phone = phone;
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getDate() {
         return date;
     }

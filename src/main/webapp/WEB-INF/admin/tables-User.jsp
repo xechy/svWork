@@ -38,11 +38,11 @@
             <a class="navbar-brand" href="#"><span>Lumino</span>Admin</a>
             <ul class="user-menu">
                 <li class="dropdown pull-right">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> User <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> ${loginAdmin.aname} <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
                         <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                        <li><a href="${pageContext.request.contextPath}/admin/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                     </ul>
                 </li>
             </ul>
@@ -52,19 +52,12 @@
 </nav>
 
 <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
-    <form role="search">
-        <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search">
-        </div>
-    </form>
-    <ul class="nav menu">
-        <li><a href="index.html"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a></li>
-        <li><a href="widgets.html"><span class="glyphicon glyphicon-th"></span> Widgets</a></li>
-        <li><a href="charts.html"><span class="glyphicon glyphicon-stats"></span> Charts</a></li>
-        <li class="active"><a href="tables.html"><span class="glyphicon glyphicon-list-alt"></span> Tables</a></li>
-        <li><a href="forms.html"><span class="glyphicon glyphicon-pencil"></span> Forms</a></li>
-        <li><a href="panels.html"><span class="glyphicon glyphicon-info-sign"></span> Alerts &amp; Panels</a></li>
 
+    <ul class="nav menu">
+        <li class="active"><a href="${pageContext.request.contextPath}/admin/tables-UserUI"><span class="glyphicon glyphicon-list-alt"></span> Tables-User</a></li>
+        <li><a href="${pageContext.request.contextPath}/admin/tables-BusinessUI"><span class="glyphicon glyphicon-list-alt"></span> Tables-Business</a></li>
+        <li><a href="${pageContext.request.contextPath}/admin/tables-OrderUI"><span class="glyphicon glyphicon-list-alt"></span> Tables-Orders</a></li>
+        <li><a href="${pageContext.request.contextPath}/admin/tables-GoodsUI"><span class="glyphicon glyphicon-list-alt"></span> Tables-Goods</a></li>
         <li role="presentation" class="divider"></li>
 
     </ul>
@@ -110,35 +103,6 @@
         </div>
     </div><!--/.row-->
     <div class="row">
-        <div class="col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">Basic Table</div>
-                <div class="panel-body">
-                    <table data-toggle="table" data-url="${pageContext.request.contextPath}/admin/searchUser" >
-                        <thead>
-                        <tr>
-                            <th data-field="id" data-align="right">Item ID</th>
-                            <th data-field="name">Item Name</th>
-                            <th data-field="price">Item Price</th>
-                        </tr>
-                        </thead>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">Styled Table</div>
-                <div class="panel-body">
-                    <table data-toggle="table" id="table-style" data-url="${pageContext.request.contextPath}/admin/searchUser" data-row-style="rowStyle">
-                        <thead>
-                        <tr>
-                            <th data-field="id" data-align="right" >Item ID</th>
-                            <th data-field="name" >Item Name</th>
-                            <th data-field="price" >Item Price</th>
-                        </tr>
-                        </thead>
-                    </table>
                     <script>
                         $(function () {
                             $('#hover, #striped, #condensed').click(function () {
@@ -170,10 +134,6 @@
                         }
                     </script>
                 </div>
-            </div>
-        </div>
-    </div><!--/.row-->
-
 
 </div><!--/.main-->
 

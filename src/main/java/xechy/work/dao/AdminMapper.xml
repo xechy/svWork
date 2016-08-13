@@ -13,7 +13,7 @@
     </resultMap>
 
     <select id="login" resultMap="BaseResultMap" parameterType="xechy.work.model.Admin">
-        SELECT id,aname FROM admin
+        SELECT aid,aname FROM admin
         where aname=#{aname} and apassword=#{apassword};
     </select>
 

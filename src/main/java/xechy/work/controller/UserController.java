@@ -47,7 +47,7 @@ public class UserController extends BaseController<User> {
         return TEMPLATE_PATH+"loginUI";
     }
 
-    @RequestMapping("show/{id}")
+    @RequestMapping("/show/{id}")
     public String show(@PathVariable Long id, Model model, HttpServletRequest request){
         User loginUser = (User) request.getSession().getAttribute("loginUser");
         model.addAttribute(userService.showUser(id));

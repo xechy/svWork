@@ -12,7 +12,7 @@ public class BaseController<T> {
 
     protected String user_dir = "/WEB-INF/";                   //后台管理的jsp目录
     protected String TEMPLATE_PATH=user_dir+TEMPLATE_NAME+"/";              //每个模块的页面地址
-    protected String REDIRECT_URL="redirect:/"+TEMPLATE_NAME+"/";      //重定向    //重定向
+    protected String REDIRECT_URL="redirect:/"+TEMPLATE_NAME+"/";      //重定向
 
 
 
