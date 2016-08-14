@@ -26,14 +26,14 @@ public class GoodsController extends BaseController<Goods> {
     public String addGoods(@Valid Goods goods, RedirectAttributes redirectAttributes){
         goodsService.save(goods);
         redirectAttributes.addFlashAttribute("msg","添加成功");
-        return TEMPLATE_PATH+"listUI";
+        return REDIRECT_URL+"listUI";
     }
 
     @RequestMapping("updateGoods")
     public String updateGoods(@Valid Goods goods,RedirectAttributes redirectAttributes){
         goodsService.update(goods);
         redirectAttributes.addFlashAttribute("msg","修改成功");
-        return TEMPLATE_PATH+"listUI";
+        return REDIRECT_URL+"listUI";
     }
 
     @RequestMapping("addGoodsUI")
@@ -42,7 +42,7 @@ public class GoodsController extends BaseController<Goods> {
         if (b == null){
             return "business/loginUI";
         }
-        return TEMPLATE_PATH+"addGoodsUI";
+        return REDIRECT_URL+"addGoodsUI";
     }
 
     @RequestMapping("updateGoodsUI")
@@ -51,7 +51,7 @@ public class GoodsController extends BaseController<Goods> {
         if (b == null){
             return "business/loginUI";
         }
-        return TEMPLATE_PATH+"updateGoodsUI";
+        return REDIRECT_URL+"updateGoodsUI";
     }
 
     @RequestMapping("searchGoods/{bid}")
@@ -62,12 +62,12 @@ public class GoodsController extends BaseController<Goods> {
 
     @RequestMapping("searchGoodsUI")
     public String searchGoodsUI(HttpServletRequest request){
-        return TEMPLATE_PATH+"searchGoodsUI";
+        return REDIRECT_URL+"searchGoodsUI";
     }
 
     @RequestMapping("deleteGoods/{gid}")
     public String deleteGoods(@PathVariable long gid){
         goodsService.deleteById(gid);
-        return TEMPLATE_PATH+"searchGoodsUI";
+        return REDIRECT_URL+"searchGoodsUI";
     }
 }

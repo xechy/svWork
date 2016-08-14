@@ -27,16 +27,16 @@ public class OrderController extends BaseController<Order> {
     public String updateOrderUI(HttpServletRequest request){
         Business b = (Business) request.getSession().getAttribute("loginBusiness");
         if (b == null){
-            return TEMPLATE_PATH+"loginUI";
+            return REDIRECT_URL+"loginUI";
         }
-        return TEMPLATE_PATH+"updateOrderUI";
+        return REDIRECT_URL+"updateOrderUI";
     }
 
     @RequestMapping("updateOrder")
     public String updateOrder(@Valid Order order, RedirectAttributes redirectAttributes){
         orderService.update(order);
         redirectAttributes.addFlashAttribute("msg","修改成功");
-        return TEMPLATE_PATH+"listUI";
+        return REDIRECT_URL+"listUI";
     }
 
 
@@ -57,11 +57,11 @@ public class OrderController extends BaseController<Order> {
     @RequestMapping("deleteOrder/{id}")
     public String deleteOrder(@PathVariable long id){
         orderService.deleteById(id);
-        return TEMPLATE_PATH+"listUI";
+        return REDIRECT_URL+"listUI";
     }
 
     @RequestMapping("searchOrderUI")
     public String searchOrderUI(){
-        return TEMPLATE_PATH+"searchOrderUI";
+        return REDIRECT_URL+"searchOrderUI";
     }
 }

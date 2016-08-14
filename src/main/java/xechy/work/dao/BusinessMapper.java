@@ -27,4 +27,6 @@ public interface BusinessMapper {
     void deleteById(long id);
 
     Business checkName(String bname);
+
+    Business checkStoreName(String storeName);
 }

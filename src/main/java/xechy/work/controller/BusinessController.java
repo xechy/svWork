@@ -36,33 +36,35 @@ public class BusinessController extends BaseController<Business> {
     private OrderService orderService;
 
     @RequestMapping("/login")
-    public String login(@Valid Business business, HttpSession session){
+    public String login(@Valid Business business, HttpSession session,RedirectAttributes redirectAttributes){
         Business b = businessService.login(business);
         if(b == null){
+            redirectAttributes.addFlashAttribute("result","用户名或密码错误！");
             return REDIRECT_URL+"loginUI";
         }
 
         session.setAttribute("loginBusiness",b);
-        return REDIRECT_URL+"listUI";
+        return TEMPLATE_PATH+"listUI";
     }
 
     @RequestMapping("/saveBusiness")
     public String saveBusiness(@Valid Business business,RedirectAttributes redirectAttributes){
+        business.setBpassword("123456");
         try {
             business.setBdate(new Date());
             this.businessService.save(business);
         }catch (Exception e){
             e.printStackTrace();
         }
-        redirectAttributes.addFlashAttribute("result","注册成功!");
-        return TEMPLATE_PATH+"loginUI";
+        redirectAttributes.addFlashAttribute("result","注册成功，初始密码为123456！");
+        return REDIRECT_URL+"loginUI";
     }
 
     @RequestMapping("/show/{id}")
     public String show(@PathVariable Long id, Model model, HttpServletRequest request){
         Business loginBusiness = (Business) request.getSession().getAttribute("loginBusiness");
-        model.addAttribute(businessService.show(id));
-        return TEMPLATE_PATH+"showUI";
+        model.addAttribute("businessShow",businessService.show(id));
+        return REDIRECT_URL+"showUI";
     }
 
     @RequestMapping("/loginUI")
@@ -80,11 +82,22 @@ public class BusinessController extends BaseController<Business> {
         PrintWriter out = response.getWriter();
         Business b =  businessService.checkName(Name);
         if(b != null){
-            out.print("已存在用户");
+            out.print("存在该用户");
         }else {
-            out.print("该用户名可用");
+            out.print("");
         }
     }
 
+    @RequestMapping("/checkStoreName/{storeName}")
+    public void checkStoreName(@PathVariable String storeName, HttpServletResponse response) throws IOException {
+        response.setContentType("text/html; charset=utf-8");
+        PrintWriter out = response.getWriter();
+        Business b =  businessService.checkStoreName(storeName);
+        if(b != null){
+            out.print("存在该商铺");
+        }else {
+            out.print("");
+        }
+    }
 
 }

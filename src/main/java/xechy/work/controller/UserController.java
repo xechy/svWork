@@ -29,10 +29,10 @@ public class UserController extends BaseController<User> {
         User u = this.userService.login(user);
         if(u == null){
             redirectAttributes.addFlashAttribute("msg","账号或者密码错误！");
-            return TEMPLATE_PATH+"loginUI";
+            return REDIRECT_URL+"loginUI";
         }
         session.setAttribute("loginUser",u);
-        return TEMPLATE_PATH+"listUI";
+        return REDIRECT_URL+"listUI";
     }
 
     @RequestMapping("/saveUser")
@@ -44,7 +44,7 @@ public class UserController extends BaseController<User> {
             e.printStackTrace();
         }
         redirectAttributes.addFlashAttribute("result","注册成功!");
-        return TEMPLATE_PATH+"loginUI";
+        return REDIRECT_URL+"loginUI";
     }
 
     @RequestMapping("/show/{id}")
@@ -58,8 +58,8 @@ public class UserController extends BaseController<User> {
     public String loginUI(HttpServletRequest request){
         User u = (User) request.getSession().getAttribute("loginUser");
         if (null == u ){
-            return TEMPLATE_PATH+"loginUI";
+            return REDIRECT_URL+"loginUI";
         }
-        return TEMPLATE_PATH+"listUI";
+        return REDIRECT_URL+"listUI";
     }
 }

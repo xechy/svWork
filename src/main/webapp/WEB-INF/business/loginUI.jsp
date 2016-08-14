@@ -171,7 +171,7 @@
 	</head>
 
 	<body>
-
+	<!--检验是否存在相同的用户v名-->
 	<script type="text/javascript">
 		$(document).ready(function () {
 
@@ -183,12 +183,18 @@
 					beforeSend:function(XMLHttpRequest)
 					{
 						$("#showResult").text("正在查询");
+						$("#showResult").css("color","blue");
 						//Pause(this,100000);
 					},
 					success:function(msg)
 					{
-						$("#showResult").html(msg);
-						$("#showResult").css("color","red");
+						if(msg == ""){
+							$("#showResult").html("用户名可用");
+							$("#showResult").css("color","green");
+						}else{
+							$("#showResult").html(msg);
+							$("#showResult").css("color","red");
+						}
 					},
 					complete:function(XMLHttpRequest,textStatus)
 					{
@@ -201,8 +207,46 @@
 				});
 			})
 		});
+		</script>
+	<!--检验是否存在相同的商铺名-->
+	<script type="text/javascript">
+				$(document).ready(function () {
+
+					$('#txtStoreName').bind('input',function () {
+						$.ajax({
+							type:"GET",
+							url:"${pageContext.request.contextPath}/business/checkStoreName/"+$("#txtStoreName").val(),
+
+							beforeSend:function(XMLHttpRequest)
+							{
+								$("#showResult_1").text("正在查询");
+								$("#showResult_1").css("color","blue");
+								//Pause(this,100000);
+							},
+							success:function(msg)
+							{
+								if(msg == ""){
+									$("#showResult_1").html("商铺名可用");
+									$("#showResult_1").css("color","green");
+								}else{
+									$("#showResult_1").html(msg);
+									$("#showResult_1").css("color","red");
+								}
+							},
+							complete:function(XMLHttpRequest,textStatus)
+							{
+								//隐藏正在查询图片
+							},
+							error:function()
+							{
+								//错误处理
+							}
+						});
+					})
+				});
 
 	</script>
+	<!--检验是否没有输入-->
 	<script type="text/javascript">
 		function check(f){//检测函数
 			if(f.bname.value==""){//如果用户名为空
@@ -210,22 +254,15 @@
 				f.bname.focus();//文本框获取焦点
 				return false;//返回错误
 			}
-			if(f.bpassword.value=="") {
-				alert("请输入密码！");
-				f.bpassword.focus();
+			if (f.storeName.value==""){
+				alert("请输入商铺名！");
+				f.storeName.focus();
 				return false;
 			}
-			if (f.bpassword_1.value==""){
-				alert("请再次输入密码！");
-				f.bpassword_1.focus();
+			if (f.baddress.value==""){
+				alert("请输入地址！");
+				f.baddress.focus();
 				return false;
-			}
-			if(f.bpassword.value!=f.bpassword_1.value){
-				alert("请输入相同密码！");
-				f.bpassword_1.focus();
-				return false;
-			}else{
-				return true;
 			}
 			if (f.bphone.value==""){
 				alert("请输入电话号码！");
@@ -237,8 +274,21 @@
 				f.bmail.focus();
 				return false;
 			}
+		}
+	</script>
 
-			return false;
+	<script type="text/javascript">
+		function check_1(f){//检测函数
+			if(f.bname.value==""){//如果用户名为空
+				alert("请输入用户名！");//弹出提示框
+				f.bname.focus();//文本框获取焦点
+				return false;//返回错误
+			}
+			if(f.bpassword.value=="") {
+				alert("请输入密码！");
+				f.bpassword.focus();
+				return false;
+			}
 		}
 	</script>
 
@@ -250,7 +300,8 @@
 			<div id="landing-content">
 				<div id="photo"><img src="${pageContext.request.contextPath}/img/photo.jpg" />
 				</div>
-				<form onsubmit="return check(this)" action="${pageContext.request.contextPath}/business/login" method="post">
+				<form onsubmit="return check_1(this)" action="${pageContext.request.contextPath}/business/login" method="post">
+					<div  style="font-size:xx-small;float: right;color: red">${result}</div>
 					<div class="inp"><input type="text" placeholder="用户名" name="bname"/></div>
 					<div class="inp"><input type="password" placeholder="密码" name="bpassword"/></div>
 					<input class="login" type="submit" value="登录"/>
@@ -259,12 +310,14 @@
 			</div>
 			<div id="registered-content">
 				<form name="regfrom" action="${pageContext.request.contextPath}/business/saveBusiness" method="post" onsubmit="return check(this)">
-					<div class="inp"><input id="txtName" type="text" placeholder="请输入用户名" name="bname" onkeyup="JudgeUserName()"/></div>
-					<div class="inp" id="showResult" style="float:right" style="font-size: 0.5px" ></div>
-					<div class="inp"><input type="password" placeholder="请输入密码" name="bpassword"/></div>
-					<div class="inp"><input type="password" placeholder="请输入密码" name="bpassword_1"/></div>
+
+					<div id="showResult" style="font-size:xx-small;float: right" ></div>
+					<div class="inp" ><input id="txtName" type="text"  placeholder="请输入用户名" name="bname" /></div>
+					<div id="showResult_1" style="font-size:xx-small;float: right" ></div>
+					<div class="inp"><input id="txtStoreName" type="text" placeholder="请输入商铺名" name="storeName"/></div>
+					<div class="inp"><input type="password" placeholder="请输入地址" name="baddress"/></div>
 					<div class="inp"><input type="text" placeholder="请输入手机号码" name="bphone"/></div>
-					<div class="inp"><input type="text" placeholder="电子邮箱" name="bmail"/></div>
+					<div class="inp"><input type="text" placeholder="请输入电子邮箱" name="bmail"/></div>
 					<input class="login" type="submit" value="立即注册"/>
 				</form>
 			</div>
@@ -272,9 +325,5 @@
 
 
 	</body>
-	<c:if test="${result!=null}">
-		<script>
 
-		</script>
-	</c:if>
 </html>

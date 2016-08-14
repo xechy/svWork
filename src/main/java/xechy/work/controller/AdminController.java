@@ -40,10 +40,10 @@ public class AdminController extends BaseController<Admin> {
     public String login(@Valid Admin admin, HttpSession session){
         Admin a = adminService.login(admin);
         if(a == null){
-            return TEMPLATE_PATH+"loginUI";
+            return REDIRECT_URL+"loginUI";
         }
         session.setAttribute("loginAdmin",a);
-        return TEMPLATE_PATH+"tables-User";
+        return REDIRECT_URL+"tables-User";
     }
 
     @RequestMapping("/update")
@@ -51,12 +51,12 @@ public class AdminController extends BaseController<Admin> {
         try {
             adminService.update(admin);
             redirectAttributes.addFlashAttribute("msg","success");
-            return TEMPLATE_PATH+"tables-User";
+            return REDIRECT_URL+"tables-User";
         }catch (Exception e){
             e.printStackTrace();
         }
         redirectAttributes.addFlashAttribute("msg","error");
-        return TEMPLATE_PATH+"tables-User";
+        return REDIRECT_URL+"tables-User";
     }
 
     @RequestMapping("/updatePassword")
@@ -64,39 +64,39 @@ public class AdminController extends BaseController<Admin> {
         try {
             adminService.updatePassword(admin);
             redirectAttributes.addFlashAttribute("msg","success");
-            return TEMPLATE_PATH+"tables-User";
+            return REDIRECT_URL+"tables-User";
         }catch (Exception e){
             e.printStackTrace();
         }
         redirectAttributes.addFlashAttribute("msg","error");
-        return TEMPLATE_PATH+"tables-User";
+        return REDIRECT_URL+"tables-User";
     }
 
     @RequestMapping("/loginUI")
     public String loginUI(HttpServletRequest request){
         Admin a = (Admin) request.getSession().getAttribute("loginAdmin");
         if(a == null){
-            return TEMPLATE_PATH+"loginUI";
+            return REDIRECT_URL+"loginUI";
         }
-        return TEMPLATE_PATH+"tables-User";
+        return REDIRECT_URL+"tables-User";
     }
 
     @RequestMapping("/updateUI")
     public String updateUI(HttpServletRequest request){
         Admin a = (Admin) request.getSession().getAttribute("loginAdmin");
         if(a == null){
-            return TEMPLATE_PATH+"loginUI";
+            return REDIRECT_URL+"loginUI";
         }
-        return TEMPLATE_PATH+"updateUI";
+        return REDIRECT_URL+"updateUI";
     }
 
     @RequestMapping("/updatePssswordUI")
     public String updatePasswordUI(HttpServletRequest request){
         Admin a = (Admin) request.getSession().getAttribute("loginAdmin");
         if(a == null){
-            return TEMPLATE_PATH+"loginUI";
+            return REDIRECT_URL+"loginUI";
         }
-        return TEMPLATE_PATH+"updatePasswordUI";
+        return REDIRECT_URL+"updatePasswordUI";
     }
 
     @RequestMapping("/searchUser")
@@ -136,43 +136,43 @@ public class AdminController extends BaseController<Admin> {
     @RequestMapping("/logout")
     public String logout(HttpSession session){
         session.removeAttribute("loginAdmin");
-        return TEMPLATE_PATH+"loginUI";
+        return REDIRECT_URL+"loginUI";
     }
 
     @RequestMapping("/tables-BusinessUI")
     public String tBusinessUI(HttpServletRequest request){
         Admin a = (Admin) request.getSession().getAttribute("loginAdmin");
         if(a == null){
-            return TEMPLATE_PATH+"loginUI";
+            return REDIRECT_URL+"loginUI";
         }
-        return TEMPLATE_PATH+"tables-Business";
+        return REDIRECT_URL+"tables-Business";
     }
 
     @RequestMapping("/tables-GoodsUI")
     public String tGoodsUI(HttpServletRequest request){
         Admin a = (Admin) request.getSession().getAttribute("loginAdmin");
         if(a == null){
-            return TEMPLATE_PATH+"loginUI";
+            return REDIRECT_URL+"loginUI";
         }
-        return TEMPLATE_PATH+"tables-Goods";
+        return REDIRECT_URL+"tables-Goods";
     }
 
     @RequestMapping("/tables-OrderUI")
     public String tOrderUI(HttpServletRequest request){
         Admin a = (Admin) request.getSession().getAttribute("loginAdmin");
         if(a == null){
-            return TEMPLATE_PATH+"loginUI";
+            return REDIRECT_URL+"loginUI";
         }
-        return TEMPLATE_PATH+"tables-Order";
+        return REDIRECT_URL+"tables-Order";
     }
 
     @RequestMapping("/tables-UserUI")
     public String tUserUI(HttpServletRequest request){
         Admin a = (Admin) request.getSession().getAttribute("loginAdmin");
         if(a == null){
-            return TEMPLATE_PATH+"loginUI";
+            return REDIRECT_URL+"loginUI";
         }
-        return TEMPLATE_PATH+"tables-User";
+        return REDIRECT_URL+"tables-User";
     }
 
 }

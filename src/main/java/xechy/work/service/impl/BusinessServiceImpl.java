@@ -65,4 +65,9 @@ public class BusinessServiceImpl extends BaseServiceImpl<Business> implements Bu
     public Business checkName(String bname) {
         return this.businessMapper.checkName(bname);
     }
+
+    @Override
+    public Business checkStoreName(String storeName) {
+        return this.businessMapper.checkStoreName(storeName);
+    }
 }

@@ -63,7 +63,11 @@
     </delete>
 
     <select id="checkName" resultMap="BaseResultMap" parameterType="String">
-        SELECT * FROM business WHERE bname=#{bname};
+        SELECT bid FROM business WHERE bname=#{bname};
+    </select>
+
+    <select id="checkStoreName" resultMap="BaseResultMap" parameterType="String">
+        SELECT bid FROM business WHERE storeName=#{storeName};
     </select>
 
 </mapper>
