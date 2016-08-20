@@ -2,9 +2,12 @@ package xechy.work.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import xechy.work.dao.BusinessMapper;
 import xechy.work.model.Business;
+import xechy.work.model.User;
 import xechy.work.service.BusinessService;
+import xechy.work.util.FileUploadUtil;
 
 import java.util.List;
 
@@ -23,7 +26,8 @@ public class BusinessServiceImpl extends BaseServiceImpl<Business> implements Bu
     }
 
     @Override
-    public void save(Business business) {
+    public void save(Business business, MultipartFile filePath) {
+        FileUploadUtil.uploadBusinesstPicture(filePath,business);
         this.businessMapper.save(business);
     }
 
@@ -47,8 +51,8 @@ public class BusinessServiceImpl extends BaseServiceImpl<Business> implements Bu
         return this.businessMapper.searchByNames(storeName);
     }
 
-    public void receivePassowrd(Business business){
-        this.businessMapper.receivePassword(business);
+    public Business receivePassword(Business business){
+        return this.businessMapper.receivePassword(business);
     }
 
     @Override
@@ -69,5 +73,10 @@ public class BusinessServiceImpl extends BaseServiceImpl<Business> implements Bu
     @Override
     public Business checkStoreName(String storeName) {
         return this.businessMapper.checkStoreName(storeName);
+    }
+
+    @Override
+    public List<Business> searchByAddress(String baddress) {
+        return this.businessMapper.searchByAddress(baddress);
     }
 }

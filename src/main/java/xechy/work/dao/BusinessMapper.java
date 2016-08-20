@@ -20,7 +20,7 @@ public interface BusinessMapper {
 
     List<Business> searchByNames(String storeName);
 
-    void receivePassword(Business business);
+    Business receivePassword(Business business);
 
     List<Business> searchAll();
 
@@ -29,4 +29,6 @@ public interface BusinessMapper {
     Business checkName(String bname);
 
     Business checkStoreName(String storeName);
+
+    List<Business> searchByAddress(String baddress);
 }

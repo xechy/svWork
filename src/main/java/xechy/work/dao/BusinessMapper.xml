@@ -12,7 +12,7 @@
         <result column="baddress" property="baddress" jdbcType="VARCHAR" />
         <result column="bdate" property="bdate" jdbcType="DATE" />
         <result column="bphone" property="bphone" jdbcType="VARCHAR" />
-
+        <result column="bPicture" property="bPicture" jdbcType="VARCHAR" />
         <!--一对多的关系-->
         <collection property="border" ofType="Order">
             <id column="oid" property="oid" jdbcType="BIGINT" />
@@ -28,8 +28,8 @@
     </select>
 
     <insert id="save" parameterType="xechy.work.model.Business">
-        INSERT INTO business (bname,storeName,bpassword,bphone,bmail,bdate,baddress)
-        VALUES (#{bname},#{storeName},#{bpassword},#{bphone},#{bmail},#{bdate},#{baddress});
+        INSERT INTO business (bname,storeName,bpassword,bphone,bmail,bdate,baddress,bPicture)
+        VALUES (#{bname},#{storeName},#{bpassword},#{bphone},#{bmail},#{bdate},#{baddress},#{bPicture});
     </insert>
 
     <select id="show" resultMap="BaseResultMap" parameterType="Long">
@@ -68,6 +68,10 @@
 
     <select id="checkStoreName" resultMap="BaseResultMap" parameterType="String">
         SELECT bid FROM business WHERE storeName=#{storeName};
+    </select>
+
+    <select id="searchByAddress" resultMap="BaseResultMap" parameterType="String">
+        SELECT bid,bname,bPicture FROM business WHERE baddress LIKE '%' #{baddress} '%';
     </select>
 
 </mapper>

@@ -5,6 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import xechy.work.model.Business;
 import xechy.work.service.BusinessService;
@@ -18,12 +21,13 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Japa xie on 2016/8/5.
  */
 @Controller
-@RequestMapping("/business")
+@RequestMapping(value = "/business")
 public class BusinessController extends BaseController<Business> {
 
     @Autowired
@@ -48,11 +52,12 @@ public class BusinessController extends BaseController<Business> {
     }
 
     @RequestMapping("/saveBusiness")
-    public String saveBusiness(@Valid Business business,RedirectAttributes redirectAttributes){
+    public String saveBusiness(@Valid Business business,RedirectAttributes redirectAttributes,
+                               @RequestParam(value = "bPicture_1")MultipartFile picture){
         business.setBpassword("123456");
         try {
             business.setBdate(new Date());
-            this.businessService.save(business);
+            this.businessService.save(business,picture);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -98,6 +103,44 @@ public class BusinessController extends BaseController<Business> {
         }else {
             out.print("");
         }
+    }
+
+    @RequestMapping("/listUI")
+    public String listUI(HttpServletRequest request){
+        Business b = (Business) request.getSession().getAttribute("loginBusiness");
+        if (b == null){
+            return TEMPLATE_PATH+"loginUI";
+        }
+        return TEMPLATE_PATH+"listUI";
+    }
+
+    @RequestMapping("/listOrderUI")
+    public String listOrderUI(HttpServletRequest request){
+        Business b = (Business) request.getSession().getAttribute("loginBusiness");
+        if (b == null){
+            return TEMPLATE_PATH+"loginUI";
+        }
+        return TEMPLATE_PATH+"listOrderUI";
+    }
+
+    @RequestMapping("/logout")
+    public String logout(HttpSession session){
+        session.removeAttribute("loginBusiness");
+        return TEMPLATE_PATH+"loginUI";
+    }
+
+    @RequestMapping("/searchByAddress/{baddress}")
+    @ResponseBody
+    public List<Business> searchByAddress(@PathVariable String baddress){
+        List<Business> bs = businessService.searchByAddress(baddress);
+        return bs;
+    }
+
+
+    @RequestMapping("/searchByAddressUI")
+    public String searchByAddressUI(@RequestParam(value = "baddress") String baddress, HttpServletRequest request){
+        request.setAttribute("baddress",baddress);
+        return "WEB-INF/user/listUI";
     }
 
 }

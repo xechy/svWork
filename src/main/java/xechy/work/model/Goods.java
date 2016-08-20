@@ -11,20 +11,35 @@ import java.util.Date;
 @Table(name = "goods")
 public class Goods {
 
+    @Override
+    public String toString() {
+        return "Goods{" +
+                "gid=" + gid +
+                ", gname='" + gname + '\'' +
+                ", gdescribe='" + gdescribe + '\'' +
+                ", price=" + price +
+                ", bid=" + bid +
+                ", gdate=" + gdate +
+                ", picture='" + picture + '\'' +
+                '}';
+    }
+
     @Id
     private long gid;
     //外卖名字
     private String gname;
     //外卖描述
-    private String describe;
+    private String gdescribe;
     //外卖价格
     private Double price;
-    //外卖数量
-    private Integer number;
     //关联对应的商家
-    private Business gbusiness;
+    private long bid;
     //外卖上架日期
     private Date gdate;
+
+    private String picture;
+    //下单前添加到确认栏！
+    private long id;
 
     public long getGid() {
         return gid;
@@ -42,12 +57,12 @@ public class Goods {
         this.gname = gname;
     }
 
-    public String getDescribe() {
-        return describe;
+    public String getGdescribe() {
+        return gdescribe;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe;
+    public void setGdescribe(String gdescribe) {
+        this.gdescribe = gdescribe;
     }
 
     public Double getPrice() {
@@ -58,19 +73,12 @@ public class Goods {
         this.price = price;
     }
 
-    public Integer getNumber() {
-        return number;
+    public long getBid() {
+        return bid;
     }
 
-    public void setNumber(Integer number) {
-        this.number = number;
-    }
-        public Business getGbusiness() {
-        return gbusiness;
-    }
-
-    public void setGbusiness(Business gbusiness) {
-        this.gbusiness = gbusiness;
+    public void setBid(long bid) {
+        this.bid = bid;
     }
 
     public Date getGdate() {
@@ -79,5 +87,21 @@ public class Goods {
 
     public void setGdate(Date gdate) {
         this.gdate = gdate;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

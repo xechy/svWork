@@ -28,7 +28,8 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#sidebar-collapse">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -37,11 +38,13 @@
             <a class="navbar-brand" href="#"><span>Lumino</span>Admin</a>
             <ul class="user-menu">
                 <li class="dropdown pull-right">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> ${loginAdmin.aname} <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
+                            class="glyphicon glyphicon-user"></span> ${loginBusiness.bname} <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
                         <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
-                        <li><a href="${pageContext.request.contextPath}/admin/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                        <li><a href="${pageContext.request.contextPath}/business/logout"><span
+                                class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                     </ul>
                 </li>
             </ul>
@@ -56,10 +59,10 @@
         </div>
     </form>
     <ul class="nav menu">
-        <li><a href="${pageContext.request.contextPath}/admin/tables-UserUI"><span class="glyphicon glyphicon-list-alt"></span> Tables-User</a></li>
-        <li><a href="${pageContext.request.contextPath}/admin/tables-BusinessUI"><span class="glyphicon glyphicon-pencil"></span>Tables-Business</a></li>
-        <li><a href="${pageContext.request.contextPath}/admin/tables-GoodsUI"><span class="glyphicon glyphicon-info-sign"></span>Tables-Goods</a></li>
-        <li class="active"><a href="${pageContext.request.contextPath}/admin/tables-OrderUI"><span class="glyphicon glyphicon-info-sign"></span>Tables-Order</a></li>
+        <li><a href="${pageContext.request.contextPath}/business/listUI"><span class="glyphicon glyphicon-th"></span>List-Goods</a>
+        </li>
+        <li class="active"><a href="${pageContext.request.contextPath}/business/listOrderUI"><span
+                class="glyphicon glyphicon-th"></span>List-Order</a></li>
         <li role="presentation" class="divider"></li>
     </ul>
 
@@ -72,20 +75,17 @@
             <li class="active">Tables</li>
         </ol>
     </div><!--/.row-->
-
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Tables</h1>
         </div>
     </div><!--/.row-->
-
-
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">Advanced Table</div>
                 <div class="panel-body">
-                    <table data-toggle="table" data-url="${pageContext.request.contextPath}/admin/searchOrder"
+                    <table data-toggle="table" data-url="${pageContext.request.contextPath}/admin/searchBusiness"
                            data-show-refresh="true"
                            data-show-toggle="true"
                            data-show-columns="true"
@@ -96,9 +96,9 @@
                            data-sort-order="desc">
                         <thead>
                         <tr>
-                            <th data-field="state" data-checkbox="true" >Item ID</th>
+                            <th data-field="state" data-checkbox="true">Item ID</th>
                             <th data-field="id" data-sortable="true">Item ID</th>
-                            <th data-field="name"  data-sortable="true">Item Name</th>
+                            <th data-field="name" data-sortable="true">Item Name</th>
                             <th data-field="price" data-sortable="true">Item Price</th>
                         </tr>
                         </thead>
@@ -108,37 +108,37 @@
         </div>
     </div><!--/.row-->
 
-                    <script>
-                        $(function () {
-                            $('#hover, #striped, #condensed').click(function () {
-                                var classes = 'table';
+    <script>
+        $(function () {
+            $('#hover, #striped, #condensed').click(function () {
+                var classes = 'table';
 
-                                if ($('#hover').prop('checked')) {
-                                    classes += ' table-hover';
-                                }
-                                if ($('#condensed').prop('checked')) {
-                                    classes += ' table-condensed';
-                                }
-                                $('#table-style').bootstrapTable('destroy')
-                                        .bootstrapTable({
-                                            classes: classes,
-                                            striped: $('#striped').prop('checked')
-                                        });
-                            });
+                if ($('#hover').prop('checked')) {
+                    classes += ' table-hover';
+                }
+                if ($('#condensed').prop('checked')) {
+                    classes += ' table-condensed';
+                }
+                $('#table-style').bootstrapTable('destroy')
+                        .bootstrapTable({
+                            classes: classes,
+                            striped: $('#striped').prop('checked')
                         });
+            });
+        });
 
-                        function rowStyle(row, index) {
-                            var classes = ['active', 'success', 'info', 'warning', 'danger'];
+        function rowStyle(row, index) {
+            var classes = ['active', 'success', 'info', 'warning', 'danger'];
 
-                            if (index % 2 === 0 && index / 2 < classes.length) {
-                                return {
-                                    classes: classes[index / 2]
-                                };
-                            }
-                            return {};
-                        }
-                    </script>
-                </div>
+            if (index % 2 === 0 && index / 2 < classes.length) {
+                return {
+                    classes: classes[index / 2]
+                };
+            }
+            return {};
+        }
+    </script>
+</div>
 
 <script src="${pageContext.request.contextPath}/resources/admin_js/jquery-1.11.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/admin_js/bootstrap.min.js"></script>
@@ -150,7 +150,7 @@
 <script src="${pageContext.request.contextPath}/resources/admin_js/bootstrap-table.js"></script>
 <script>
     !function ($) {
-        $(document).on("click","ul.nav li.parent > a > span.icon", function(){
+        $(document).on("click", "ul.nav li.parent > a > span.icon", function () {
             $(this).find('em:first').toggleClass("glyphicon-minus");
         });
         $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
@@ -162,12 +162,6 @@
     $(window).on('resize', function () {
         if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
     })
-</script>
-
-<script type="text/javascript">
-
-
-
 </script>
 </body>
 

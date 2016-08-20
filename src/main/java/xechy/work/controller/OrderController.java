@@ -18,12 +18,13 @@ import java.util.List;
  * Created by Japa xie on 2016/8/5.
  */
 @Controller
+@RequestMapping(value = "/order")
 public class OrderController extends BaseController<Order> {
 
     @Autowired
     private OrderService orderService;
 
-    @RequestMapping("updateOrderUI")
+    @RequestMapping("/updateOrderUI")
     public String updateOrderUI(HttpServletRequest request){
         Business b = (Business) request.getSession().getAttribute("loginBusiness");
         if (b == null){
@@ -32,7 +33,7 @@ public class OrderController extends BaseController<Order> {
         return REDIRECT_URL+"updateOrderUI";
     }
 
-    @RequestMapping("updateOrder")
+    @RequestMapping("/updateOrder")
     public String updateOrder(@Valid Order order, RedirectAttributes redirectAttributes){
         orderService.update(order);
         redirectAttributes.addFlashAttribute("msg","修改成功");
@@ -40,13 +41,13 @@ public class OrderController extends BaseController<Order> {
     }
 
 
-    @RequestMapping("searchOrder/{id}")
+    @RequestMapping("/searchOrder/{id}")
     public List<Goods> searchOrder(@PathVariable long id){
         List<Goods> goodses = (List<Goods>) orderService.searchById(id);
         return goodses;
     }
 
-    @RequestMapping("saveOrder/{id}")
+    @RequestMapping("/saveOrder/{id}")
     public String saveOrder(@Valid Order order,@PathVariable long id, RedirectAttributes redirectAttributes){
         order.getOuser().setId(id);
         orderService.save(order);
@@ -54,13 +55,13 @@ public class OrderController extends BaseController<Order> {
         return "user/listUI";
     }
 
-    @RequestMapping("deleteOrder/{id}")
+    @RequestMapping("/deleteOrder/{id}")
     public String deleteOrder(@PathVariable long id){
         orderService.deleteById(id);
         return REDIRECT_URL+"listUI";
     }
 
-    @RequestMapping("searchOrderUI")
+    @RequestMapping("/searchOrderUI")
     public String searchOrderUI(){
         return REDIRECT_URL+"searchOrderUI";
     }

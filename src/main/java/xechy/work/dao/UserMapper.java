@@ -18,11 +18,13 @@ public interface UserMapper {
 
     void updatePassword(User user);
 
-    void updateUser(User user);
+    void update(User user);
 
-    void receivePassowrd(User user);
+    User receivePassword(User user);
 
     List<User> searchAll();
 
     void deleteById(long id);
+
+    User checkName(String name);
 }

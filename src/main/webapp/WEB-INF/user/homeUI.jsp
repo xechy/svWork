@@ -1,8 +1,15 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: Japa xie
+  Date: 2016/8/18
+  Time: 23:16
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Register</title>
+
+    <title>Lazy TakeOUT Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords" content="Photo-Hub Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
@@ -12,65 +19,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     }, false);
     function hideURLbar() {
         window.scrollTo(0, 1);
-    } </script>
+    }</script>
     <link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" rel='stylesheet' type='text/css'/>
     <link href="${pageContext.request.contextPath}/resources/css/style.css" rel='stylesheet' type='text/css'/>
     <link href='http://fonts.useso.com/css?family=Quicksand:300,400,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600,700,800' rel='stylesheet' type='text/css'>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/easyResponsiveTabs.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#horizontalTab').easyResponsiveTabs({
-                type: 'default', //Types: default, vertical, accordion
-                width: 'auto', //auto or any width like 600px
-                fit: true   // 100% fit in a container
-            });
-        });
-    </script>
-    <script src="js/menu_jquery.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/menu_jquery.js"></script>
 
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 </head>
 <body>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        var tbody = "";
-        $.ajax({
-            url: "${pageContext.request.contextPath}/business/searchByAddress/${baddress}",
-            type: 'GET',
-            cache: false,
-            dataType: 'json',
-            async: 'false',
-            success: function (data) {
-                $.each(data, function (n, value) {
-                    var count = 0;
-                    var trs = "";
-                    if (count % 6 != 0) {
-                        trs += " <li><a href='${pageContext.request.contextPath}/goods/searchGoodsUI/" + value.bid + " '> " +
-                                "<img src='${pageContext.request.contextPath}/resources/file/business/" + value.bPicture + "' class='img-responsive'  alt=''/>" +
-                                "<div class='tab_desc'>" +
-                                "<p>" + value.bname + "</p>" +
-                                "</div></a></li>";
-                    } else {
-                        trs += " <li class='last'><li><a href='${pageContext.request.contextPath}/goods/searchGoodsUI/" + value.bid + " '> " +
-                                "<img src='${pageContext.request.contextPath}/resources/file/business/" + value.bPicture + "' class='img-responsive'  alt=''/>" +
-                                "<div class='tab_desc'>" +
-                                "<p>" + value.bname + "</p>" +
-                                "</div></a></li>";
-                    }
-                    tbody += trs;
-                });
-                $("#project").append(tbody);
-            },
-            error: function () {
-                alert("error");
-            }
-        });
-    });
-</script>
 <script type="text/javascript">
     function check(f) {//检测函数
         if (f.name.value == "") {//如果用户名为空
@@ -93,8 +54,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
         <div class="top_right">
             <ul>
+
                 <c:choose>
-                    <c:when test="${loginUser!=null}">
+                    <c:when test="${loginUser.id != null}">
                         <li>${loginUser.name}</li>|
                         <li><a href="${pageContext.request.contextPath}/user/show/${loginUser.id}">查看个人资料</a></li>|
                         <li><a href="${pageContext.request.contextPath}/user/logout">登出</a></li>
@@ -114,7 +76,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                                 <label>密码</label>
                                                 <input type="password" name="password" id="password">
                                             </fieldset>
-                                            <div  style="font-size:xx-small;float: right;color: red">${msg}</div>
                                             <input type="submit" id="login" value="登录">
                                             <label for="checkbox"><input type="checkbox" id="checkbox"> <i>记住我</i></label>
                                         </fieldset>
@@ -125,29 +86,35 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </li>
                     </c:otherwise>
                 </c:choose>
+                <div style="font-size:xx-small;float: right;color: red">${msg}</div>
             </ul>
         </div>
         <div class="clearfix"></div>
     </div>
 </div>
-
-<div class="col-md-10 sap_tabs">
-    <div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
-        <ul class="resp-tabs-list">
-            <li class="resp-tab-item" aria-controls="tab_item-0" role="tab">
-                <a href="${pageContext.request.contextPath}/user/homeUI">
-                    <span>更改收货地址</span></a></li>
-            <div class="clearfix"></div>
-        </ul>
-        <div class="resp-tabs-container">
-            <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
-                <ul class="tab_img" id="project">
+<div class="banner">
+    <div class="container">
+        <div class="span_1_of_1">
+            <br/><br/>
+            <br/><br/>
+            <br/><br/>
+            <div class="search">
+                <ul class="nav1">
+                    <li id="search">
+                        <form action="${pageContext.request.contextPath}/business/searchByAddressUI" method="post">
+                            <input type="text" name="baddress" id="search_text" placeholder="请输入你所在的地址"/>
+                            <input type="button" name="search_button" id="search_button">
+                        </form>
+                    </li>
+                    <li>
+                        <a href="#">TakeOUT</a>
+                    </li>
                 </ul>
             </div>
-            <div class="clearfix"></div>
         </div>
     </div>
 </div>
+<br/><br/>
 <div class="grid_2">
     <div class="container">
         <div class="col-md-3 col_2">
@@ -211,9 +178,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <li><a href="faq.html">FAQ</a></li>
             <li><a href="#">Categories</a></li>
         </ul>
-        <p>Copyright &copy; 2015.Company name All rights reserved.<a target="_blank" href="http://www.777moban.com/">777模板</a>
-        </p>
     </div>
 </div>
+
 </body>
 </html>

@@ -20,11 +20,13 @@ public interface UserService extends BaseService<User>{
     void updatePassword(User user);//修改密码
 
     @Override
-    void receivePassowrd(User user);//找回密码
+    User receivePassword(User user);//找回密码
 
     @Override
     List<User> searchAll();
 
     @Override
     void deleteById(long id);
+
+    User checkName(String name);
 }

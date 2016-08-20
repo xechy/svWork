@@ -6,29 +6,40 @@
     <resultMap id="BaseResultMap" type="xechy.work.model.Goods">
         <id column="gid" property="gid" jdbcType="BIGINT" />
         <result column="gname" property="gname" jdbcType="VARCHAR" />
-        <result column="describe" property="describe" jdbcType="VARCHAR" />
+        <result column="gdescribe" property="gdescribe" jdbcType="VARCHAR" />
         <result column="price" property="price" jdbcType="DOUBLE" />
-        <result column="number" property="number" jdbcType="INTEGER" />
         <result column="gdate" property="gdate" jdbcType="DATE" />
+        <result column="picture" property="picture" jdbcType="VARCHAR" />
         <!--<result column="gbusiness" property="bid" jdbcType="INT" />-->
 
         <!--多对一的关系-->
-        <association property="gbusiness" javaType="Business">
+        <association property="bid" javaType="Business">
             <id column="bid" property="bid" jdbcType="BIGINT" />
         </association>
+        <association property="id" javaType="User">
+            <id column="id" property="id" jdbcType="BIGINT" />
+        </association>
     </resultMap>
+
+    <parameterMap type="java.util.Map" id="getPageBean">
+        <parameter property="pageOffset" mode="IN" jdbcType="INTEGER"/>
+        <parameter property="size" mode="IN" jdbcType="INTEGER"/>
+        <parameter property="searchText" mode="IN" jdbcType="VARCHAR"/>
+        <parameter property="sort" mode="IN" jdbcType="VARCHAR"/>
+        <parameter property="order" mode="IN" jdbcType="VARCHAR"/>
+    </parameterMap>
 
     <delete id="deleteById" parameterType="Long">
           DELETE FROM goods WHERE gid=#{gid};
     </delete>
 
     <insert id="save" parameterType="xechy.work.model.Goods">
-        INSERT INTO goods (gname,describe,price,number,gdate,gbuiness.gid)
-        VALUES (#{gname},#{describe},#{price},#{number},#{gdate},#{gid});
+        INSERT INTO goods (gname,gdescribe,price,bid,gdate,picture)
+        VALUES (#{gname},#{gdescribe},#{price},#{bid},#{gdate},#{picture});
     </insert>
 
     <update id="update" parameterType="xechy.work.model.Goods">
-        UPDATE goods SET * WHERE gid=#{gid} AND gbusiness.id=#{bid};
+        UPDATE goods SET * WHERE gid=#{gid} AND bid=#{bid};
     </update>
 
     <select id="show" resultMap="BaseResultMap" parameterType="xechy.work.model.Goods">
@@ -39,8 +50,16 @@
         SELECT * FROM goods WHERE gname LIKE % #{gname} %;
     </select>
 
-    <select id="searchAll" resultMap="BaseResultMap" >
-        SELECT * FROM goods;
+    <select id="searchByBid" resultMap="BaseResultMap" parameterMap="getPageBean">
+        SELECT gid,gname,picture,gdescribe FROM goods WHERE bid=#{bid};
     </select>
+
+    <select id="countAll" parameterMap="getPageBean" resultType="int">
+        SELECT COUNT(*) FROM goods WHERE bid=#{bid};
+    </select>
+
+    <update id="addID" parameterType="xechy.work.model.Goods">
+        UPDATE goods SET id=#{id} WHERE gid=#{gid};
+    </update>
 
 </mapper>

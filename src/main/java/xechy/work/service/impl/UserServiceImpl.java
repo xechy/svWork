@@ -1,13 +1,11 @@
 package xechy.work.service.impl;
 
-import org.apache.poi.util.SystemOutLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xechy.work.dao.UserMapper;
 import xechy.work.model.User;
 import xechy.work.service.UserService;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,7 +29,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 
     @Override
     public void updateUser(User user) {
-        this.userMapper.updateUser(user);
+        this.userMapper.update(user);
     }
 
 
@@ -45,8 +43,9 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
         this.userMapper.updatePassword(user);
     }
 
-    public void receivePassowrd(User user){
-        this.userMapper.receivePassowrd(user);
+    @Override
+    public User receivePassword(User user) {
+        return this.userMapper.receivePassword(user);
     }
 
     @Override
@@ -57,5 +56,10 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
     @Override
     public void deleteById(long id) {
         this.userMapper.deleteById(id);
+    }
+
+    @Override
+    public User checkName(String name) {
+        return this.userMapper.checkName(name);
     }
 }

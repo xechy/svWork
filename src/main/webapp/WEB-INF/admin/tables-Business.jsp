@@ -51,6 +51,10 @@
 </nav>
 
 <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+    <form role="search">
+        <div class="form-group">
+        </div>
+    </form>
     <ul class="nav menu">
         <li><a href="${pageContext.request.contextPath}/admin/tables-UserUI"><span class="glyphicon glyphicon-list-alt"></span> Tables-User</a></li>
         <li class="active"><a href="${pageContext.request.contextPath}/admin/tables-BusinessUI"><span class="glyphicon glyphicon-pencil"></span>Tables-Business</a></li>

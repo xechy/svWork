@@ -33,6 +33,8 @@ public class Business {
 
     private List<Order> border;
 
+    private String bPicture;
+
     public long getBid() {
         return bid;
     }
@@ -111,5 +113,13 @@ public class Business {
 
     public void setBorder(List<Order> border) {
         this.border = border;
+    }
+
+    public String getbPicture() {
+        return bPicture;
+    }
+
+    public void setbPicture(String bPicture) {
+        this.bPicture = bPicture;
     }
 }

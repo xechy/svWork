@@ -1,5 +1,6 @@
 package xechy.work.service;
 
+import org.springframework.web.multipart.MultipartFile;
 import xechy.work.model.Business;
 
 import java.util.List;
@@ -12,8 +13,8 @@ public interface BusinessService extends BaseService<Business> {
     @Override
     Business login(Business business);//登录
 
-    @Override
-    void save(Business business);//注册
+
+    void save(Business business, MultipartFile filePath);//注册
 
     @Override
     void update(Business business);//更新个人信息
@@ -27,7 +28,7 @@ public interface BusinessService extends BaseService<Business> {
     @Override
     List<Business> searchByNames(String storeName);//搜索商家
 
-    void receivePassowrd(Business business);//找回密码
+    Business receivePassword(Business business);//找回密码
 
     @Override
     List<Business> searchAll();
@@ -38,4 +39,6 @@ public interface BusinessService extends BaseService<Business> {
     Business checkName(String bname);
 
     Business checkStoreName(String storeName);
+
+    List<Business> searchByAddress(String baddress);
 }

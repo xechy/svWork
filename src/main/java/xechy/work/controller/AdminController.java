@@ -43,7 +43,7 @@ public class AdminController extends BaseController<Admin> {
             return REDIRECT_URL+"loginUI";
         }
         session.setAttribute("loginAdmin",a);
-        return REDIRECT_URL+"tables-User";
+        return TEMPLATE_PATH+"tables-User";
     }
 
     @RequestMapping("/update")
@@ -76,27 +76,27 @@ public class AdminController extends BaseController<Admin> {
     public String loginUI(HttpServletRequest request){
         Admin a = (Admin) request.getSession().getAttribute("loginAdmin");
         if(a == null){
-            return REDIRECT_URL+"loginUI";
+            return TEMPLATE_PATH+"loginUI";
         }
-        return REDIRECT_URL+"tables-User";
+        return TEMPLATE_PATH+"tables-User";
     }
 
     @RequestMapping("/updateUI")
     public String updateUI(HttpServletRequest request){
         Admin a = (Admin) request.getSession().getAttribute("loginAdmin");
         if(a == null){
-            return REDIRECT_URL+"loginUI";
+            return TEMPLATE_PATH+"loginUI";
         }
-        return REDIRECT_URL+"updateUI";
+        return TEMPLATE_PATH+"updateUI";
     }
 
     @RequestMapping("/updatePssswordUI")
     public String updatePasswordUI(HttpServletRequest request){
         Admin a = (Admin) request.getSession().getAttribute("loginAdmin");
         if(a == null){
-            return REDIRECT_URL+"loginUI";
+            return TEMPLATE_PATH+"loginUI";
         }
-        return REDIRECT_URL+"updatePasswordUI";
+        return TEMPLATE_PATH+"updatePasswordUI";
     }
 
     @RequestMapping("/searchUser")
@@ -136,43 +136,43 @@ public class AdminController extends BaseController<Admin> {
     @RequestMapping("/logout")
     public String logout(HttpSession session){
         session.removeAttribute("loginAdmin");
-        return REDIRECT_URL+"loginUI";
+        return TEMPLATE_PATH+"loginUI";
     }
 
     @RequestMapping("/tables-BusinessUI")
     public String tBusinessUI(HttpServletRequest request){
         Admin a = (Admin) request.getSession().getAttribute("loginAdmin");
         if(a == null){
-            return REDIRECT_URL+"loginUI";
+            return TEMPLATE_PATH+"loginUI";
         }
-        return REDIRECT_URL+"tables-Business";
+        return TEMPLATE_PATH+"tables-Business";
     }
 
     @RequestMapping("/tables-GoodsUI")
     public String tGoodsUI(HttpServletRequest request){
         Admin a = (Admin) request.getSession().getAttribute("loginAdmin");
         if(a == null){
-            return REDIRECT_URL+"loginUI";
+            return TEMPLATE_PATH+"loginUI";
         }
-        return REDIRECT_URL+"tables-Goods";
+        return TEMPLATE_PATH+"tables-Goods";
     }
 
     @RequestMapping("/tables-OrderUI")
     public String tOrderUI(HttpServletRequest request){
         Admin a = (Admin) request.getSession().getAttribute("loginAdmin");
         if(a == null){
-            return REDIRECT_URL+"loginUI";
+            return TEMPLATE_PATH+"loginUI";
         }
-        return REDIRECT_URL+"tables-Order";
+        return TEMPLATE_PATH+"tables-Order";
     }
 
     @RequestMapping("/tables-UserUI")
     public String tUserUI(HttpServletRequest request){
         Admin a = (Admin) request.getSession().getAttribute("loginAdmin");
         if(a == null){
-            return REDIRECT_URL+"loginUI";
+            return TEMPLATE_PATH+"loginUI";
         }
-        return REDIRECT_URL+"tables-User";
+        return TEMPLATE_PATH+"tables-User";
     }
 
 }

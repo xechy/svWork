@@ -61,9 +61,8 @@ public class BaseServiceImpl<T> implements BaseService<T> {
     public void deleteById(long id) {
 
     }
-
     @Override
-    public void receivePassowrd(T t) {
-
+    public T receivePassword(T t) {
+        return null;
     }
 }

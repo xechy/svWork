@@ -22,12 +22,12 @@
     </select>
 
     <insert id="saveUser" parameterType="xechy.work.model.User">
-        INSERT INTO user (name,password,phone,mail,date)
-        VALUES (#{name},#{password},#{phone},#{mail},#{date});
+        INSERT INTO user (name,password,phone,mail,date,sex)
+        VALUES (#{name},#{password},#{phone},#{mail},#{date},#{sex});
     </insert>
 
     <select id="show" resultMap="BaseResultMap" parameterType="Long">
-        SELECT id,name,mail.address,phone,date,sex from user where id=#{id};
+        SELECT id,name,mail,address,phone,date,sex from user where id=#{id};
     </select>
 
     <update id="updatePassword" parameterType="xechy.work.model.User">
@@ -35,7 +35,7 @@
         WHERE id=#{id};
     </update>
 
-    <update id="updateUser" parameterType="xechy.work.model.User">
+    <update id="update" parameterType="xechy.work.model.User">
         UPDATE user SET name=#{name},mail=#{mail},address=#{address},
         phone=#{phone},sex=#{sex} WHERE id=#{id};
     </update>
@@ -51,5 +51,9 @@
     <delete id="deleteById" parameterType="Long">
         DELETE * FROM user WHERE id=#{id};
     </delete>
+
+    <select id="checkName" resultMap="BaseResultMap" parameterType="String">
+        SELECT id FROM USER WHERE name=#{name};
+    </select>
 
 </mapper>

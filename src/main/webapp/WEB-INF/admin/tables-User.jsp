@@ -52,7 +52,10 @@
 </nav>
 
 <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
-
+    <form role="search">
+        <div class="form-group">
+        </div>
+    </form>
     <ul class="nav menu">
         <li class="active"><a href="${pageContext.request.contextPath}/admin/tables-UserUI"><span class="glyphicon glyphicon-list-alt"></span> Tables-User</a></li>
         <li><a href="${pageContext.request.contextPath}/admin/tables-BusinessUI"><span class="glyphicon glyphicon-list-alt"></span> Tables-Business</a></li>
@@ -89,12 +92,14 @@
                         <tr>
                             <th data-field="state" data-checkbox="true" >ID</th>
                             <th data-field="id" data-sortable="true">ID</th>
-                            <th data-field="name"  data-sortable="true">Name</th>
-                            <th data-field="phone" data-sortable="true">Phone</th>
-                            <th data-field="mail" data-sortable="true">Mail</th>
-                            <th data-field="address" data-sortable="true">Address</th>
-                            <th data-field="sex" data-sortable="true">Sex</th>
-                            <th data-field="date" data-sortable="true">Date</th>
+                            <th data-field="name"  data-sortable="true">姓名</th>
+                            <th data-field="phone" data-sortable="true">电话</th>
+                            <th data-field="mail" data-sortable="true">邮箱</th>
+                            <th data-field="address" data-sortable="true">地址</th>
+                            <th data-field="sex" data-sortable="true">性别</th>
+                            <th data-field="date" data-sortable="true">日期</th>
+                            <th data-field="delete" data-sortable="true">Delete</th>
+                            <th data-field="update" data-sortable="true">Update</th>
                         </tr>
                         </thead>
                     </table>

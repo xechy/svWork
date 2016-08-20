@@ -309,13 +309,15 @@
 				<div id="bottom"><span id="forgotpassword">忘记密码</span></div>
 			</div>
 			<div id="registered-content">
-				<form name="regfrom" action="${pageContext.request.contextPath}/business/saveBusiness" method="post" onsubmit="return check(this)">
+				<form name="regfrom" action="${pageContext.request.contextPath}/business/saveBusiness" method="post"
+					  enctype="multipart/form-data" onsubmit="return check(this)">
 
 					<div id="showResult" style="font-size:xx-small;float: right" ></div>
 					<div class="inp" ><input id="txtName" type="text"  placeholder="请输入用户名" name="bname" /></div>
 					<div id="showResult_1" style="font-size:xx-small;float: right" ></div>
 					<div class="inp"><input id="txtStoreName" type="text" placeholder="请输入商铺名" name="storeName"/></div>
-					<div class="inp"><input type="password" placeholder="请输入地址" name="baddress"/></div>
+					<div class="inp"><input type="file" name="bPicture_1" placeholder="选择图片"></div>
+					<div class="inp"><input type="text" placeholder="请输入地址" name="baddress"/></div>
 					<div class="inp"><input type="text" placeholder="请输入手机号码" name="bphone"/></div>
 					<div class="inp"><input type="text" placeholder="请输入电子邮箱" name="bmail"/></div>
 					<input class="login" type="submit" value="立即注册"/>
