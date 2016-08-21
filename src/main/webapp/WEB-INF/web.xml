@@ -66,7 +66,7 @@
     <url-pattern>/</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
-    <welcome-file>/WEB-INF/user/home.jsp</welcome-file>
+    <welcome-file>/WEB-INF/user/homeUI.jsp</welcome-file>
   </welcome-file-list>
 
 

@@ -175,4 +175,13 @@ public class AdminController extends BaseController<Admin> {
         return TEMPLATE_PATH+"tables-User";
     }
 
+    @RequestMapping("/tables-UEditorUI")
+    public String tUEditorUI(HttpServletRequest request){
+        Admin a = (Admin) request.getSession().getAttribute("loginAdmin");
+        if(a == null){
+            return TEMPLATE_PATH+"loginUI";
+        }
+        return TEMPLATE_PATH+"tables-UEditor";
+    }
+
 }
