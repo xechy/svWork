@@ -52,7 +52,13 @@
         </div>
     </form>
     <ul class="nav menu">
-        <li class="active"><a href="${pageContext.request.contextPath}/goods/addGoodsUI"><span class="glyphicon glyphicon-pencil"></span> 添加商品</a></li>
+        <li class="active"><a href="${pageContext.request.contextPath}/business/listUI"><span
+                class="glyphicon glyphicon-th"></span>List-Goods</a></li>
+        <li><a href="${pageContext.request.contextPath}/business/listOrderUI"><span
+                class="glyphicon glyphicon-th"></span>List-Order</a></li>
+        <li role="presentation" class="divider"></li>
+        <li><a href="${pageContext.request.contextPath}/goods/addGoodsUI"><span
+                class="glyphicon glyphicon-pencil"></span> 添加商品</a></li>
     </ul>
     <div class="attribution">Template by Medialoot</div>
 </div>
@@ -78,11 +84,12 @@
                 <div class="panel-heading">商品详细信息</div>
                 <div class="panel-body">
                     <div class="col-md-6">
-                        <form role="form" action="${pageContext.request.contextPath}/goods/addGoods" method="post" enctype="multipart/form-data">
+                        <form role="form" action="${pageContext.request.contextPath}/goods/addGoods" method="post"
+                              enctype="multipart/form-data">
                             <input type="hidden" name="bid" value="${loginBusiness.bid}">
                             <div class="form-group">
                                 <label>Name</label>
-                                <input type="text" name="gname" class="form-control" placeholder="填写商品名称" >
+                                <input type="text" name="gname" class="form-control" placeholder="填写商品名称">
                             </div>
 
                             <div class="form-group">

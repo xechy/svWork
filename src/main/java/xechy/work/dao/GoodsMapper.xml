@@ -8,7 +8,7 @@
         <result column="gname" property="gname" jdbcType="VARCHAR" />
         <result column="gdescribe" property="gdescribe" jdbcType="VARCHAR" />
         <result column="price" property="price" jdbcType="DOUBLE" />
-        <result column="gdate" property="gdate" jdbcType="DATE" />
+        <result column="gdate" property="gdate" jdbcType="TIMESTAMP" />
         <result column="picture" property="picture" jdbcType="VARCHAR" />
         <!--<result column="gbusiness" property="bid" jdbcType="INT" />-->
 
@@ -48,6 +48,14 @@
 
     <select id="searchByNames" resultMap="BaseResultMap" parameterType="String">
         SELECT * FROM goods WHERE gname LIKE % #{gname} %;
+    </select>
+
+    <select id="searchsById" resultMap="BaseResultMap" parameterType="long">
+        SELECT gid,gname,gdescribe,price,picture FROM goods WHERE bid=#{bid};
+    </select>
+
+    <select id="searchsByUId" resultMap="BaseResultMap" parameterType="long">
+        SELECT gid,gname,price,picture FROM goods WHERE id=#{id};
     </select>
 
     <select id="searchByBid" resultMap="BaseResultMap" parameterMap="getPageBean">

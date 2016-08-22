@@ -1,5 +1,7 @@
 package xechy.work.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
@@ -90,7 +92,7 @@ public class Business {
     public void setBaddress(String baddress) {
         this.baddress = baddress;
     }
-
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getBdate() {
         return bdate;
     }
@@ -107,19 +109,19 @@ public class Business {
         this.bgoods = bgoods;
     }
 
-    public List<Order> getBorder() {
-        return border;
-    }
-
-    public void setBorder(List<Order> border) {
-        this.border = border;
-    }
-
     public String getbPicture() {
         return bPicture;
     }
 
     public void setbPicture(String bPicture) {
         this.bPicture = bPicture;
+    }
+
+    public List<Order> getBorder() {
+        return border;
+    }
+
+    public void setBorder(List<Order> border) {
+        this.border = border;
     }
 }

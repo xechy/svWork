@@ -29,9 +29,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         });
     </script>
     <script src="js/menu_jquery.js"></script>
-
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 </head>
 <body>
 
@@ -39,7 +36,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     $(document).ready(function () {
         var tbody = "";
         $.ajax({
-            url: "${pageContext.request.contextPath}/goods/searchGoods/${bid}",
+            url: "${pageContext.request.contextPath}/goods/searchGoods/${searchB.bid}",
             type: 'GET',
             cache: false,
             dataType: 'json',
@@ -49,19 +46,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     var count = 0;
                     var trs = "";
                     if (count % 6 != 0) {
-                        trs += " <li><a href='${pageContext.request.contextPath}/order/searchGoodsUI/" + value.gid + " '> " +
+                        trs += " <li><a href='${pageContext.request.contextPath}/goods/addID/" + value.gid + " '> " +
                                 "<img src='${pageContext.request.contextPath}/resources/file/goods/" + value.picture + "' class='img-responsive'  alt=''/>" +
                                 "<div class='tab_desc'>" +
                                 "<p>" + value.gname + "</p>" +
-                                "<h4>"+ value.gdescribe +
-                                "</h4></div></a></li>";
+                                "<h4>" + value.gdescribe +
+                                "<h5> ￥" + value.price +
+                                "</h5></h4></div></a></li>";
                     } else {
-                        trs += " <li class='last'><li><a href='${pageContext.request.contextPath}/order/searchGoodsUI/" + value.gid + " '> " +
+                        trs += " <li class='last'><li><a href='${pageContext.request.contextPath}/goods/addID/" + value.gid + " '> " +
                                 "<img src='${pageContext.request.contextPath}/resources/file/goods/" + value.picture + "' class='img-responsive'  alt=''/>" +
                                 "<div class='tab_desc'>" +
                                 "<p>" + value.gname + "</p>" +
-                                "<h4>"+ value.gdescribe +
-                                "</h4></div></a></li>";
+                                "<h4>" + value.gdescribe +
+                                "<h5>" + value.price +
+                                "</h5></h4></div></a></li>";
                     }
                     tbody += trs;
                 });
@@ -73,21 +72,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         });
     });
 </script>
-<script type="text/javascript">
-    function check(f) {//检测函数
-        if (f.name.value == "") {//如果用户名为空
-            alert("请输入用户名！");//弹出提示框
-            f.name.focus();//文本框获取焦点
-            return false;//返回错误
-        }
-        if (f.password.value == "") {
-            alert("请输入密码！");
-            f.password.focus();
-            return false;
-        }
-        return true;
-    }
-</script>
 <div class="header">
     <div class="container">
         <div class="logo">
@@ -95,38 +79,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
         <div class="top_right">
             <ul>
-                <c:choose>
-                    <c:when test="${loginUser!=null}">
-                        <li>${loginUser.name}</li>|
-                        <li><a href="${pageContext.request.contextPath}/user/show/${loginUser.id}">查看个人资料</a></li>|
-                        <li><a href="${pageContext.request.contextPath}/user/logout">登出</a></li>
-                    </c:when>
-                    <c:otherwise>
-                        <li><a href="${pageContext.request.contextPath}/user/registerUI">注册</a></li>|
-                        <li class="login">
-                            <div id="loginContainer"><a href="#" id="loginButton"><span>登录</span></a>
-                                <div id="loginBox">
-                                    <form id="loginForm" action="${pageContext.request.contextPath}/user/login" method="post" onsubmit="return check(this)">
-                                        <fieldset id="body">
-                                            <fieldset>
-                                                <label>用户名</label>
-                                                <input type="text" name="name" id="name">
-                                            </fieldset>
-                                            <fieldset>
-                                                <label>密码</label>
-                                                <input type="password" name="password" id="password">
-                                            </fieldset>
-                                            <div  style="font-size:xx-small;float: right;color: red">${msg}</div>
-                                            <input type="submit" id="login" value="登录">
-                                            <label for="checkbox"><input type="checkbox" id="checkbox"> <i>记住我</i></label>
-                                        </fieldset>
-                                        <span><a href="${pageContext.request.contextPath}/user/forgetUI">忘记密码?</a></span>
-                                    </form>
-                                </div>
-                            </div>
-                        </li>
-                    </c:otherwise>
-                </c:choose>
+                <li>${loginUser.name}</li>
+                |
+                <li><a href="${pageContext.request.contextPath}/user/show/${loginUser.id}">查看个人资料</a></li>
+                |
+                <li><a href="${pageContext.request.contextPath}/user/logout">登出</a></li>
             </ul>
         </div>
         <div class="clearfix"></div>
@@ -137,8 +94,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
         <ul class="resp-tabs-list">
             <li class="resp-tab-item" aria-controls="tab_item-0" role="tab">
+                <span><img src='${pageContext.request.contextPath}/resources/file/business/${searchB.bPicture}'
+                           class="img-responsive" alt=""/></span></li>
+            <li class="resp-tab-item" aria-controls="tab_item-1" role="tab">
+                <span><h2>${searchB.bname}</h2></span></li>
+            <li class="resp-tab-item" aria-controls="tab_item-2" role="tab">
                 <a href="${pageContext.request.contextPath}/user/homeUI">
-                    <span>更改收货地址</span></a></li>
+                    <span><div style="font-size: xx-small">更改收货地址</div></span></a></li>
+            <li class="resp-tab-item" aria-controls="tab_item-3" role="tab">
+                <span><div style="font-size: xx-small;color: #6ce26c">
+                <a href="${pageContext.request.contextPath}/order/saveOrderUI}">${addIDMsg}</a></div></span>
+            </li>
             <div class="clearfix"></div>
         </ul>
         <div class="resp-tabs-container">

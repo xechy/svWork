@@ -34,4 +34,5 @@ public interface GoodsService extends BaseService<Goods> {
 
     Map dataTable(String searchText, int sEcho, PageBean pageBean);
 
+
 }

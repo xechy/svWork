@@ -24,4 +24,8 @@ public interface GoodsMapper {
     List<Goods> searchByBid(Map<String, Object> parameterMap);
 
     void addID(Goods goods);
+
+    List<Goods> searchsById(long id);
+
+    List<Goods> searchByUId(long id);
 }

@@ -6,16 +6,15 @@
     <resultMap id="BaseResultMap" type="xechy.work.model.Order">
         <id column="oid" property="oid" jdbcType="BIGINT" />
         <result column="state" property="state" jdbcType="VARCHAR" />
-        <result column="odate" property="odate" jdbcType="DATE" />
-        <!--<result column="obusiness" property="bid" jdbcType="INT" />-->
-        <!--<result column="ouser" property="id" jdbcType="INT" />-->
-        <!--<result column="ogoods" property="gid" jdbcType="INT" />-->
-        
+        <result column="odate" property="odate" jdbcType="TIMESTAMP" />
+        <result column="price" property="price" jdbcType="DOUBLE" />
+
         <!--多对一的关系-->
-        <association property="obusiness" javaType="Business">
-            <id column="bid" property="bid" jdbcType="BIGINT" />
+
+        <association property="id" javaType="xechy.work.model.User">
+            <id column="id" property="id" jdbcType="BIGINT" />
         </association>
-        <association property="ouser" javaType="User">
+        <association property="gid" javaType="xechy.work.model.Goods">
             <id column="id" property="id" jdbcType="BIGINT" />
         </association>
     </resultMap>
@@ -30,7 +29,7 @@
     </select>
 
     <insert id="overBooking" parameterType="xechy.work.model.Order">
-        INSERT INTO order (state,odate,bid,id,gid) WHERE (#{state},#{odate},#{bid},#{gid});
+        INSERT INTO order (state,odate,price,id,gid) WHERE (#{state},#{odate},#{price},#{bid},#{gid});
     </insert>
 
     <update id="updateBooking" parameterType="xechy.work.model.Order">

@@ -16,12 +16,8 @@
     <link href="${pageContext.request.contextPath}/resources/admin_css/datepicker3.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/admin_css/bootstrap-table.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/admin_css/styles.css" rel="stylesheet">
-
-    <!--[if lt IE 9]>
-    <script src="${pageContext.request.contextPath}/resources/admin_js/html5shiv.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/admin_js/respond.min.js"></script>
-    <![endif]-->
-
+    <link href="${pageContext.request.contextPath}/resources/datatables/dataTables.css">
+    <script src="${pageContext.request.contextPath}/resources/datatables/jquery.dataTables.min.js" ></script>
 </head>
 
 <body>
@@ -59,11 +55,13 @@
         </div>
     </form>
     <ul class="nav menu">
-        <li><a href="${pageContext.request.contextPath}/business/listUI"><span class="glyphicon glyphicon-th"></span>List-Goods</a>
-        </li>
-        <li class="active"><a href="${pageContext.request.contextPath}/business/listOrderUI"><span
+        <li class="active"><a href="${pageContext.request.contextPath}/business/listUI"><span
+                class="glyphicon glyphicon-th"></span>List-Goods</a></li>
+        <li><a href="${pageContext.request.contextPath}/business/listOrderUI"><span
                 class="glyphicon glyphicon-th"></span>List-Order</a></li>
         <li role="presentation" class="divider"></li>
+        <li><a href="${pageContext.request.contextPath}/goods/addGoodsUI"><span
+                class="glyphicon glyphicon-pencil"></span> 添加商品</a></li>
     </ul>
 
 </div><!--/.sidebar-->
@@ -80,27 +78,48 @@
             <h1 class="page-header">Tables</h1>
         </div>
     </div><!--/.row-->
+
+
+    <%--<div class="container-fluid main-content">--%>
+        <%--<!-- DataTables Example -->--%>
+        <%--<div class="row">--%>
+            <%--<div class="col-lg-12">--%>
+                <%--<div class="widget-container fluid-height clearfix">--%>
+                    <%--<div class="heading">--%>
+                        <%--<i class="icon-table"></i>报名情况--%>
+                    <%--</div>--%>
+                    <%--<div class="widget-content padded clearfix">--%>
+                        <%--<table class="table table-bordered table-striped" id="datatable-editable">--%>
+                            <%--<thead>--%>
+                            <%--<th>商品名</th>--%>
+                            <%--<th>简介</th>--%>
+                            <%--<th>图片</th>--%>
+                            <%--<th>操作</th>--%>
+                            <%--</thead>--%>
+                            <%--<tbody>--%>
+                            <%--</tbody>--%>
+                        <%--</table>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+        <%--<!-- end DataTables Example -->--%>
+    <%--</div>--%>
+
+
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Advanced Table</div>
+                <div class="panel-heading">GoodS Table</div>
                 <div class="panel-body">
-                    <table data-toggle="table" data-url="${pageContext.request.contextPath}/admin/searchBusiness"
-                           data-show-refresh="true"
-                           data-show-toggle="true"
-                           data-show-columns="true"
-                           data-search="true"
-                           data-select-item-name="toolbar1"
-                           data-pagination="true"
-                           data-sort-name="name"
-                           data-sort-order="desc">
+                    <table  class="table table-bordered table-striped" id="datatable-editable" >
                         <thead>
-                        <tr>
-                            <th data-field="state" data-checkbox="true">Item ID</th>
-                            <th data-field="id" data-sortable="true">Item ID</th>
-                            <th data-field="name" data-sortable="true">Item Name</th>
-                            <th data-field="price" data-sortable="true">Item Price</th>
-                        </tr>
+                            <th width="200px">商品名</th>
+                            <th width="200px">简介</th>
+                            <th width="200px">图片</th>
+                            <th>操作</th>
+                        <tbody>
+                        </tbody>
                         </thead>
                     </table>
                 </div>
@@ -108,36 +127,6 @@
         </div>
     </div><!--/.row-->
 
-    <script>
-        $(function () {
-            $('#hover, #striped, #condensed').click(function () {
-                var classes = 'table';
-
-                if ($('#hover').prop('checked')) {
-                    classes += ' table-hover';
-                }
-                if ($('#condensed').prop('checked')) {
-                    classes += ' table-condensed';
-                }
-                $('#table-style').bootstrapTable('destroy')
-                        .bootstrapTable({
-                            classes: classes,
-                            striped: $('#striped').prop('checked')
-                        });
-            });
-        });
-
-        function rowStyle(row, index) {
-            var classes = ['active', 'success', 'info', 'warning', 'danger'];
-
-            if (index % 2 === 0 && index / 2 < classes.length) {
-                return {
-                    classes: classes[index / 2]
-                };
-            }
-            return {};
-        }
-    </script>
 </div>
 
 <script src="${pageContext.request.contextPath}/resources/admin_js/jquery-1.11.1.min.js"></script>
@@ -148,21 +137,128 @@
 <script src="${pageContext.request.contextPath}/resources/admin_js/easypiechart-data.js"></script>
 <script src="${pageContext.request.contextPath}/resources/admin_js/bootstrap-datepicker.js"></script>
 <script src="${pageContext.request.contextPath}/resources/admin_js/bootstrap-table.js"></script>
-<script>
-    !function ($) {
-        $(document).on("click", "ul.nav li.parent > a > span.icon", function () {
-            $(this).find('em:first').toggleClass("glyphicon-minus");
-        });
-        $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
-    }(window.jQuery);
 
-    $(window).on('resize', function () {
-        if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
-    })
-    $(window).on('resize', function () {
-        if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
-    })
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#goods_page").addClass("current");
+        var oTable= $("#datatable-editable").dataTable({
+            "bProcessing": true, // 是否显示取数据时的那个等待提示
+            "bServerSide": true,//这个用来指明是通过服务端来取数据
+            "sPaginationType": "full_numbers", //分页风格，full_number会把所有页码显示出来（大概是，自己尝试）
+            "iDisplayLength": 10,//每页显示10条数据
+            "sAjaxSource": "${pageContext.request.contextPath}/goods/dataTable",//这个是请求的地址
+            "fnServerData": retrieveData ,
+            "oLanguage" : { // 汉化
+                "sProcessing" : "正在加载数据...",
+                "sLengthMenu" : "显示_MENU_条 ",
+                "sZeroRecords" : "没有您要搜索的内容",
+                "sInfo" : "从_START_ 到 _END_ 条记录——总记录数为 _TOTAL_ 条",
+                "sInfoEmpty" : "记录数为0",
+                "sInfoFiltered" : "(全部记录数 _MAX_  条)",
+                "sInfoPostFix" : "",
+                "sSearch" : "搜索",
+                "sUrl" : "",
+                "oPaginate" : {
+                    "sFirst" : "第一页",
+                    "sPrevious" : " 上一页 ",
+                    "sNext" : " 下一页 ",
+                    "sLast" : " 最后一页 "
+                }
+            },
+            "aoColumns":
+                    [
+                        { "mData": "gname", 'sClass':'center'},
+                        { "mData": "gdescribe", 'sClass':'center'},
+                        { "mData": "picture", 'sClass':'center'},
+                        {
+                            "mDataProp": "gid",
+                            "bSearchable": false,
+                            "bSortable": false,
+                            "fnRender": function(obj) {
+                                var id=obj.aData.id;
+                                var render=  '<a class="edit-row" target="_blank" href="${pageContext.request.contextPath}/admin/product/updateUI/'+id+'"><i class="icon-pencil"></i>编辑</a>';
+                                render+= '&nbsp;/&nbsp;';
+                                render +=  '<a class="delete-row" href="#" name='+id+'><i class="icon-remove"></i>删除</a>';
+                                return render;
+                            }
+                        }
+
+                    ]
+        });
+
+// 3个参数的名字可以随便命名,但必须是3个参数,少一个都不行
+        function retrieveData( sSource111,aoData111, fnCallback111) {
+            var arrayObj=new Array(
+                    { "mData": "gname", 'sClass':'center'},
+                    { "mData": "gdescribe", 'sClass':'center'},
+                    { "mData": "picture", 'sClass':'center'},
+                    { "mData": "id", 'sClass':'center'});
+            var searchtext="";
+            var sort="";
+            var order="";
+            var pageOffset=0;
+            var size=10;
+            var sEcho=0;
+            for(var i=0;i<aoData111.length;i++){
+                var value=aoData111[i].value;
+                if(aoData111[i].name=="iSortCol_0"){
+                    sort=arrayObj[value].mData;
+                }
+                if(aoData111[i].name=="sSortDir_0"){
+                    order=value;
+                }
+                if(aoData111[i].name=="sSearch"){
+                    searchtext=value;
+                }
+                if(aoData111[i].name=="iDisplayStart"){
+                    pageOffset=value
+                }
+                if(aoData111[i].name=="iDisplayLength"){
+                    size=value
+                }
+                if(aoData111[i].name=="sEcho"){
+                    sEcho=value;
+                }
+
+            }
+            var page=Math.floor(pageOffset/size)+1;
+            $.ajax({
+                url : sSource111,//这个就是请求地址对应sAjaxSource
+                data :{"sort":sort,"order":order,"pageOffset":pageOffset,"size":size,"searchText":searchtext,"page":page,"sEcho":sEcho},//这个是把datatable的一些基本数据传给后台,比如起始位置,每页显示的行数
+                type : 'post',
+                dataType : 'json',
+                async : false,
+                success : function(result) {
+                    console.info(result)
+                    fnCallback111(result);//把返回的数据传给这个方法就可以了,datatable会自动绑定数据的
+                },
+                error : function(msg) {
+                }
+            });
+        }
+        var nEditing = null;
+
+        $('#datatable-editable').on('click', 'a.delete-row', function (e) {
+            var id=$(this).attr("name");
+            var nRow = $(this).parents('tr')[0];
+            $.post("${pageContext.request.contextPath}/admin/product/delete/"+id, function(result){
+                if(result.success){
+                    oTable.fnDeleteRow( nRow );
+                    $("#msg >p").text("提示:"+result.msg);
+                    $("#msg").removeAttrs("hidden");
+                }else{
+                    $("#msg >p").text("提示:"+result.msg);
+                    $("#msg").removeAttrs("hidden");
+                }
+                setTimeout(function(){    //设时延迟0.5s执行
+                    $("#msg").attr("hidden","hidden");
+                },5000)
+            },"json");
+        } );
+
+    });
 </script>
+
 </body>
 
 </html>

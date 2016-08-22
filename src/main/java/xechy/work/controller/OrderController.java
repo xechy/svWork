@@ -12,6 +12,7 @@ import xechy.work.service.OrderService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -48,11 +49,11 @@ public class OrderController extends BaseController<Order> {
     }
 
     @RequestMapping("/saveOrder/{id}")
-    public String saveOrder(@Valid Order order,@PathVariable long id, RedirectAttributes redirectAttributes){
-        order.getOuser().setId(id);
-        orderService.save(order);
-        redirectAttributes.addFlashAttribute("msg","下单成功");
-        return "user/listUI";
+    public String saveOrder(@Valid Order order,@PathVariable long id, HttpServletRequest request){
+        order.setOdate(new Date());
+        orderService.overBooking(order);
+        request.setAttribute("msg","下单成功");
+        return "WEB-INF/user/homeUI";
     }
 
     @RequestMapping("/deleteOrder/{id}")
@@ -65,4 +66,10 @@ public class OrderController extends BaseController<Order> {
     public String searchOrderUI(){
         return REDIRECT_URL+"searchOrderUI";
     }
+
+    @RequestMapping("/saveOrderUI")
+    public String saveOrderUI(){
+        return TEMPLATE_PATH+"saveOrderUI";
+    }
+
 }

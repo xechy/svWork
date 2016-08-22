@@ -15,7 +15,7 @@ public class User {
 
     //用户id
     @Id
-    private long id;
+    private Integer id;
     //用户姓名
     private String name;
     //用户密码
@@ -29,15 +29,50 @@ public class User {
     //用户地址
     private String address;
     //用户性别
-    private char sex;
+    private String sex;
 
-    private List<Order> uOrder;
+    private List<Order> orders;
 
-    public long getId() {
+    public User(Integer id, String name, String password, String mail, String phone, String address, String sex, java.sql.Date date) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        this.mail = mail;
+        this.phone = phone;
+        this.date = date;
+        this.address = address;
+        this.sex = sex;
+    }
+    public User(Integer id, String name, String password, String mail, String phone, String address, String sex, Date date) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        this.mail = mail;
+        this.phone = phone;
+        this.date = date;
+        this.address = address;
+        this.sex = sex;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", mail='" + mail + '\'' +
+                ", phone='" + phone + '\'' +
+                ", date=" + date +
+                ", address='" + address + '\'' +
+                ", sex='" + sex + '\'' +
+                '}';
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -73,7 +108,7 @@ public class User {
         this.phone = phone;
     }
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     public Date getDate() {
         return date;
     }
@@ -90,19 +125,12 @@ public class User {
         this.address = address;
     }
 
-    public char getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(char sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
-    public List<Order> getuOrder() {
-        return uOrder;
-    }
-
-    public void setuOrder(List<Order> uOrder) {
-        this.uOrder = uOrder;
-    }
 }

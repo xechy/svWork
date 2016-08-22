@@ -13,7 +13,7 @@ public interface OrderMapper {
 
     Order show(long id);
 
-    void overBooking(Goods goods);
+    void overBooking(Order order);
 
     void updateBooking(Goods goods);
 
@@ -23,4 +23,5 @@ public interface OrderMapper {
 
     void deleteById(long id);
 
+    void addToCar(long gid);
 }

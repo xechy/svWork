@@ -37,6 +37,11 @@ public class BusinessServiceImpl extends BaseServiceImpl<Business> implements Bu
     }
 
     @Override
+    public Business searchById(long id) {
+        return this.businessMapper.searchById(id);
+    }
+
+    @Override
     public Business show(long id) {
         return this.businessMapper.show(id);
     }

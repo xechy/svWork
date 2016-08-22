@@ -109,7 +109,8 @@ public class UserController extends BaseController<User> {
     }
 
     @RequestMapping("/homeUI")
-    public String homeUI(){
+    public String homeUI(HttpSession session){
+        session.removeAttribute("searchB");
         return TEMPLATE_PATH+"homeUI";
     }
 

@@ -10,7 +10,7 @@
         <result column="bpassword" property="bpassword" jdbcType="VARCHAR" />
         <result column="bmail" property="bmail" jdbcType="VARCHAR" />
         <result column="baddress" property="baddress" jdbcType="VARCHAR" />
-        <result column="bdate" property="bdate" jdbcType="DATE" />
+        <result column="bdate" property="bdate" jdbcType="TIMESTAMP" />
         <result column="bphone" property="bphone" jdbcType="VARCHAR" />
         <result column="bPicture" property="bPicture" jdbcType="VARCHAR" />
         <!--一对多的关系-->
@@ -22,6 +22,10 @@
             <id column="gid" property="gid" jdbcType="BIGINT" />
         </collection>
     </resultMap>
+
+    <select id="searchById" resultMap="BaseResultMap" parameterType="long">
+      SELECT * FROM business WHERE bid=#{bid};
+    </select>
 
     <select id="login" resultMap="BaseResultMap" parameterType="xechy.work.model.Business">
         SELECT bid,bname FROM business where bname = #{bname} and bpassword = #{bpassword}

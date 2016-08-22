@@ -1,5 +1,7 @@
 package xechy.work.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
@@ -18,11 +20,18 @@ public class Order {
     //外卖的下单日期
     private Date odate;
     //订单中外卖名字
-    private Goods ogoods;
-    //订单中对应的商家
-    private Business obusiness;
+    private long gid;
     //下单的用户
-    private User ouser;
+    private long id;
+
+
+    public long getGid() {
+        return gid;
+    }
+
+    public void setGid(long gid) {
+        this.gid = gid;
+    }
 
     public long getOid() {
         return oid;
@@ -31,7 +40,7 @@ public class Order {
     public void setOid(long oid) {
         this.oid = oid;
     }
-
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getOdate() {
         return odate;
     }
@@ -40,20 +49,12 @@ public class Order {
         this.odate = odate;
     }
 
-    public Business getObusiness() {
-        return obusiness;
+    public long getId() {
+        return id;
     }
 
-    public void setObusiness(Business obusiness) {
-        this.obusiness = obusiness;
-    }
-
-    public User getOuser() {
-        return ouser;
-    }
-
-    public void setOuser(User ouser) {
-        this.ouser = ouser;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getState() {

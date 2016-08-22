@@ -11,7 +11,7 @@ public interface OrderService extends BaseService<Order> {
     @Override
     Order show(long id); //显示订单状态
 
-    void overBooking(Goods goods); //下单
+    void overBooking(Order order); //下单
 
     void updateBooking(Goods goods);//更新外卖状态信息
 
@@ -22,4 +22,6 @@ public interface OrderService extends BaseService<Order> {
 
     @Override
     void deleteById(long id);
+
+    void addToCar(long gid);
 }

@@ -31,4 +31,6 @@ public interface BusinessMapper {
     Business checkStoreName(String storeName);
 
     List<Business> searchByAddress(String baddress);
+
+    Business searchById(long id);
 }

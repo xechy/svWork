@@ -43,6 +43,16 @@ public class BaseServiceImpl<T> implements BaseService<T> {
     }
 
     @Override
+    public List<T> searchsById(long id) {
+        return null;
+    }
+
+    @Override
+    public List<T> searchByUId(long id) {
+        return null;
+    }
+
+    @Override
     public T searchById(long id) {
         return null;
     }

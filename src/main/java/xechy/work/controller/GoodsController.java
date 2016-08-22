@@ -12,6 +12,7 @@ import xechy.work.been.PageBean;
 import xechy.work.model.Business;
 import xechy.work.model.Goods;
 import xechy.work.model.User;
+import xechy.work.service.BusinessService;
 import xechy.work.service.GoodsService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +30,9 @@ public class GoodsController extends BaseController<Goods> {
 
     @Autowired
     private GoodsService goodsService;
+
+    @Autowired
+    private BusinessService businessService;
 
     @RequestMapping("/addGoods")
     public String addGoods(@Valid Goods goods,@RequestParam(value = "picture_1")MultipartFile picture,
@@ -56,23 +60,33 @@ public class GoodsController extends BaseController<Goods> {
     }
 
     @RequestMapping("/updateGoodsUI")
-    public String updateGoodsUI(HttpServletRequest request){
+    public String updateGoodsUI(long gid,HttpServletRequest request){
         Business b = (Business) request.getSession().getAttribute("loginBusiness");
         if (b == null){
             return "/WEB-INF/business/loginUI";
         }
+        request.setAttribute("gid",gid);
         return TEMPLATE_PATH+"updateGoodsUI";
     }
 
     @RequestMapping("/searchGoods/{bid}")
+    @ResponseBody
     public List<Goods> searchGoods(@PathVariable long bid){
-        List<Goods> goodses = (List<Goods>) goodsService.searchById(bid);
-        return goodses;
+        List<Goods> gs =  goodsService.searchsById(bid);
+        return gs;
+    }
+
+    @RequestMapping("/searchGoodsOnO/{id}")
+    @ResponseBody
+    public List<Goods> searchGoodsOnO(@PathVariable long id){
+        List<Goods> gs =  goodsService.searchByUId(id);
+        return gs;
     }
 
     @RequestMapping("/searchGoodsUI/{bid}")
     public String searchGoodsUI(@PathVariable long bid,HttpServletRequest request){
-        request.setAttribute("searchBid",bid);
+        Business b = businessService.searchById(bid);
+        request.getSession().setAttribute("searchB",b);
         return TEMPLATE_PATH+"searchGoodsUI";
     }
 
@@ -84,17 +98,23 @@ public class GoodsController extends BaseController<Goods> {
 
     @RequestMapping("/dataTable")
     @ResponseBody
-    public Map dataTable(String searchText, int sEcho, PageBean pageBean) {
+    public Map dataTable(String searchText, Integer sEcho, PageBean pageBean) {
+        System.out.println("c -1");
         return goodsService.dataTable(searchText, sEcho, pageBean);
     }
 
-    @RequestMapping("/addID")
+    @RequestMapping("/addID/{gid}")
     public String addID(@Valid Goods goods,HttpServletRequest request,RedirectAttributes redirectAttributes){
-        User u = (User) request.getAttribute("loginUser");
+        User u = (User) request.getSession().getAttribute("loginUser");
         goods.setId(u.getId());
         goodsService.addID(goods);
-        redirectAttributes.addFlashAttribute("addIDMsg","添加购物车成功");
+        redirectAttributes.addFlashAttribute("addIDMsg","添加购物车成功！");
         return REDIRECT_URL+"searchGoodsUI";
+    }
+
+    @RequestMapping("/searchGoodsUI")
+    public String searchGoodsUI(){
+        return TEMPLATE_PATH+"searchGoodsUI";
     }
 
 }

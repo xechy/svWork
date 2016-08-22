@@ -29,9 +29,10 @@ public class OrderServiceImpl extends BaseServiceImpl<Order> implements OrderSer
         return this.orderMapper.show(id);
     }
 
+
     @Override
-    public void overBooking(Goods goods) {
-        this.orderMapper.overBooking(goods);
+    public void overBooking(Order order) {
+        this.orderMapper.overBooking(order);
     }
 
     @Override
@@ -52,5 +53,10 @@ public class OrderServiceImpl extends BaseServiceImpl<Order> implements OrderSer
     @Override
     public void deleteById(long id) {
         this.orderMapper.deleteById(id);
+    }
+
+    @Override
+    public void addToCar(long gid) {
+        this.orderMapper.addToCar(gid);
     }
 }

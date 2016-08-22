@@ -71,7 +71,6 @@
         <li><a href="${pageContext.request.contextPath}/admin/tables-UEditorUI"><span
                 class="glyphicon glyphicon-list-alt"></span> Tables-UEditor</a></li>
         <li role="presentation" class="divider"></li>
-
     </ul>
 
 </div><!--/.sidebar-->
@@ -96,6 +95,23 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Advanced Table</div>
                 <div class="panel-body">
+
+                        <div  style="float:left">
+                            <form action="${pageContext.request.contextPath}/excel/uploadUser" enctype="multipart/form-data" method="post">
+                                <div class="form-group" style="clear: both">
+                                    <div style="float:left">
+                                    <input type="file" name="excel">
+                                        </div>
+                                    <div style="float:left">
+                                    <button type="submit" class="btn btn-primary">导入</button>
+                                    </div>
+                                    <div style="float:left">
+                                        <a class="btn btn-primary" href="${pageContext.request.contextPath}/excel/download" >导出</a>
+                                    </div>
+                                  </div>
+                            </form>
+                    </div>
+
                     <table data-toggle="table" data-url="${pageContext.request.contextPath}/admin/searchUser"
                            data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true"
                            data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name"

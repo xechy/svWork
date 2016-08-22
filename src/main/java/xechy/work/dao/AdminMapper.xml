@@ -8,7 +8,7 @@
         <result column="aname" property="aname" jdbcType="VARCHAR" />
         <result column="apassword" property="apassword" jdbcType="VARCHAR" />
         <result column="amail" property="amail" jdbcType="VARCHAR" />
-        <result column="adate" property="adate" jdbcType="DATE" />
+        <result column="adate" property="adate" jdbcType="TIMESTAMP" />
         <result column="aphone" property="aphone" jdbcType="VARCHAR" />
     </resultMap>
 

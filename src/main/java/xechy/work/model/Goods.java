@@ -1,8 +1,11 @@
 package xechy.work.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Japa xie on 2016/8/4.
@@ -40,6 +43,8 @@ public class Goods {
     private String picture;
     //下单前添加到确认栏！
     private long id;
+
+    private List<Order> orders;
 
     public long getGid() {
         return gid;
@@ -81,6 +86,7 @@ public class Goods {
         this.bid = bid;
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getGdate() {
         return gdate;
     }

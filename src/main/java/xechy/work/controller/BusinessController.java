@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import xechy.work.model.Business;
+import xechy.work.model.User;
 import xechy.work.service.BusinessService;
 import xechy.work.service.GoodsService;
 import xechy.work.service.OrderService;
@@ -139,6 +140,11 @@ public class BusinessController extends BaseController<Business> {
 
     @RequestMapping("/searchByAddressUI")
     public String searchByAddressUI(@RequestParam(value = "baddress") String baddress, HttpServletRequest request){
+        User u = (User) request.getSession().getAttribute("loginUser");
+        if (u == null){
+            request.setAttribute("msg","请先登录，再做其他操作！");
+            return "WEB-INF/user/homeUI";
+        }
         request.setAttribute("baddress",baddress);
         return "WEB-INF/user/listUI";
     }
