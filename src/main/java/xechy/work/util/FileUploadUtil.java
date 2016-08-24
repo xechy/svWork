@@ -95,15 +95,6 @@ public class FileUploadUtil {
 		return fileName.substring(fileName.lastIndexOf("."));
 	}
     /**
-     * 获取文件的名,不包括后缀名
-     * @param fileName 原文件名
-     * @return 后缀
-     */
-    public static String getFilePrefix(String fileName){
-        return fileName.substring(0,fileName.lastIndexOf("."));
-    }
-
-    /**
      * 删除服务器中的文件
      *
      * 根路径
@@ -123,25 +114,6 @@ public class FileUploadUtil {
             file.delete();
         }
 
-    }
-    /**
-     * 删除服务器中的文件
-     *
-     * 根路径
-     *
-     * @param fileName
-     *            文件名
-     * @param realPath
-     *            真实路径
-     */
-    public static void deleteFile(String realPath, String savePath,
-                                  String fileName) {
-        String path = realPath + savePath;
-        System.out.println("delete" + path + "/" + fileName);
-        File file = new File(path + "/" + fileName);
-        if (file.exists()) {
-            file.delete();
-        }
     }
 
 }

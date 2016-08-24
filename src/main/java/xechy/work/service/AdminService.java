@@ -13,8 +13,7 @@ public interface AdminService extends BaseService<Admin>{
     @Override
     void update(Admin admin);
 
-    @Override
-    void updatePassword(Admin admin);
+
 
 
 

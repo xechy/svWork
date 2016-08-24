@@ -7,6 +7,7 @@ import xechy.work.model.Goods;
 import xechy.work.model.Order;
 import xechy.work.service.OrderService;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,6 +33,8 @@ public class OrderServiceImpl extends BaseServiceImpl<Order> implements OrderSer
 
     @Override
     public void overBooking(Order order) {
+        order.setOdate(new Date());
+        order.setState("商家接单");
         this.orderMapper.overBooking(order);
     }
 

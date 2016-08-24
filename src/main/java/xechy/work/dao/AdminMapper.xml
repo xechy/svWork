@@ -22,9 +22,8 @@
         WHERE aid=#{aid};
     </update>
 
-    <update id="updatePassword" parameterType="xechy.work.model.Admin">
-        UPDATE admin SET apassword=#{apassword}
-        WHERE aid=#{aid};
-    </update>
+    <select id="show" parameterType="long" resultMap="BaseResultMap">
+        SELECT * FROM admin WHERE aid=#{aid};
+    </select>
 
 </mapper>

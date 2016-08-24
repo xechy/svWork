@@ -20,17 +20,28 @@ public class Order {
     //外卖的下单日期
     private Date odate;
     //订单中外卖名字
-    private long gid;
+    private String gname;
     //下单的用户
     private long id;
 
+    private long bid;
 
-    public long getGid() {
-        return gid;
+    private Double price;
+
+    public long getBid() {
+        return bid;
     }
 
-    public void setGid(long gid) {
-        this.gid = gid;
+    public void setBid(long bid) {
+        this.bid = bid;
+    }
+
+    public String getGname() {
+        return gname;
+    }
+
+    public void setGname(String gname) {
+        this.gname = gname;
     }
 
     public long getOid() {
@@ -65,11 +76,12 @@ public class Order {
         this.state = state;
     }
 
-//    public Goods getOgoods() {
-//        return ogoods;
-//    }
-//
-//    public void setOgoods(Goods ogoods) {
-//        this.ogoods = ogoods;
-//    }
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
 }

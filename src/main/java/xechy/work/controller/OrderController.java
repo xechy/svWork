@@ -12,7 +12,6 @@ import xechy.work.service.OrderService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -50,7 +49,7 @@ public class OrderController extends BaseController<Order> {
 
     @RequestMapping("/saveOrder/{id}")
     public String saveOrder(@Valid Order order,@PathVariable long id, HttpServletRequest request){
-        order.setOdate(new Date());
+        order.setId(id);
         orderService.overBooking(order);
         request.setAttribute("msg","下单成功");
         return "WEB-INF/user/homeUI";

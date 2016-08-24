@@ -9,16 +9,12 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import xechy.work.model.Admin;
 import xechy.work.model.User;
 import xechy.work.service.UserService;
 import xechy.work.util.ExportExcel;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -45,9 +41,9 @@ public class ExcelController extends BaseController<Admin> {
      */
     @RequestMapping(value = "/uploadUser")
     public String upload(MultipartFile excel) throws IOException {
-        RequestAttributes ar = RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = ((ServletRequestAttributes) ar).getRequest();
-        String uploadPath = request.getSession().getServletContext().getRealPath("") + "/resources/file/excel";
+//        RequestAttributes ar = RequestContextHolder.getRequestAttributes();
+//        HttpServletRequest request = ((ServletRequestAttributes) ar).getRequest();
+//        String uploadPath = request.getSession().getServletContext().getRealPath("") + "/resources/file/excel";
 
         //文件流指向excel文件
         InputStream fin = excel.getInputStream();
@@ -72,13 +68,10 @@ public class ExcelController extends BaseController<Admin> {
                 row.getCell(0).setCellType(Cell.CELL_TYPE_STRING);
                 id = Integer.parseInt(row.getCell(0).getStringCellValue());
             }
-            System.out.println(id);
             cell = row.getCell(1);
             name = cell.getRichStringCellValue().toString();
-            System.out.println(name);
             cell = row.getCell(2);
             password = cell.getRichStringCellValue().toString();
-            System.out.println(password);
             cell = row.getCell(3);
             mail = cell.getRichStringCellValue().toString();
             cell = row.getCell(4);
@@ -110,10 +103,8 @@ public class ExcelController extends BaseController<Admin> {
         String[] headers = {"ID", "姓名", "密码", "邮箱", "电话", "日期", "地址","性别"};
         //存储每一行的表中数据
         OutputStream out = response.getOutputStream();
-//        System.out.println("test_2");
         ex.exportExcel(headers, users, out);
         out.close();
-//        System.out.println("test_3");
     }
 
 }

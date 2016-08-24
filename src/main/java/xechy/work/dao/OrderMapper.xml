@@ -4,44 +4,45 @@
 
 <mapper namespace="xechy.work.dao.OrderMapper">
     <resultMap id="BaseResultMap" type="xechy.work.model.Order">
-        <id column="oid" property="oid" jdbcType="BIGINT" />
-        <result column="state" property="state" jdbcType="VARCHAR" />
-        <result column="odate" property="odate" jdbcType="TIMESTAMP" />
-        <result column="price" property="price" jdbcType="DOUBLE" />
-
+        <id column="oid" property="oid" jdbcType="INTEGER"/>
+        <result column="state" property="state" jdbcType="VARCHAR"/>
+        <result column="odate" property="odate" jdbcType="DATE"/>
+        <result column="price" property="price" jdbcType="DOUBLE"/>
+        <result column="gname" property="gname" jdbcType="VARCHAR"/>
         <!--多对一的关系-->
 
         <association property="id" javaType="xechy.work.model.User">
-            <id column="id" property="id" jdbcType="BIGINT" />
+            <id column="id" property="id" jdbcType="INTEGER"/>
         </association>
-        <association property="gid" javaType="xechy.work.model.Goods">
-            <id column="id" property="id" jdbcType="BIGINT" />
+        <association property="bid" javaType="xechy.work.model.Business">
+            <id column="bid" property="bid" jdbcType="INTEGER"/>
         </association>
     </resultMap>
 
 
     <delete id="deleteBooking" parameterType="Long">
-        DELETE FROM order WHERE oid=#{oid};
+        DELETE FROM orders WHERE oid=#{oid};
     </delete>
-    
+
     <select id="show" resultMap="BaseResultMap" parameterType="Long">
-        SELECT * FROM order WHERE oid=#{oid};
+        SELECT * FROM orders WHERE oid=#{oid};
     </select>
 
     <insert id="overBooking" parameterType="xechy.work.model.Order">
-        INSERT INTO order (state,odate,price,id,gid) WHERE (#{state},#{odate},#{price},#{bid},#{gid});
+        INSERT INTO orders (state,price,gname,id,bid,odate)
+        VALUES (#{state},#{price},#{gname},#{id},#{bid},#{odate});
     </insert>
 
     <update id="updateBooking" parameterType="xechy.work.model.Order">
-        UPDATE order SET state=#{state} WHERE oid=#{oid} AND (id=#{id} OR bid=#{bid});
+        UPDATE orders SET state=#{state} WHERE oid=#{oid} AND (id=#{id} OR bid=#{bid});
     </update>
 
     <select id="searchById" resultMap="BaseResultMap" parameterType="Long">
-        SELECT * FROM order WHERE id=#{id}
+        SELECT * FROM orders WHERE id=#{id}
     </select>
 
     <delete id="deleteById" parameterType="Long">
-        DELETE * FROM order WHERE oid=#{oid};
+        DELETE * FROM orders WHERE oid=#{oid};
     </delete>
 
 </mapper>

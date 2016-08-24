@@ -64,8 +64,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </script>
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('#name').bind('input',function () {
+        function checkName () {
             $.ajax({
                 type:"GET",
                 url:"${pageContext.request.contextPath}/user/checkName/" +$("#name").val(),
@@ -93,9 +92,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     //错误处理
                 }
             });
-        })
-    });
-
+        }
 </script>
 <div class="header">
     <div class="container">
@@ -117,7 +114,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <h1>填写个人信息</h1>
                 <div>
                     <span>用户名<label>*</label></span>
-                    <input type="text" name="name" id="name">
+                    <input type="text" name="name" id="name" onblur="checkName()">
                     <div id="showResult" style="font-size:xx-small;float: right" ></div>
                 </div>
                 <div>

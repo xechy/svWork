@@ -104,7 +104,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <input class="register-but" type="submit" value="提交">
         </form>
         <div style="font-size:xx-small;float: right;color: red">${msg_receive}</div>
-
     </div>
 </div>
 </div>
@@ -175,5 +174,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </p>
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        setTimeout(function () {    //设时延迟0.5s执行
+            $("#msg").empty();
+        }, 5000)
+    })
+</script>
 </body>
 </html>

@@ -31,4 +31,8 @@ public class AdminServiceImpl extends BaseServiceImpl<Admin> implements AdminSer
         this.adminMapper.updatePassword(admin);
     }
 
+    @Override
+    public Admin show(long aid) {
+        return this.adminMapper.show(aid);
+    }
 }

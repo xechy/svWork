@@ -51,7 +51,7 @@
     </update>
 
     <select id="receivePassword" resultMap="BaseResultMap" parameterType="xechy.work.model.Business">
-        SELECT bid from business where bmail=#{bmail} AND bphone=#{bphone};
+        SELECT bid from business where  storeName=#{storeName} AND bmail=#{bmail} AND bphone=#{bphone};
     </select>
 
     <select id="searchByNames" resultMap="BaseResultMap" parameterType="String">

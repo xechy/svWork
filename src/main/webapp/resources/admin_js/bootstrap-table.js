@@ -979,13 +979,10 @@
         // click to select by column
         this.$body.find('> tr > td').off('click').on('click', function () {
             var $tr = $(this).parent();
-            alert(this),
-            alert($tr),
             that.trigger('click-row', that.data[$tr.data('index')], $tr);
             // if click to select - then trigger the checkbox/radio click
             if (that.options.clickToSelect) {
                 if (that.header.clickToSelects[$tr.children().index($(this))]) {
-                    alert(this+"_2"),
                     $tr.find(sprintf('[name="%s"]',
                         that.options.selectItemName)).trigger('click');
                 }
@@ -1039,7 +1036,6 @@
                         name = key.substring(0, index),
                         el = key.substring(index + 1),
                         func = events[key];
-
                     $td.find(el).off(name).on(name, function (e) {
                         var index = $tr.data('index'),
                             row = that.data[index],

@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -29,6 +28,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         });
     </script>
     <script src="js/menu_jquery.js"></script>
+
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 </head>
 <body>
 
@@ -48,19 +50,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     if (count % 6 != 0) {
                         trs += " <li><a href='${pageContext.request.contextPath}/goods/addID/" + value.gid + " '> " +
                                 "<img src='${pageContext.request.contextPath}/resources/file/goods/" + value.picture + "' class='img-responsive'  alt=''/>" +
-                                "<div class='tab_desc'>" +
-                                "<p>" + value.gname + "</p>" +
-                                "<h4>" + value.gdescribe +
-                                "<h5> ￥" + value.price +
-                                "</h5></h4></div></a></li>";
+                                value.gname + " ￥" + value.price +
+                                "</a></li>";
                     } else {
-                        trs += " <li class='last'><li><a href='${pageContext.request.contextPath}/goods/addID/" + value.gid + " '> " +
+                        trs += " <li class='last'><a href='${pageContext.request.contextPath}/goods/addID/" + value.gid + " '> " +
                                 "<img src='${pageContext.request.contextPath}/resources/file/goods/" + value.picture + "' class='img-responsive'  alt=''/>" +
-                                "<div class='tab_desc'>" +
-                                "<p>" + value.gname + "</p>" +
-                                "<h4>" + value.gdescribe +
-                                "<h5>" + value.price +
-                                "</h5></h4></div></a></li>";
+                                value.gname + " ￥" + value.price +
+                                "</a></li>";
                     }
                     tbody += trs;
                 });
@@ -72,6 +68,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         });
     });
 </script>
+
 <div class="header">
     <div class="container">
         <div class="logo">
@@ -83,6 +80,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 |
                 <li><a href="${pageContext.request.contextPath}/user/show/${loginUser.id}">查看个人资料</a></li>
                 |
+                <li><a href="${pageContext.request.contextPath}/order/searchOrderUI">查看订单状态</a></li>|
                 <li><a href="${pageContext.request.contextPath}/user/logout">登出</a></li>
             </ul>
         </div>
@@ -90,29 +88,30 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
 </div>
 
-<div class="col-md-10 sap_tabs">
-    <div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
-        <ul class="resp-tabs-list">
-            <li class="resp-tab-item" aria-controls="tab_item-0" role="tab">
-                <span><img src='${pageContext.request.contextPath}/resources/file/business/${searchB.bPicture}'
-                           class="img-responsive" alt=""/></span></li>
-            <li class="resp-tab-item" aria-controls="tab_item-1" role="tab">
-                <span><h2>${searchB.bname}</h2></span></li>
-            <li class="resp-tab-item" aria-controls="tab_item-2" role="tab">
-                <a href="${pageContext.request.contextPath}/user/homeUI">
-                    <span><div style="font-size: xx-small">更改收货地址</div></span></a></li>
-            <li class="resp-tab-item" aria-controls="tab_item-3" role="tab">
-                <span><div style="font-size: xx-small;color: #6ce26c">
-                <a href="${pageContext.request.contextPath}/order/saveOrderUI}">${addIDMsg}</a></div></span>
-            </li>
-            <div class="clearfix"></div>
-        </ul>
-        <div class="resp-tabs-container">
-            <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
-                <ul class="tab_img" id="project">
+<div class="single">
+    <div class="container">
+        <div class="single_box1">
+            <div class="col-sm-5 single_left">
+                <img src="${pageContext.request.contextPath}/img/photo.jpg" class="img-responsive" alt=""/>
+                <%--<img src='${pageContext.request.contextPath}/resources/file/business/${searchB.bPicture}'--%>
+                <%--class="img-responsive" alt=""/>--%>
+            </div>
+            <div class="col-sm-7 col_6">
+                <ul class="size">
+                    <h1>${searchB.bname}</h1>
                 </ul>
+                <a class="btn_3" href="${pageContext.request.contextPath}/order/saveOrderUI">查看购物车</a>
+                <p class="movie_option"><strong>
+                    <div id="addIDMsg" style="color: #bf800c">${addIDMsg}</div>
+                </strong></p>
             </div>
             <div class="clearfix"></div>
+        </div>
+        <div class="tags">
+            <h4 class="tag_head">我家商品</h4>
+            <ul class="tags_images" id="project">
+                <div class="clearfix"></div>
+            </ul>
         </div>
     </div>
 </div>
@@ -183,5 +182,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </p>
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        setTimeout(function () {    //设时延迟0.5s执行
+            $("#addIDMsg").empty();
+        }, 5000)
+    })
+</script>
 </body>
 </html>

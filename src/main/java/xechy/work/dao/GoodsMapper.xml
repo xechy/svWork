@@ -4,30 +4,20 @@
 
 <mapper namespace="xechy.work.dao.GoodsMapper">
     <resultMap id="BaseResultMap" type="xechy.work.model.Goods">
-        <id column="gid" property="gid" jdbcType="BIGINT" />
+        <id column="gid" property="gid" jdbcType="INTEGER" />
         <result column="gname" property="gname" jdbcType="VARCHAR" />
         <result column="gdescribe" property="gdescribe" jdbcType="VARCHAR" />
         <result column="price" property="price" jdbcType="DOUBLE" />
         <result column="gdate" property="gdate" jdbcType="TIMESTAMP" />
         <result column="picture" property="picture" jdbcType="VARCHAR" />
-        <!--<result column="gbusiness" property="bid" jdbcType="INT" />-->
-
         <!--多对一的关系-->
-        <association property="bid" javaType="Business">
-            <id column="bid" property="bid" jdbcType="BIGINT" />
+        <association property="business" javaType="xechy.work.model.Business">
+            <id column="bid" property="bid" jdbcType="INTEGER" />
         </association>
-        <association property="id" javaType="User">
-            <id column="id" property="id" jdbcType="BIGINT" />
+        <association property="user" javaType="xechy.work.model.User">
+            <id column="id" property="id" jdbcType="INTEGER" />
         </association>
     </resultMap>
-
-    <parameterMap type="java.util.Map" id="getPageBean">
-        <parameter property="pageOffset" mode="IN" jdbcType="INTEGER"/>
-        <parameter property="size" mode="IN" jdbcType="INTEGER"/>
-        <parameter property="searchText" mode="IN" jdbcType="VARCHAR"/>
-        <parameter property="sort" mode="IN" jdbcType="VARCHAR"/>
-        <parameter property="order" mode="IN" jdbcType="VARCHAR"/>
-    </parameterMap>
 
     <delete id="deleteById" parameterType="Long">
           DELETE FROM goods WHERE gid=#{gid};
@@ -47,23 +37,23 @@
     </select>
 
     <select id="searchByNames" resultMap="BaseResultMap" parameterType="String">
-        SELECT * FROM goods WHERE gname LIKE % #{gname} %;
+        SELECT * FROM goods WHERE 1 = 1
+         <if test="gname != null and gname !=''">
+          AND gname LIKE % #{gname} %
+         </if>
+        ORDER BY gid;
     </select>
 
     <select id="searchsById" resultMap="BaseResultMap" parameterType="long">
         SELECT gid,gname,gdescribe,price,picture FROM goods WHERE bid=#{bid};
     </select>
 
-    <select id="searchsByUId" resultMap="BaseResultMap" parameterType="long">
-        SELECT gid,gname,price,picture FROM goods WHERE id=#{id};
+    <select id="searchByUId" resultMap="BaseResultMap" parameterType="long">
+        SELECT gid,gname,price,bid FROM goods WHERE id=#{id};
     </select>
 
-    <select id="searchByBid" resultMap="BaseResultMap" parameterMap="getPageBean">
+    <select id="searchByBid" resultMap="BaseResultMap" parameterType="long">
         SELECT gid,gname,picture,gdescribe FROM goods WHERE bid=#{bid};
-    </select>
-
-    <select id="countAll" parameterMap="getPageBean" resultType="int">
-        SELECT COUNT(*) FROM goods WHERE bid=#{bid};
     </select>
 
     <update id="addID" parameterType="xechy.work.model.Goods">

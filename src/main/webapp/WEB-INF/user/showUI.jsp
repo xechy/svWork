@@ -33,6 +33,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <ul>
                 <li>${loginUser.name}</li>|
                 <li><a href="${pageContext.request.contextPath}/user/show/${loginUser.id}">查看个人资料</a></li>|
+                <li><a href="${pageContext.request.contextPath}/order/searchOrderUI">查看订单状态</a></li>|
                 <li><a href="${pageContext.request.contextPath}/user/logout">登出</a></li>
             </ul>
         </div>

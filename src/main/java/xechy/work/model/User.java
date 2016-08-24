@@ -12,7 +12,6 @@ import java.util.List;
  */
 @Table(name="user")
 public class User {
-
     //用户id
     @Id
     private Integer id;
@@ -32,6 +31,21 @@ public class User {
     private String sex;
 
     private List<Order> orders;
+
+    public User() {
+    }
+
+    public User(Integer id, String name, String password, String mail, String phone, Date date, String address, String sex, List<Order> orders) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        this.mail = mail;
+        this.phone = phone;
+        this.date = date;
+        this.address = address;
+        this.sex = sex;
+        this.orders = orders;
+    }
 
     public User(Integer id, String name, String password, String mail, String phone, String address, String sex, java.sql.Date date) {
         this.id = id;
@@ -54,19 +68,7 @@ public class User {
         this.sex = sex;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                ", mail='" + mail + '\'' +
-                ", phone='" + phone + '\'' +
-                ", date=" + date +
-                ", address='" + address + '\'' +
-                ", sex='" + sex + '\'' +
-                '}';
-    }
+
 
     public Integer getId() {
         return id;
@@ -107,7 +109,6 @@ public class User {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
     @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     public Date getDate() {
         return date;
@@ -132,5 +133,14 @@ public class User {
     public void setSex(String sex) {
         this.sex = sex;
     }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
 
 }

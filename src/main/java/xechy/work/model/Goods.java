@@ -14,18 +14,7 @@ import java.util.List;
 @Table(name = "goods")
 public class Goods {
 
-    @Override
-    public String toString() {
-        return "Goods{" +
-                "gid=" + gid +
-                ", gname='" + gname + '\'' +
-                ", gdescribe='" + gdescribe + '\'' +
-                ", price=" + price +
-                ", bid=" + bid +
-                ", gdate=" + gdate +
-                ", picture='" + picture + '\'' +
-                '}';
-    }
+
 
     @Id
     private long gid;
@@ -36,13 +25,13 @@ public class Goods {
     //外卖价格
     private Double price;
     //关联对应的商家
-    private long bid;
+    private Business business;
     //外卖上架日期
     private Date gdate;
 
     private String picture;
     //下单前添加到确认栏！
-    private long id;
+    private User user;
 
     private List<Order> orders;
 
@@ -78,12 +67,28 @@ public class Goods {
         this.price = price;
     }
 
-    public long getBid() {
-        return bid;
+    public List<Order> getOrders() {
+        return orders;
     }
 
-    public void setBid(long bid) {
-        this.bid = bid;
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    public Business getBusiness() {
+        return business;
+    }
+
+    public void setBusiness(Business business) {
+        this.business = business;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
@@ -103,11 +108,4 @@ public class Goods {
         this.picture = picture;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 }

@@ -13,9 +13,9 @@
         <result column="phone" property="phone" jdbcType="VARCHAR" />
         <result column="sex" property="sex" jdbcType="VARCHAR" />
         <!--一对多的关系-->
-        <!--<collection property="uOrder" ofType="Order">-->
-            <!--<id column="oid" property="oid" jdbcType="INTEGER" />-->
-        <!--</collection>-->
+        <collection property="orders" ofType="xechy.work.model.Order">
+            <id column="oid" property="oid" jdbcType="INTEGER" />
+        </collection>
     </resultMap>
     <select id="login" resultMap="BaseResultMap" parameterType="xechy.work.model.User">
         SELECT id,name FROM user where name=#{name} and password=#{password}
@@ -45,7 +45,7 @@
     </select>
 
     <select id="searchAll" resultMap="BaseResultMap" >
-        SELECT * FROM user;
+        SELECT * FROM user ORDER BY id;
     </select>
 
     <delete id="deleteById" parameterType="Long">

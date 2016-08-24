@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import xechy.work.been.PageBean;
 import xechy.work.model.Business;
 import xechy.work.model.Goods;
 import xechy.work.model.User;
@@ -19,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Japa xie on 2016/8/5.
@@ -37,10 +35,10 @@ public class GoodsController extends BaseController<Goods> {
     @RequestMapping("/addGoods")
     public String addGoods(@Valid Goods goods,@RequestParam(value = "picture_1")MultipartFile picture,
                            RedirectAttributes redirectAttributes){
-        //redirectAttributes.addFlashAttribute("msg","添加成功");
+        redirectAttributes.addFlashAttribute("msg","添加成功");
         goods.setGdate(new Date());
         goodsService.save(goods,picture);
-        return TEMPLATE_PATH+"listUI";
+        return REDIRECT_URL+"addGoodsUI";
     }
 
     @RequestMapping("/updateGoods")
@@ -76,9 +74,9 @@ public class GoodsController extends BaseController<Goods> {
         return gs;
     }
 
-    @RequestMapping("/searchGoodsOnO/{id}")
+    @RequestMapping("/searchByUId/{id}")
     @ResponseBody
-    public List<Goods> searchGoodsOnO(@PathVariable long id){
+    public List<Goods> searchByUId(@PathVariable long id){
         List<Goods> gs =  goodsService.searchByUId(id);
         return gs;
     }
@@ -96,17 +94,10 @@ public class GoodsController extends BaseController<Goods> {
         return REDIRECT_URL+"searchGoodsUI";
     }
 
-    @RequestMapping("/dataTable")
-    @ResponseBody
-    public Map dataTable(String searchText, Integer sEcho, PageBean pageBean) {
-        System.out.println("c -1");
-        return goodsService.dataTable(searchText, sEcho, pageBean);
-    }
-
     @RequestMapping("/addID/{gid}")
     public String addID(@Valid Goods goods,HttpServletRequest request,RedirectAttributes redirectAttributes){
         User u = (User) request.getSession().getAttribute("loginUser");
-        goods.setId(u.getId());
+        goods.getUser().setId(u.getId());
         goodsService.addID(goods);
         redirectAttributes.addFlashAttribute("addIDMsg","添加购物车成功！");
         return REDIRECT_URL+"searchGoodsUI";

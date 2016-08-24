@@ -12,4 +12,6 @@ public interface AdminMapper {
     void update(Admin admin);
 
     Admin login(Admin admin);
+
+    Admin show(long aid);
 }

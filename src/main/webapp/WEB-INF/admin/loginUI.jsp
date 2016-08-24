@@ -29,7 +29,7 @@
 <div class="row">
     <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
         <div class="login-panel panel panel-default">
-            <div class="panel-heading">Log in</div>
+            <div class="panel-heading">Admin Log in</div>
             <div class="panel-body">
                 <form role="form" name="regfrom" action="${pageContext.request.contextPath}/admin/login" method="post">
                     <fieldset>
@@ -39,12 +39,9 @@
                         <div class="form-group">
                             <input class="form-control" placeholder="Password" name="apassword" type="password">
                         </div>
-                        <div class="checkbox">
-                            <label>
-                                <input name="remember" type="checkbox" value="Remember Me">Remember Me
-                            </label>
+                        <div style="float: right">
+                            <input type="submit" class="btn btn-primary" value="登录"/>
                         </div>
-                        <input type="submit" class="btn btn-primary" value="登录"/>
                     </fieldset>
                 </form>
             </div>

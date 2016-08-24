@@ -67,10 +67,9 @@ public class BusinessController extends BaseController<Business> {
     }
 
     @RequestMapping("/show/{id}")
-    public String show(@PathVariable Long id, Model model, HttpServletRequest request){
-        Business loginBusiness = (Business) request.getSession().getAttribute("loginBusiness");
+    public String show(@PathVariable Long id, Model model){
         model.addAttribute("businessShow",businessService.show(id));
-        return REDIRECT_URL+"showUI";
+        return TEMPLATE_PATH+"showUI";
     }
 
     @RequestMapping("/loginUI")
@@ -147,6 +146,35 @@ public class BusinessController extends BaseController<Business> {
         }
         request.setAttribute("baddress",baddress);
         return "WEB-INF/user/listUI";
+    }
+
+    @RequestMapping("/updatePasswordUI")
+    public String updatePasswordUI(){
+        return TEMPLATE_PATH+"updatePasswordUI";
+    }
+
+    @RequestMapping("/forgetPasswordUI")
+    public String forgetPasswordUI(){
+        return TEMPLATE_PATH+"forgetPasswordUI";
+    }
+
+    @RequestMapping("/updatePassword")
+    public String updatePassword(@Valid Business b,HttpSession session,RedirectAttributes redirectAttributes){
+        businessService.updatePassword(b);
+        session.removeAttribute("loginBusiness");
+        redirectAttributes.addFlashAttribute("result","更改成功，请重新登录！");
+        return REDIRECT_URL+"loginUI";
+    }
+
+    @RequestMapping("/receivePassword")
+    public String receivePassword(@Valid Business b,HttpServletRequest request,RedirectAttributes redirectAttributes){
+        Business rb = businessService.receivePassword(b);
+        if(rb == null){
+            redirectAttributes.addFlashAttribute("error","信息错误，请核对后重新输入！");
+            return REDIRECT_URL+"forgetPasswordUI";
+        }
+        request.setAttribute("receiveBusiness",rb);
+        return TEMPLATE_PATH+"updatePasswordUI";
     }
 
 }

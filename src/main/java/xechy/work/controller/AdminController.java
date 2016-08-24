@@ -2,6 +2,7 @@ package xechy.work.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -46,23 +47,16 @@ public class AdminController extends BaseController<Admin> {
         return TEMPLATE_PATH+"tables-User";
     }
 
+    @RequestMapping("/show/{aid}")
+    public String show(@PathVariable long aid, Model model){
+        model.addAttribute("showAdmin",adminService.show(aid));
+        return TEMPLATE_PATH+"showUI";
+    }
+
     @RequestMapping("/update")
     public String update(Admin admin,RedirectAttributes redirectAttributes){
         try {
             adminService.update(admin);
-            redirectAttributes.addFlashAttribute("msg","success");
-            return REDIRECT_URL+"tables-User";
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        redirectAttributes.addFlashAttribute("msg","error");
-        return REDIRECT_URL+"tables-User";
-    }
-
-    @RequestMapping("/updatePassword")
-    public String updatePassword(Admin admin,RedirectAttributes redirectAttributes){
-        try {
-            adminService.updatePassword(admin);
             redirectAttributes.addFlashAttribute("msg","success");
             return REDIRECT_URL+"tables-User";
         }catch (Exception e){
@@ -81,23 +75,6 @@ public class AdminController extends BaseController<Admin> {
         return TEMPLATE_PATH+"tables-User";
     }
 
-    @RequestMapping("/updateUI")
-    public String updateUI(HttpServletRequest request){
-        Admin a = (Admin) request.getSession().getAttribute("loginAdmin");
-        if(a == null){
-            return TEMPLATE_PATH+"loginUI";
-        }
-        return TEMPLATE_PATH+"updateUI";
-    }
-
-    @RequestMapping("/updatePssswordUI")
-    public String updatePasswordUI(HttpServletRequest request){
-        Admin a = (Admin) request.getSession().getAttribute("loginAdmin");
-        if(a == null){
-            return TEMPLATE_PATH+"loginUI";
-        }
-        return TEMPLATE_PATH+"updatePasswordUI";
-    }
 
     @RequestMapping("/searchUser")
     @ResponseBody
@@ -127,11 +104,6 @@ public class AdminController extends BaseController<Admin> {
         return goodses;
     }
 
-    @RequestMapping("/deleteGoods/{id}")
-    public String deleteGoods(@PathVariable Long id){
-        goodsService.deleteById(id);
-        return null;
-    }
 
     @RequestMapping("/logout")
     public String logout(HttpSession session){

@@ -20,49 +20,7 @@
 </head>
 
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#sidebar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#"><span>Lazy TakeOUT</span>Business</a>
-            <ul class="user-menu">
-                <li class="dropdown pull-right">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
-                            class="glyphicon glyphicon-user"></span> ${loginBusiness.bname} <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> 查看个人信息</a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> 登出</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-
-    </div><!-- /.container-fluid -->
-</nav>
-
-<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
-    <form role="search">
-        <div class="form-group">
-        </div>
-    </form>
-    <ul class="nav menu">
-        <li class="active"><a href="${pageContext.request.contextPath}/business/listUI"><span
-                class="glyphicon glyphicon-th"></span>List-Goods</a></li>
-        <li><a href="${pageContext.request.contextPath}/business/listOrderUI"><span
-                class="glyphicon glyphicon-th"></span>List-Order</a></li>
-        <li role="presentation" class="divider"></li>
-        <li><a href="${pageContext.request.contextPath}/goods/addGoodsUI"><span
-                class="glyphicon glyphicon-pencil"></span> 添加商品</a></li>
-    </ul>
-    <div class="attribution">Template by Medialoot</div>
-</div>
-<!--/.sidebar-->
+<%@ include file="../business/colunm.jsp" %>
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
@@ -81,7 +39,10 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
-                <div class="panel-heading">商品详细信息</div>
+
+                    <div class="panel-heading">商品详细信息 <div style="float:right;color: #bf800c" id="msg">${msg}</div></div>
+
+
                 <div class="panel-body">
                     <div class="col-md-6">
                         <form role="form" action="${pageContext.request.contextPath}/goods/addGoods" method="post"
@@ -105,8 +66,10 @@
                                 <label>商品描述</label>
                                 <textarea class="form-control" rows="10" name="gdescribe"></textarea>
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit Button</button>
-                            <button type="reset" class="btn btn-default">Reset Button</button>
+                            <div style="float: right">
+                                <button type="submit" class="btn btn-primary">Submit Button</button>
+                                <button type="reset" class="btn btn-default">Reset Button</button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -122,22 +85,13 @@
 <script src="${pageContext.request.contextPath}/resources/admin_js/easypiechart.js"></script>
 <script src="${pageContext.request.contextPath}/resources/admin_js/easypiechart-data.js"></script>
 <script src="${pageContext.request.contextPath}/resources/admin_js/bootstrap-datepicker.js"></script>
-<script>
-    !function ($) {
-        $(document).on("click", "ul.nav li.parent > a > span.icon", function () {
-            $(this).find('em:first').toggleClass("glyphicon-minus");
-        });
-        $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
-    }(window.jQuery);
-
-    $(window).on('resize', function () {
-        if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
-    })
-    $(window).on('resize', function () {
-        if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+<script type="text/javascript">
+    $(document).ready(function () {
+        setTimeout(function () {    //设时延迟0.5s执行
+            $("#msg").empty();
+        }, 5000)
     })
 </script>
-
 </body>
 
 </html>
