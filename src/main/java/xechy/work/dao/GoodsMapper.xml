@@ -36,14 +36,6 @@
         SELECT * FROM goods WHERE gid=#{gid};
     </select>
 
-    <select id="searchByNames" resultMap="BaseResultMap" parameterType="String">
-        SELECT * FROM goods WHERE 1 = 1
-         <if test="gname != null and gname !=''">
-          AND gname LIKE % #{gname} %
-         </if>
-        ORDER BY gid;
-    </select>
-
     <select id="searchsById" resultMap="BaseResultMap" parameterType="long">
         SELECT gid,gname,gdescribe,price,picture FROM goods WHERE bid=#{bid};
     </select>
@@ -59,5 +51,25 @@
     <update id="addID" parameterType="xechy.work.model.Goods">
         UPDATE goods SET id=#{id} WHERE gid=#{gid};
     </update>
+
+    <update id="deleteUId" parameterType="long">
+        UPDATE goods SET id=NULL WHERE bid=#{bid};
+    </update>
+
+    <!-- 分页SQL语句 -->
+    <select id="selectProductsByPage" parameterType="INTEGER" resultMap="BaseResultMap">
+        select
+        gid,gname,gdescribe,price,gdate,picture
+        from goods WHERE bid=#{bid}
+        limit #{startPos},#{pageSize};
+    </select>
+    <!-- 取得记录的总数 -->
+    <select id="getProductsCount" resultType="INTEGER">
+        SELECT COUNT(*) FROM goods WHERE bid=#{bid};
+    </select>
+
+    <select id="searchAll" resultMap="BaseResultMap">
+        SELECT * FROM goods ;
+    </select>
 
 </mapper>

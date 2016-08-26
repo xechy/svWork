@@ -9,23 +9,29 @@
         <result column="odate" property="odate" jdbcType="DATE"/>
         <result column="price" property="price" jdbcType="DOUBLE"/>
         <result column="gname" property="gname" jdbcType="VARCHAR"/>
-        <!--多对一的关系-->
 
-        <association property="id" javaType="xechy.work.model.User">
+        <!--多对一的关系-->
+        <association property="user" javaType="xechy.work.model.User">
             <id column="id" property="id" jdbcType="INTEGER"/>
+            <result column="name" property="name" jdbcType="VARCHAR"></result>
+            <result column="address" property="address" jdbcType="VARCHAR"></result>
+            <result column="phone" property="phone" jdbcType="VARCHAR"></result>
         </association>
-        <association property="bid" javaType="xechy.work.model.Business">
-            <id column="bid" property="bid" jdbcType="INTEGER"/>
+        <association property="business" javaType="xechy.work.model.Business">
+            <id column="bid" property="bid" jdbcType="INTEGER"></id>
         </association>
     </resultMap>
 
+    <select id="searchAll" resultMap="BaseResultMap">
+        SELECT * FROM orders ;
+    </select>
 
     <delete id="deleteBooking" parameterType="Long">
         DELETE FROM orders WHERE oid=#{oid};
     </delete>
 
     <select id="show" resultMap="BaseResultMap" parameterType="Long">
-        SELECT * FROM orders WHERE oid=#{oid};
+        SELECT * FROM orders WHERE bid=#{bid};
     </select>
 
     <insert id="overBooking" parameterType="xechy.work.model.Order">
@@ -34,15 +40,41 @@
     </insert>
 
     <update id="updateBooking" parameterType="xechy.work.model.Order">
-        UPDATE orders SET state=#{state} WHERE oid=#{oid} AND (id=#{id} OR bid=#{bid});
+        UPDATE orders SET state=#{state} WHERE oid=#{oid} AND bid=#{bid};
     </update>
 
     <select id="searchById" resultMap="BaseResultMap" parameterType="Long">
-        SELECT * FROM orders WHERE id=#{id}
+        SELECT o.* FROM orders o WHERE o.id=#{id} ;
+    </select>
+
+    <select id="searchONEById" resultMap="BaseResultMap" parameterType="Long">
+        SELECT oid,state,bid FROM orders  WHERE oid=#{oid} ;
     </select>
 
     <delete id="deleteById" parameterType="Long">
         DELETE * FROM orders WHERE oid=#{oid};
     </delete>
+
+    <!-- 分页SQL语句 -->
+    <select id="selectProductsByPage" parameterType="INTEGER" resultMap="BaseResultMap">
+        select
+        o.oid,o.gname,o.state,o.price,o.odate,u.address,u.phone,u.name
+        from orders o,user u WHERE o.bid=#{bid} AND o.id=u.id
+        ORDER BY oid DESC
+        limit #{startPos},#{pageSize};
+    </select>
+    <!-- 取得记录的总数 -->
+    <select id="getProductsCount" resultType="INTEGER">
+        SELECT COUNT(*) FROM orders WHERE bid=#{bid};
+    </select>
+
+    <!-- 分页SQL语句 -->
+    <select id="showOrderInUser" parameterType="INTEGER" resultMap="BaseResultMap">
+        select * from orders  WHERE id=#{id} ORDER BY oid DESC limit #{startPos},#{pageSize};
+    </select>
+    <!-- 取得记录的总数 -->
+    <select id="getShowOrderInUser" resultType="INTEGER">
+        SELECT COUNT(*) FROM orders WHERE bid=#{bid};
+    </select>
 
 </mapper>

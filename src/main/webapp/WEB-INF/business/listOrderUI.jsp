@@ -16,6 +16,8 @@
     <link href="${pageContext.request.contextPath}/resources/admin_css/datepicker3.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/admin_css/bootstrap-table.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/admin_css/styles.css" rel="stylesheet">
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 </head>
 
 <body>
@@ -36,23 +38,50 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
-                <div class="panel-heading">GoodS Table</div>
+                <div class="panel-heading"><div style="float: right;color: #1006F1">${updateMsg}</div>Advanced Table </div>
                 <div class="panel-body">
-                    <table  class="table table-bordered table-striped" id="datatable-editable" >
+                    <table class="table table-bordered table-striped">
                         <thead>
-                            <th width="200px">商品名</th>
-                            <th width="200px">简介</th>
-                            <th width="200px">图片</th>
-                            <th>操作</th>
+                        <tr>
+                            <th width="10px"> ID </th>
+                            <th width="150px"> 本单商品名 </th>
+                            <th width="150px"> 状态 </th>
+                            <th width="50px"> 本单价格 </th>
+                            <th width="50px"> 下单客户 </th>
+                            <th width="200px"> 送货地址 </th>
+                            <th width="150px"> 客户电话 </th>
+                            <th width="200px"> 下单日期 </th>
+                            <th width="50px"> 操作 </th>
+                        </tr>
                         <tbody>
+                        <c:forEach items="${pageList.recordList }" var="order">
+                            <tr>
+                                <td> ${order.oid} </td>
+                                <td> ${order.gname} </td>
+                                <td> ${order.state} </td>
+                                <td>  ￥ ${order.price} </td>
+                                <td>  ${order.getUser().name} </td>
+                                <td>  ${order.getUser().address} </td>
+                                <td>  ${order.getUser().phone} </td>
+                                <td> ${order.odate} </td>
+                                <td>
+                                    <c:if test="${order.state eq'等待商家接单'}">
+                                    <a href="${pageContext.request.contextPath}/business/updateBooking/${order.oid}">接单</a>
+                                    </c:if>
+                                    <c:if test="${order.state eq'商家已接单'}">
+                                    <a href="${pageContext.request.contextPath}/business/updateBooking/${order.oid}">送货</a>
+                                    </c:if>
+                                </td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                         </thead>
                     </table>
+                    <%@ include file="../common.jsp" %>
                 </div>
             </div>
         </div>
     </div><!--/.row-->
-
 </div>
 
 <script src="${pageContext.request.contextPath}/resources/admin_js/jquery-1.11.1.min.js"></script>

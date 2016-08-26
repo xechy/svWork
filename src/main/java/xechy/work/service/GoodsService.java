@@ -2,8 +2,10 @@ package xechy.work.service;
 
 import org.springframework.web.multipart.MultipartFile;
 import xechy.work.model.Goods;
-import xechy.work.util.PagedResult;
+import xechy.work.util.Page;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -26,20 +28,8 @@ public interface GoodsService extends BaseService<Goods> {
     @Override
     void deleteById(long id);//删除商品
 
-    @Override
-    List<Goods> searchAll();
-
     void addID(Goods goods);
 
-    /**
-     *
-     * @author linbingwen
-     * @since  2015年10月23日
-     * @param gname 查询条件，可为空
-     * @param pageNo 查询条件，可为空，默认取1
-     * @param pageSize 查询条件，可为空，默认取10
-     * @return
-     */
-    PagedResult<Goods> queryByPage(String gname, Integer pageNo, Integer pageSize);
+    Page<Goods> showProductsByPage(Integer bid,HttpServletRequest request, HttpServletResponse response);
 
 }

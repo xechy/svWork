@@ -42,7 +42,7 @@
         </div>
     </form>
     <ul class="nav menu">
-        <li class="active"><a href="${pageContext.request.contextPath}/admin/tables-UserUI"><span
+        <li ><a href="${pageContext.request.contextPath}/admin/tables-UserUI"><span
                 class="glyphicon glyphicon-list-alt"></span> Tables-User</a></li>
         <li><a href="${pageContext.request.contextPath}/admin/tables-BusinessUI"><span
                 class="glyphicon glyphicon-list-alt"></span> Tables-Business</a></li>
@@ -50,7 +50,7 @@
                 class="glyphicon glyphicon-list-alt"></span> Tables-Orders</a></li>
         <li><a href="${pageContext.request.contextPath}/admin/tables-GoodsUI"><span
                 class="glyphicon glyphicon-list-alt"></span> Tables-Goods</a></li>
-        <li><a href="${pageContext.request.contextPath}/admin/tables-UEditorUI"><span
+        <li class="active"><a href="${pageContext.request.contextPath}/admin/tables-UEditorUI"><span
                 class="glyphicon glyphicon-list-alt"></span> Tables-UEditor</a></li>
         <li role="presentation" class="divider"></li>
 
@@ -129,102 +129,102 @@
                             alert(UE.getEditor('editor').isFocus());
                             UE.dom.domUtils.preventDefault(e)
                         }
-//                        function setblur(e) {
-//                            UE.getEditor('editor').blur();
-//                            UE.dom.domUtils.preventDefault(e)
-//                        }
-//                        function insertHtml() {
-//                            var value = prompt('插入html代码', '');
-//                            UE.getEditor('editor').execCommand('insertHtml', value)
-//                        }
-//                        function createEditor() {
-//                            enableBtn();
-//                            UE.getEditor('editor');
-//                        }
-//                        function getAllHtml() {
-//                            alert(UE.getEditor('editor').getAllHtml())
-//                        }
-//                        function getContent() {
-//                            var arr = [];
-//                            arr.push("使用editor.getContent()方法可以获得编辑器的内容");
-//                            arr.push("内容为：");
-//                            arr.push(UE.getEditor('editor').getContent());
-//                            alert(arr.join("\n"));
-//                        }
-//                        function getPlainTxt() {
-//                            var arr = [];
-//                            arr.push("使用editor.getPlainTxt()方法可以获得编辑器的带格式的纯文本内容");
-//                            arr.push("内容为：");
-//                            arr.push(UE.getEditor('editor').getPlainTxt());
-//                            alert(arr.join('\n'))
-//                        }
-//                        function setContent(isAppendTo) {
-//                            var arr = [];
-//                            arr.push("使用editor.setContent('欢迎使用ueditor')方法可以设置编辑器的内容");
-//                            UE.getEditor('editor').setContent('欢迎使用ueditor', isAppendTo);
-//                            alert(arr.join("\n"));
-//                        }
-//                        function setDisabled() {
-//                            UE.getEditor('editor').setDisabled('fullscreen');
-//                            disableBtn("enable");
-//                        }
-//                        function setEnabled() {
-//                            UE.getEditor('editor').setEnabled();
-//                            enableBtn();
-//                        }
-//                        function getText() {
-//                            //当你点击按钮时编辑区域已经失去了焦点，如果直接用getText将不会得到内容，所以要在选回来，然后取得内容
-//                            var range = UE.getEditor('editor').selection.getRange();
-//                            range.select();
-//                            var txt = UE.getEditor('editor').selection.getText();
-//                            alert(txt)
-//                        }
-//                        function getContentTxt() {
-//                            var arr = [];
-//                            arr.push("使用editor.getContentTxt()方法可以获得编辑器的纯文本内容");
-//                            arr.push("编辑器的纯文本内容为：");
-//                            arr.push(UE.getEditor('editor').getContentTxt());
-//                            alert(arr.join("\n"));
-//                        }
-//                        function hasContent() {
-//                            var arr = [];
-//                            arr.push("使用editor.hasContents()方法判断编辑器里是否有内容");
-//                            arr.push("判断结果为：");
-//                            arr.push(UE.getEditor('editor').hasContents());
-//                            alert(arr.join("\n"));
-//                        }
-//                        function setFocus() {
-//                            UE.getEditor('editor').focus();
-//                        }
-//                        function deleteEditor() {
-//                            disableBtn();
-//                            UE.getEditor('editor').destroy();
-//                        }
-//                        function disableBtn(str) {
-//                            var div = document.getElementById('btns');
-//                            var btns = UE.dom.domUtils.getElementsByTagName(div, "button");
-//                            for (var i = 0, btn; btn = btns[i++];) {
-//                                if (btn.id == str) {
-//                                    UE.dom.domUtils.removeAttributes(btn, ["disabled"]);
-//                                } else {
-//                                    btn.setAttribute("disabled", "true");
-//                                }
-//                            }
-//                        }
-//                        function enableBtn() {
-//                            var div = document.getElementById('btns');
-//                            var btns = UE.dom.domUtils.getElementsByTagName(div, "button");
-//                            for (var i = 0, btn; btn = btns[i++];) {
-//                                UE.dom.domUtils.removeAttributes(btn, ["disabled"]);
-//                            }
-//                        }
-//                        function getLocalData() {
-//                            alert(UE.getEditor('editor').execCommand("getlocaldata"));
-//                        }
-//                        function clearLocalData() {
-//                            UE.getEditor('editor').execCommand("clearlocaldata");
-//                            alert("已清空草稿箱")
-//                        }
+                        function setblur(e) {
+                            UE.getEditor('editor').blur();
+                            UE.dom.domUtils.preventDefault(e)
+                        }
+                        function insertHtml() {
+                            var value = prompt('插入html代码', '');
+                            UE.getEditor('editor').execCommand('insertHtml', value)
+                        }
+                        function createEditor() {
+                            enableBtn();
+                            UE.getEditor('editor');
+                        }
+                        function getAllHtml() {
+                            alert(UE.getEditor('editor').getAllHtml())
+                        }
+                        function getContent() {
+                            var arr = [];
+                            arr.push("使用editor.getContent()方法可以获得编辑器的内容");
+                            arr.push("内容为：");
+                            arr.push(UE.getEditor('editor').getContent());
+                            alert(arr.join("\n"));
+                        }
+                        function getPlainTxt() {
+                            var arr = [];
+                            arr.push("使用editor.getPlainTxt()方法可以获得编辑器的带格式的纯文本内容");
+                            arr.push("内容为：");
+                            arr.push(UE.getEditor('editor').getPlainTxt());
+                            alert(arr.join('\n'))
+                        }
+                        function setContent(isAppendTo) {
+                            var arr = [];
+                            arr.push("使用editor.setContent('欢迎使用ueditor')方法可以设置编辑器的内容");
+                            UE.getEditor('editor').setContent('欢迎使用ueditor', isAppendTo);
+                            alert(arr.join("\n"));
+                        }
+                        function setDisabled() {
+                            UE.getEditor('editor').setDisabled('fullscreen');
+                            disableBtn("enable");
+                        }
+                        function setEnabled() {
+                            UE.getEditor('editor').setEnabled();
+                            enableBtn();
+                        }
+                        function getText() {
+                            //当你点击按钮时编辑区域已经失去了焦点，如果直接用getText将不会得到内容，所以要在选回来，然后取得内容
+                            var range = UE.getEditor('editor').selection.getRange();
+                            range.select();
+                            var txt = UE.getEditor('editor').selection.getText();
+                            alert(txt)
+                        }
+                        function getContentTxt() {
+                            var arr = [];
+                            arr.push("使用editor.getContentTxt()方法可以获得编辑器的纯文本内容");
+                            arr.push("编辑器的纯文本内容为：");
+                            arr.push(UE.getEditor('editor').getContentTxt());
+                            alert(arr.join("\n"));
+                        }
+                        function hasContent() {
+                            var arr = [];
+                            arr.push("使用editor.hasContents()方法判断编辑器里是否有内容");
+                            arr.push("判断结果为：");
+                            arr.push(UE.getEditor('editor').hasContents());
+                            alert(arr.join("\n"));
+                        }
+                        function setFocus() {
+                            UE.getEditor('editor').focus();
+                        }
+                        function deleteEditor() {
+                            disableBtn();
+                            UE.getEditor('editor').destroy();
+                        }
+                        function disableBtn(str) {
+                            var div = document.getElementById('btns');
+                            var btns = UE.dom.domUtils.getElementsByTagName(div, "button");
+                            for (var i = 0, btn; btn = btns[i++];) {
+                                if (btn.id == str) {
+                                    UE.dom.domUtils.removeAttributes(btn, ["disabled"]);
+                                } else {
+                                    btn.setAttribute("disabled", "true");
+                                }
+                            }
+                        }
+                        function enableBtn() {
+                            var div = document.getElementById('btns');
+                            var btns = UE.dom.domUtils.getElementsByTagName(div, "button");
+                            for (var i = 0, btn; btn = btns[i++];) {
+                                UE.dom.domUtils.removeAttributes(btn, ["disabled"]);
+                            }
+                        }
+                        function getLocalData() {
+                            alert(UE.getEditor('editor').execCommand("getlocaldata"));
+                        }
+                        function clearLocalData() {
+                            UE.getEditor('editor').execCommand("clearlocaldata");
+                            alert("已清空草稿箱")
+                        }
                     </script>
                 </div>
             </div>
@@ -243,21 +243,7 @@
 <script src="${pageContext.request.contextPath}/resources/admin_js/easypiechart-data.js"></script>
 <script src="${pageContext.request.contextPath}/resources/admin_js/bootstrap-datepicker.js"></script>
 <script src="${pageContext.request.contextPath}/resources/admin_js/bootstrap-table.js"></script>
-<script>
-    !function ($) {
-        $(document).on("click", "ul.nav li.parent > a > span.icon", function () {
-            $(this).find('em:first').toggleClass("glyphicon-minus");
-        });
-        $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
-    }(window.jQuery);
 
-    $(window).on('resize', function () {
-        if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
-    })
-    $(window).on('resize', function () {
-        if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
-    })
-</script>
 </body>
 
 </html>

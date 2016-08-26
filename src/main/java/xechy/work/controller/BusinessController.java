@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import xechy.work.model.Business;
+import xechy.work.model.Goods;
+import xechy.work.model.Order;
 import xechy.work.model.User;
 import xechy.work.service.BusinessService;
 import xechy.work.service.GoodsService;
 import xechy.work.service.OrderService;
+import xechy.work.util.Page;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -49,7 +52,7 @@ public class BusinessController extends BaseController<Business> {
         }
 
         session.setAttribute("loginBusiness",b);
-        return TEMPLATE_PATH+"listUI";
+        return "/WEB-INF/goods/addGoodsUI";
     }
 
     @RequestMapping("/saveBusiness")
@@ -175,6 +178,49 @@ public class BusinessController extends BaseController<Business> {
         }
         request.setAttribute("receiveBusiness",rb);
         return TEMPLATE_PATH+"updatePasswordUI";
+    }
+
+    @RequestMapping("/deleteGoods/{gid}")
+    public String deleteGoods(@PathVariable Integer gid,RedirectAttributes redirectAttributes,HttpSession session){
+        Business b = (Business) session.getAttribute("loginBusiness");
+        goodsService.deleteById(gid);
+        redirectAttributes.addFlashAttribute("deleteMsg","删除成功");
+        return REDIRECT_URL+"showMyGoods/"+b.getBid();
+    }
+
+    @RequestMapping("/showMyGoods/{bid}")
+    public String showMyGoods(@PathVariable Integer bid, HttpServletRequest request, HttpServletResponse response) {
+
+        Page<Goods> pageList = null;
+
+        pageList  = goodsService.showProductsByPage(bid,request, response);
+
+        request.setAttribute("pageList", pageList);
+
+        request.setAttribute("url",  bid);
+
+        return TEMPLATE_PATH+"/listUI";
+    }
+
+    @RequestMapping("/showMyOrder/{bid}")
+    public String showMyOrder(@PathVariable Integer bid, HttpServletRequest request, HttpServletResponse response){
+        Page<Order> pageList = null;
+
+        pageList  = orderService.showOrderPage(bid,request, response);
+
+        request.setAttribute("pageList", pageList);
+
+        request.setAttribute("url",  bid);
+
+        return TEMPLATE_PATH+"/listOrderUI";
+    }
+
+    @RequestMapping("/updateBooking/{oid}")
+    public String updateBooking(@PathVariable long oid,HttpSession session,RedirectAttributes redirectAttributes){
+        Business b = (Business) session.getAttribute("loginBusiness");
+        redirectAttributes.addFlashAttribute("updateMsg","操作成功");
+        orderService.updateBooking(oid);
+        return REDIRECT_URL+"showMyOrder/"+b.getBid();
     }
 
 }

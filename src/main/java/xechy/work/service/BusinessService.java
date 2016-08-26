@@ -41,4 +41,6 @@ public interface BusinessService extends BaseService<Business> {
     Business checkStoreName(String storeName);
 
     List<Business> searchByAddress(String baddress);
+
+    Business searchById(long id);
 }

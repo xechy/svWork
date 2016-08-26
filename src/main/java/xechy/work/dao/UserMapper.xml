@@ -13,8 +13,8 @@
         <result column="phone" property="phone" jdbcType="VARCHAR" />
         <result column="sex" property="sex" jdbcType="VARCHAR" />
         <!--一对多的关系-->
-        <collection property="orders" ofType="xechy.work.model.Order">
-            <id column="oid" property="oid" jdbcType="INTEGER" />
+        <collection property="orders" ofType="Order">
+            <id column="oid" property="oid" jdbcType="BIGINT" />
         </collection>
     </resultMap>
     <select id="login" resultMap="BaseResultMap" parameterType="xechy.work.model.User">

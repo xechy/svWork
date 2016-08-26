@@ -28,6 +28,26 @@ public class Order {
 
     private Double price;
 
+    private Business business;
+
+    private User user;
+
+    public Business getBusiness() {
+        return business;
+    }
+
+    public void setBusiness(Business business) {
+        this.business = business;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public long getBid() {
         return bid;
     }

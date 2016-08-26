@@ -43,9 +43,9 @@
         </div>
     </form>
     <ul class="nav menu">
-        <li><a href="${pageContext.request.contextPath}/business/listUI"><span
+        <li><a href="${pageContext.request.contextPath}/business/showMyGoods/${loginBusiness.bid}"><span
                 class="glyphicon glyphicon-th"></span>List-Goods</a></li>
-        <li><a href="${pageContext.request.contextPath}/business/listOrderUI"><span
+        <li><a href="${pageContext.request.contextPath}/business/showMyOrder/${loginBusiness.bid}"><span
                 class="glyphicon glyphicon-th"></span>List-Order</a></li>
         <li role="presentation" class="divider"></li>
         <li><a href="${pageContext.request.contextPath}/goods/addGoodsUI"><span

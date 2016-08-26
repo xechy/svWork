@@ -17,6 +17,9 @@
     <link href="${pageContext.request.contextPath}/resources/admin_css/datepicker3.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/admin_css/bootstrap-table.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/admin_css/styles.css" rel="stylesheet">
+
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 </head>
 
 <body>
@@ -48,13 +51,10 @@
                            data-sort-order="desc">
                         <thead>
                         <tr>
-                            <th data-field="bid" data-sortable="true">ID</th>
-                            <th data-field="bname" data-sortable="true">姓名</th>
-                            <th data-field="storeName" data-sortable="true">姓名</th>
-                            <th data-field="bphone" data-sortable="true">电话</th>
-                            <th data-field="bmail" data-sortable="true">邮箱</th>
-                            <th data-field="baddress" data-sortable="true">地址</th>
-                            <th data-field="bdate" data-sortable="true">日期</th>
+                            <th data-field="oid" data-sortable="true">ID</th>
+                            <th data-field="state" data-sortable="true">状态</th>
+                            <th data-field="price" data-sortable="true">价钱</th>
+                            <th data-field="odate" data-sortable="true">日期</th>
                         </tr>
                         </thead>
                     </table>

@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -29,51 +29,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         });
     </script>
     <%--<script src="js/menu_jquery.js"></script>--%>
+
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 </head>
 <body>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        var tbody = "";
-        var num_price = 0;
-        var num_gname = "";
-        var bid= 0;
-        $.ajax({
-            url: "${pageContext.request.contextPath}/goods/searchByUId/${loginUser.id}",
-            type: 'GET',
-            cache: false,
-            dataType: 'json',
-            async: 'false',
-            success: function (data) {
-                $.each(data, function (n, value) {
-                    var count = 0;
-                    var trs = "";
-                    if (count % 6 != 0) {
-                        trs += " <li><a href='${pageContext.request.contextPath}/goods/addID/" + value.gid + " '> " +
-                                value.gname + " ￥" + value.price +
-                                "</a></li>";
-                    } else {
-                        trs += " <li class='last'><a href='${pageContext.request.contextPath}/goods/addID/" + value.gid + " '> " +
-                                value.gname + " ￥" + value.price +
-                                "</a></li>";
-                    }
-                    tbody += trs;
-                    num_price += value.price;
-                    num_gname += value.gname+" ";
-                    bid = value.business.bid;
-                });
-                $("#project").append(tbody);
-                $("#num_price_div").append(num_price);
-                $("#num_price").val(num_price);
-                $("#num_gname").val(num_gname);
-                $("#bid").val(bid);
-            },
-            error: function () {
-                alert("error");
-            }
-        });
-    });
-</script>
 
 <div class="header">
     <div class="container">
@@ -86,7 +46,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 |
                 <li><a href="${pageContext.request.contextPath}/user/show/${loginUser.id}">查看个人资料</a></li>
                 |
-                <li><a href="${pageContext.request.contextPath}/order/searchOrderUI">查看订单状态</a></li>|
+                <li><a href="${pageContext.request.contextPath}/order/searchOrder/${loginUser.id}">查看我的订单</a></li>|
                 <li><a href="${pageContext.request.contextPath}/user/logout">登出</a></li>
             </ul>
         </div>
@@ -99,32 +59,38 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="single_box1">
             <div class="col-sm-7 col_6">
                 <ul class="size">
-                    <h1><div style="color: #6ce26c">请核对订单信息</div></h1>
+                    <h1><div style="color: #6ce26c">我的订单信息</div></h1>
                 </ul>
                 <p class="movie_option"><strong>
+                    <div id="addIDMsg" style="color: #bf800c"></div>
                 </strong></p>
             </div>
             <div class="clearfix"></div>
         </div>
         <div class="tags">
-            <h4 class="tag_head">购物车</h4>
+            <table class="table table-bordered table-striped" style="border-style:none" >
+                <tr>
+                    <th style="border-style:none" ></th>
+                </tr>
+                <c:forEach items="${pageList.recordList }" var="order">
+                    <tr>
+                        <td style="border-style:none;height: 10px" >
+                        ${order.gname} &nbsp;&nbsp;&nbsp; ${order.state} &nbsp;&nbsp;&nbsp; ${order.price} &nbsp;${order.odate}
+                            <div style="float: right;"><a href="${pageContext.request.contextPath}/order/endOrder/${order.oid}" style="width:200spx;height:50px" class="btn_3">收货</a></div>
 
-            <ul class="tags_images" id="project">
-                <div class="clearfix"></div>
-            </ul>
-            <div style="float: right" id="num_price_div">总价：￥</div>
-            <form action="${pageContext.request.contextPath}/order/saveOrder/${loginUser.id}" method="post">
-                <input type="hidden" name="price" id="num_price" />
-                <input type="hidden" name="gname" id="num_gname" />
-                <input type="hidden" name="bid" id="bid"/>
-                <input style="float: right" class="btn_3" type="submit" value="  下单  "/>
-            </form>
-            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border-style:none" ></td>
+                    </tr>
+                </c:forEach>
+
+            </table>
+            <%@ include file="../common.jsp" %>
         </div>
     </div>
 </div>
-
-
+</div>
 <div class="grid_2">
     <div class="container">
         <div class="col-md-3 col_2">

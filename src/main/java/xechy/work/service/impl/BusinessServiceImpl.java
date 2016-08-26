@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import xechy.work.dao.BusinessMapper;
 import xechy.work.model.Business;
-import xechy.work.model.User;
+import xechy.work.model.Order;
 import xechy.work.service.BusinessService;
 import xechy.work.util.FileUploadUtil;
 

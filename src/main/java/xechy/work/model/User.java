@@ -35,6 +35,21 @@ public class User {
     public User() {
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", mail='" + mail + '\'' +
+                ", phone='" + phone + '\'' +
+                ", date=" + date +
+                ", address='" + address + '\'' +
+                ", sex='" + sex + '\'' +
+                ", orders=" + orders +
+                '}';
+    }
+
     public User(Integer id, String name, String password, String mail, String phone, Date date, String address, String sex, List<Order> orders) {
         this.id = id;
         this.name = name;

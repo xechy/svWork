@@ -35,6 +35,26 @@ public class Goods {
 
     private List<Order> orders;
 
+    private long id;
+
+    private long bid;
+
+    public long getBid() {
+        return bid;
+    }
+
+    public void setBid(long bid) {
+        this.bid = bid;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public long getGid() {
         return gid;
     }

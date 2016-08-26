@@ -27,4 +27,11 @@ public interface GoodsMapper {
 
     List<Goods> searchByUId(long id);
 
+    void deleteUId(long bid);
+
+    Integer getProductsCount(Integer bid);
+
+    List<Goods> selectProductsByPage(@Param(value = "bid")Integer bid,@Param(value="startPos")Integer startPos, @Param(value="pageSize")Integer pageSize);
+
+    List<Goods> searchAll();
 }

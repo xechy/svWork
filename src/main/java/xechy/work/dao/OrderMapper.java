@@ -1,6 +1,6 @@
 package xechy.work.dao;
 
-import xechy.work.model.Goods;
+import org.apache.ibatis.annotations.Param;
 import xechy.work.model.Order;
 
 import java.util.List;
@@ -15,13 +15,23 @@ public interface OrderMapper {
 
     void overBooking(Order order);
 
-    void updateBooking(Goods goods);
+    void updateBooking(Order order);
 
-    Order searchById(long id);
+    List<Order> searchById(long id);
 
     List<Order> searchAll();
 
     void deleteById(long id);
 
     void addToCar(long gid);
+
+    Integer getProductsCount(Integer bid);
+
+    List<Order> selectProductsByPage(@Param(value = "bid") Integer bid,@Param(value = "startPos") Integer startPos,@Param(value = "pageSize") Integer pageSize);
+
+    Order searchONEById(long id);
+
+    List<Order> showOrderInUser(@Param(value = "id")Integer id,@Param(value = "startPos") Integer startPos,@Param(value = "pageSize") Integer pageSize);
+
+    Integer getShowOrderInUser(Integer id);
 }

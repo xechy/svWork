@@ -88,16 +88,11 @@ public class GoodsController extends BaseController<Goods> {
         return TEMPLATE_PATH+"searchGoodsUI";
     }
 
-    @RequestMapping("/deleteGoods/{gid}")
-    public String deleteGoods(@PathVariable long gid){
-        goodsService.deleteById(gid);
-        return REDIRECT_URL+"searchGoodsUI";
-    }
 
     @RequestMapping("/addID/{gid}")
     public String addID(@Valid Goods goods,HttpServletRequest request,RedirectAttributes redirectAttributes){
         User u = (User) request.getSession().getAttribute("loginUser");
-        goods.getUser().setId(u.getId());
+        goods.setId(u.getId());
         goodsService.addID(goods);
         redirectAttributes.addFlashAttribute("addIDMsg","添加购物车成功！");
         return REDIRECT_URL+"searchGoodsUI";

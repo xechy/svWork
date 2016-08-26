@@ -77,7 +77,7 @@ public class UserController extends BaseController<User> {
     public String logout(HttpSession session,RedirectAttributes redirectAttributes){
         redirectAttributes.addFlashAttribute("msg","成功注销！");
         session.removeAttribute("loginUser");
-        return TEMPLATE_PATH+"homeUI";
+        return REDIRECT_URL+"homeUI";
     }
 
     @RequestMapping("/update")

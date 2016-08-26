@@ -5,14 +5,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import xechy.work.model.Business;
-import xechy.work.model.Goods;
 import xechy.work.model.Order;
 import xechy.work.service.OrderService;
+import xechy.work.util.Page;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.util.List;
 
 /**
  * Created by Japa xie on 2016/8/5.
@@ -24,15 +23,6 @@ public class OrderController extends BaseController<Order> {
     @Autowired
     private OrderService orderService;
 
-    @RequestMapping("/updateOrderUI")
-    public String updateOrderUI(HttpServletRequest request){
-        Business b = (Business) request.getSession().getAttribute("loginBusiness");
-        if (b == null){
-            return REDIRECT_URL+"loginUI";
-        }
-        return REDIRECT_URL+"updateOrderUI";
-    }
-
     @RequestMapping("/updateOrder")
     public String updateOrder(@Valid Order order, RedirectAttributes redirectAttributes){
         orderService.update(order);
@@ -40,12 +30,6 @@ public class OrderController extends BaseController<Order> {
         return REDIRECT_URL+"listUI";
     }
 
-
-    @RequestMapping("/searchOrder/{id}")
-    public List<Goods> searchOrder(@PathVariable long id){
-        List<Goods> goodses = (List<Goods>) orderService.searchById(id);
-        return goodses;
-    }
 
     @RequestMapping("/saveOrder/{id}")
     public String saveOrder(@Valid Order order,@PathVariable long id, HttpServletRequest request){
@@ -61,14 +45,28 @@ public class OrderController extends BaseController<Order> {
         return REDIRECT_URL+"listUI";
     }
 
-    @RequestMapping("/searchOrderUI")
-    public String searchOrderUI(){
-        return REDIRECT_URL+"searchOrderUI";
-    }
-
     @RequestMapping("/saveOrderUI")
     public String saveOrderUI(){
         return TEMPLATE_PATH+"saveOrderUI";
+    }
+
+
+    @RequestMapping("/searchOrderUI")
+    public String searchOrderUI(){
+        return TEMPLATE_PATH+"searchOrderUI";
+    }
+
+    @RequestMapping("/searchOrder/{id}")
+    public String searchOrder(@PathVariable Integer id, HttpServletRequest request, HttpServletResponse response){
+        Page<Order> pageList = null;
+
+        pageList  = orderService.showOrderInUser(id,request, response);
+
+        request.setAttribute("pageList", pageList);
+
+        request.setAttribute("url",  id);
+
+        return TEMPLATE_PATH+"/searchOrderUI";
     }
 
 }

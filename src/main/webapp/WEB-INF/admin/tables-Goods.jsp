@@ -48,13 +48,11 @@
                            data-sort-order="desc">
                         <thead>
                         <tr>
-                            <th data-field="bid" data-sortable="true">ID</th>
-                            <th data-field="bname" data-sortable="true">姓名</th>
-                            <th data-field="storeName" data-sortable="true">姓名</th>
-                            <th data-field="bphone" data-sortable="true">电话</th>
-                            <th data-field="bmail" data-sortable="true">邮箱</th>
-                            <th data-field="baddress" data-sortable="true">地址</th>
-                            <th data-field="bdate" data-sortable="true">日期</th>
+                            <th data-field="gid" data-sortable="true">ID</th>
+                            <th data-field="gname" data-sortable="true">商品名</th>
+                            <th data-field="gdescribe" data-sortable="true">简介</th>
+                            <th data-field="price" data-sortable="true">价格</th>
+                            <th data-field="gdate" data-sortable="true">上架日期</th>
                         </tr>
                         </thead>
                     </table>
