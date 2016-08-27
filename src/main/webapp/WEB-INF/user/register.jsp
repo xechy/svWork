@@ -18,82 +18,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <%--<link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600,700,800' rel='stylesheet' type='text/css'>--%>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/menu_jquery.js"></script>
+   <script src="${pageContext.request.contextPath}/resources/vaildate/jquery.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/vaildate/jquery.validate.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/vaildate/messages_cn.js"></script>
 </head>
 <body>
-<script type="text/javascript">
-    function check(f) {//检测函数
-        if (f.name.value == "") {//如果用户名为空
-            alert("请输入用户名！");//弹出提示框
-            f.name.focus();//文本框获取焦点
-            return false;//返回错误
-        }
-        if (f.phone.value == "") {
-            alert("请输入电话号码！");
-            f.phone.focus();
-            return false;
-        }
-        if (f.address.value == "") {
-            alert("请输入所在地址！");
-            f.address.focus();
-            return false;
-        }
-        if (f.mail.value == "") {
-            alert("请输入邮箱！");
-            f.mail.focus();
-            return false;
-        }
-        if (f.password.value == "") {
-            alert("请输入密码！");
-            f.password.focus();
-            return false;
-        }
-        if (f.password_1.value == "") {
-            alert("请再次输入密码！");
-            f.password_1.focus();
-            return false;
-        }
-        if (f.password.value != f.password_1.value) {
-            alert("请输入相同密码！");
-            f.password_1.focus();
-            return false;
-        } else {
-            return true;
-        }
-        return true;
-    }
-</script>
-
-<script type="text/javascript">
-        function checkName () {
-            $.ajax({
-                type:"GET",
-                url:"${pageContext.request.contextPath}/user/checkName/" +$("#name").val(),
-                beforeSend:function(XMLHttpRequest)
-                {
-                    $("#showResult").text("正在查询");
-                    $("#showResult").css("color","blue");
-                },
-                success:function(msg)
-                {
-                    if(msg == ""){
-                        $("#showResult").html("用户名可用");
-                        $("#showResult").css("color","green");
-                    }else{
-                        $("#showResult").html(msg);
-                        $("#showResult").css("color","red");
-                    }
-                },
-                complete:function(XMLHttpRequest,textStatus)
-                {
-                    //隐藏正在查询图片
-                },
-                error:function()
-                {
-                    //错误处理
-                }
-            });
-        }
-</script>
+<%@include file="checkU.jsp"%>
 <div class="header">
     <div class="container">
         <div class="logo">
@@ -107,27 +37,27 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="clearfix"></div>
     </div>
 </div>
+
 <div class="register">
-    <div class="container">
-        <form action="${pageContext.request.contextPath}/user/saveUser" method="post" onsubmit="return check(this)">
+    <div class="container"> <!---->
+        <form action="${pageContext.request.contextPath}/user/saveUser" id="signupForm" method="post" >
             <div class="register-top-grid">
                 <h1>填写个人信息</h1>
                 <div>
                     <span>用户名<label>*</label></span>
-                    <input type="text" name="name" id="name" onblur="checkName()">
-                    <div id="showResult" style="font-size:xx-small;float: right" ></div>
+                    <input type="text" name="name" id="name">
                 </div>
                 <div>
                     <span>电话号码<label>*</label></span>
-                    <input type="text" name="phone">
+                    <input type="text" id="phone" name="phone">
                 </div>
                 <div>
                     <span>所在地址<label>*</label></span>
-                    <input type="text" name="address">
+                    <input type="text" id="address" name="address">
                 </div>
                 <div>
                     <span>电子邮箱<label>*</label></span>
-                    <input type="text" name="mail">
+                    <input type="text" id="mail" name="mail" >
                 </div>
                 <div>
                     <span>性别<label>*</label></span>
@@ -136,17 +66,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <option value="女" >女</option>
                     </select>
                 </div>
-
             </div>
             <div class="register-bottom-grid">
                 <h4>LOGIN INFORMATION</h4>
                 <div>
                     <span>密码<label>*</label></span>
-                    <input type="password" name="password">
+                    <input id="password" type="password" name="password">
                 </div>
                 <div>
                     <span>登录密码<label>*</label></span>
-                    <input type="password" type="password" name="password_1">
+                    <input type="password"id="password_1" name="password_1">
                 </div>
                 <div class="clearfix"></div>
             </div>

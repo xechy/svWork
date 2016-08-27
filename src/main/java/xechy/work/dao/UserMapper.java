@@ -27,4 +27,8 @@ public interface UserMapper {
     void deleteById(long id);
 
     User checkName(String name);
+
+    User checkPhone(String phone);
+
+    User checkEmail(String mail);
 }

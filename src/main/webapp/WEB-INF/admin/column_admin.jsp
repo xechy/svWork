@@ -51,8 +51,6 @@
                 class="glyphicon glyphicon-list-alt"></span> Tables-Orders</a></li>
         <li><a href="${pageContext.request.contextPath}/admin/tables-GoodsUI"><span
                 class="glyphicon glyphicon-list-alt"></span> Tables-Goods</a></li>
-        <li><a href="${pageContext.request.contextPath}/admin/tables-UEditorUI"><span
-                class="glyphicon glyphicon-list-alt"></span> Tables-UEditor</a></li>
         <li role="presentation" class="divider"></li>
     </ul>
 

@@ -87,15 +87,37 @@ public class UserController extends BaseController<User> {
         return REDIRECT_URL+"homeUI";
     }
 
-    @RequestMapping("/checkName/{name}")
-    public void checkName(@PathVariable String name,HttpServletResponse response) throws IOException {
+    @RequestMapping("/checkName")
+    public void checkName(String name,HttpServletResponse response) throws IOException {
         response.setContentType("text/html; charset=utf-8");
         PrintWriter out = response.getWriter();
         User u = userService.checkName(name);
-        if (u != null){
-            out.print("存在该用户");
+        if (u == null){
+            out.print(true);
         }else {
-            out.print("");
+            out.print(false);
+        }
+    }
+    @RequestMapping("/checkPhone")
+    public void checkPhone(String phone,HttpServletResponse response) throws IOException {
+        response.setContentType("text/html; charset=utf-8");
+        PrintWriter out = response.getWriter();
+        User u = userService.checkPhone(phone);
+        if (u == null){
+            out.print(true);
+        }else {
+            out.print(false);
+        }
+    }
+    @RequestMapping("/checkEmail")
+    public void checkEmail(String mail,HttpServletResponse response) throws IOException {
+        response.setContentType("text/html; charset=utf-8");
+        PrintWriter out = response.getWriter();
+        User u = userService.checkEmail(mail);
+        if (u == null){
+            out.print(true);
+        }else {
+            out.print(false);
         }
     }
 

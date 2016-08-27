@@ -55,7 +55,7 @@
     </select>
 
     <select id="searchByNames" resultMap="BaseResultMap" parameterType="String">
-        SELECT id,storeName,bdate FROM business WHERE storeName LIKE %#{storeName}%;
+        SELECT id,storeName,bdate FROM business WHERE storeName LIKE '%' #{storeName} '%';
     </select>
 
     <select id="searchAll" resultMap="BaseResultMap" >

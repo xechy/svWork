@@ -84,27 +84,27 @@ public class BusinessController extends BaseController<Business> {
         return TEMPLATE_PATH+"listUI";
     }
 
-    @RequestMapping("/checkName/{Name}")
-    public void checkName(@PathVariable String Name, HttpServletResponse response) throws IOException {
+    @RequestMapping("/checkBname")
+    public void checkBname(String bname, HttpServletResponse response) throws IOException {
         response.setContentType("text/html; charset=utf-8");
         PrintWriter out = response.getWriter();
-        Business b =  businessService.checkName(Name);
-        if(b != null){
-            out.print("存在该用户");
+        Business b =  businessService.checkName(bname);
+        if(b == null){
+            out.print(true);
         }else {
-            out.print("");
+            out.print(false);
         }
     }
 
-    @RequestMapping("/checkStoreName/{storeName}")
-    public void checkStoreName(@PathVariable String storeName, HttpServletResponse response) throws IOException {
+    @RequestMapping("/checkStoreName")
+    public void checkStoreName(String storeName, HttpServletResponse response) throws IOException {
         response.setContentType("text/html; charset=utf-8");
         PrintWriter out = response.getWriter();
         Business b =  businessService.checkStoreName(storeName);
-        if(b != null){
-            out.print("存在该商铺");
+        if(b == null){
+            out.print(true);
         }else {
-            out.print("");
+            out.print(false);
         }
     }
 

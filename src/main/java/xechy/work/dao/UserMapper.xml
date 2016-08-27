@@ -56,4 +56,11 @@
         SELECT id FROM USER WHERE name=#{name};
     </select>
 
+    <select id="checkPhone" resultMap="BaseResultMap" parameterType="String">
+        SELECT id FROM USER WHERE phone=#{phone};
+    </select>
+
+    <select id="checkEmail" resultMap="BaseResultMap" parameterType="String">
+        SELECT id FROM user WHERE mail LIKE '%' #{mail} '%';
+    </select>
 </mapper>

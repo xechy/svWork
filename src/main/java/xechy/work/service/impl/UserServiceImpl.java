@@ -62,4 +62,14 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
     public User checkName(String name) {
         return this.userMapper.checkName(name);
     }
+
+    @Override
+    public User checkPhone(String phone) {
+        return this.userMapper.checkPhone(phone);
+    }
+
+    @Override
+    public User checkEmail(String mail) {
+        return this.userMapper.checkEmail(mail);
+    }
 }

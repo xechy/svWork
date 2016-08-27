@@ -21,6 +21,25 @@
 
 <body>
 <%@ include file="column_admin.jsp" %>
+
+<script type="text/javascript">
+    function check(f) {
+        if (f.excel.value == ""){
+            $("#excelMsg").empty();
+            $("#excelMsg").append("请选择导入文件");
+            f.excel.focus();
+            return false;
+        }
+        excelExt=f.excel.value.substr(f.excel.value.lastIndexOf(".")).toLowerCase();
+        if (excelExt != ".xlsx" || excelExt !="xls"){
+            $("#excelMsg").empty();
+            $("#excelMsg").append("请选择正确的文件类型");
+            f.excel.focus();
+            return false;
+        }
+    }
+</script>
+
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
         <ol class="breadcrumb">
@@ -44,10 +63,10 @@
 
                     <div style="float:left">
                         <form action="${pageContext.request.contextPath}/excel/uploadUser" enctype="multipart/form-data"
-                              method="post">
+                              method="post" onsubmit="return check(this)">
                             <div class="form-group" style="clear: both">
                                 <div style="float:left">
-                                    <input type="file" name="excel">
+                                    <input id="excel" type="file" name="excel">
                                 </div>
                                 <div style="float:left">
                                     <button type="submit" class="btn btn-primary">导入</button>
@@ -55,6 +74,7 @@
                                 <div style="float:left">
                                     <a class="btn btn-primary" href="${pageContext.request.contextPath}/excel/download">导出</a>
                                 </div>
+                                <div style="float:left;color: orange" id="excelMsg"></div>
                             </div>
                         </form>
                     </div>
