@@ -33,7 +33,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 </head>
 <body>
-
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> <!--解决日期显示的问题-->
 <div class="header">
     <div class="container">
         <div class="logo">
@@ -78,7 +78,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <tr>
                         <td style="border-style:none;height: 10px">
                                 ${order.gname} &nbsp;&nbsp;&nbsp; <span style="color:olive">状态 ：</span> ${order.state}
-                            &nbsp;&nbsp;&nbsp; <span style="color:olive">价格 ： </span> ${order.price} <span style="color:olive">下单日期 ： </span> &nbsp;${order.odate}
+                            &nbsp;&nbsp;&nbsp; <span style="color:olive">价格 ： </span> ${order.price} <span style="color:olive">下单日期 ： </span> &nbsp;<fmt:formatDate value="${order.odate}" pattern="yyyy-MM--dd HH:mm:ss"/>
                             <div style="float: right;"><a
                                     href="${pageContext.request.contextPath}/order/endOrder/${order.oid}"
                                     style="width:1150px;height:60px" class="btn_3"><span style="float:left; padding:5px 20px;width:100%;text-align:center;">收货</span></a></div>

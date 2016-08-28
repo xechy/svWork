@@ -22,7 +22,7 @@
 </head>
 
 <body>
-
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="colunm.jsp" %>
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
@@ -60,7 +60,7 @@
                             <td> ${goods.gname} </td>
                             <td> ${goods.gdescribe} </td>
                             <td> ${goods.price} </td>
-                            <td> ${goods.gdate} </td>
+                            <td> <fmt:formatDate value="${goods.gdate}" pattern="yyyy-MM--dd HH:mm:ss"/> </td>
                             <td> <img src="${pageContext.request.contextPath}/resources/file/goods/${goods.picture}" width="100px"> </td>
                             <td>
                                  <a href="${pageContext.request.contextPath}/business/deleteGoods/${goods.gid}">删除</a>

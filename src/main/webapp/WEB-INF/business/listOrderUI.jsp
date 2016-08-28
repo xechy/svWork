@@ -22,7 +22,7 @@
 
 <body>
 <%@ include file="colunm.jsp"%>
-
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
         <ol class="breadcrumb">
@@ -63,7 +63,7 @@
                                 <td>  ${order.getUser().name} </td>
                                 <td>  ${order.getUser().address} </td>
                                 <td>  ${order.getUser().phone} </td>
-                                <td> ${order.odate} </td>
+                                <td><fmt:formatDate value="${order.odate}" pattern="yyyy-MM--dd HH:mm:ss"/></td>
                                 <td>
                                     <c:if test="${order.state eq'等待商家接单'}">
                                     <a href="${pageContext.request.contextPath}/business/updateBooking/${order.oid}">接单</a>
