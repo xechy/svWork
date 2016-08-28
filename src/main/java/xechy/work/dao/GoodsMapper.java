@@ -19,7 +19,7 @@ public interface GoodsMapper {
 
     List<Goods> searchByNames(@Param("gname") String gname);
 
-    List<Goods> searchByBid(long id);
+
 
     void addID(Goods goods);
 
@@ -34,4 +34,6 @@ public interface GoodsMapper {
     List<Goods> selectProductsByPage(@Param(value = "bid")Integer bid,@Param(value="startPos")Integer startPos, @Param(value="pageSize")Integer pageSize);
 
     List<Goods> searchAll();
+
+    Goods searchByOId(long id);
 }

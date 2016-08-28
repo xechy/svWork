@@ -36,7 +36,7 @@
     </update>
 
     <update id="update" parameterType="xechy.work.model.User">
-        UPDATE user SET name=#{name},mail=#{mail},address=#{address},
+        UPDATE user SET mail=#{mail},address=#{address},
         phone=#{phone},sex=#{sex} WHERE id=#{id};
     </update>
 

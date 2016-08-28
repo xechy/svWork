@@ -8,7 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <script src="${pageContext.request.contextPath}/resources/vaildate/jquery.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/vaildate/jquery.validate.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/vaildate/messages_cn.js"></script>
 </head>
 <body>
 <script type="text/javascript">

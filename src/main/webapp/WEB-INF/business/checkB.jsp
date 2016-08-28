@@ -8,11 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <script src="${pageContext.request.contextPath}/resources/vaildate/jquery.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/vaildate/jquery.validate.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/vaildate/messages_cn.js"></script>
+
 </head>
 <body>
+
 <script type="text/javascript">
     function check_1(f) {//检测函数
         if (f.bname.value == "") {//如果用户名为空
@@ -34,6 +33,7 @@
     <title>Title</title>
 </head>
 <body>
+
 <script type="text/javascript">
     $(function() {
         $("#registerForm").validate({

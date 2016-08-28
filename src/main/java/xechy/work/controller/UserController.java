@@ -82,7 +82,7 @@ public class UserController extends BaseController<User> {
 
     @RequestMapping("/update")
     public String update(@Valid User user,RedirectAttributes redirectAttributes){
-        userService.update(user);
+        userService.updateUser(user);
         redirectAttributes.addFlashAttribute("msg","修改成功");
         return REDIRECT_URL+"homeUI";
     }

@@ -1,24 +1,21 @@
 package xechy.work.service.impl;
 
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xechy.work.dao.GoodsMapper;
 import xechy.work.dao.OrderMapper;
 import xechy.work.model.Business;
-import xechy.work.model.Goods;
 import xechy.work.model.Order;
+import xechy.work.model.User;
 import xechy.work.service.OrderService;
 import xechy.work.util.Page;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import static com.sun.tools.doclint.Entity.or;
-import static javax.swing.text.html.CSS.getAttribute;
 
 /**
  * Created by Japa xie on 2016/8/5.
@@ -56,13 +53,15 @@ public class OrderServiceImpl extends BaseServiceImpl<Order> implements OrderSer
     public void updateBooking(long id) {
         Order order =  this.orderMapper.searchONEById(id);
         order.setOdate(new Date());
-        if (order.getState().equals("商家已接单")){
+        if (order.getState().equals("配送中") || order.getState().equals("等待商家接单")){
+            order.setState("配送成功");
+        }
+        if (order.getState().equals("商家已接单") && !order.getState().equals("配送中")){
             order.setState("配送中");
-        }else{
+        }
+        if (order.getState().equals("等待商家接单") && !order.getState().equals("配送中")){
             order.setState("商家已接单");
         }
-        order.setBid(order.getBusiness().getBid());
-
         this.orderMapper.updateBooking(order);
     }
 

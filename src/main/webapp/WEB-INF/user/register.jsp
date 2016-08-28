@@ -18,9 +18,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <%--<link href='http://fonts.useso.com/css?family=Open+Sans:300,400,600,700,800' rel='stylesheet' type='text/css'>--%>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-1.11.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/menu_jquery.js"></script>
-   <script src="${pageContext.request.contextPath}/resources/vaildate/jquery.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/vaildate/jquery.validate.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/vaildate/messages_cn.js"></script>
 </head>
 <body>
 <%@include file="checkU.jsp"%>
@@ -59,6 +56,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <span>电子邮箱<label>*</label></span>
                     <input type="text" id="mail" name="mail" >
                 </div>
+            </div>
+            <div class="register-bottom-grid">
+                <div>
+                    <span>密码<label>*</label></span>
+                    <input id="password" type="password" name="password">
+                </div>
+                <div>
+                    <span>重新输入一次密码<label>*</label></span>
+                    <input type="password"id="password_1" name="password_1">
+                 </div>
                 <div>
                     <span>性别<label>*</label></span>
                     <select name="sex" >
@@ -66,18 +73,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <option value="女" >女</option>
                     </select>
                 </div>
-            </div>
-            <div class="register-bottom-grid">
-                <h4>LOGIN INFORMATION</h4>
-                <div>
-                    <span>密码<label>*</label></span>
-                    <input id="password" type="password" name="password">
-                </div>
-                <div>
-                    <span>登录密码<label>*</label></span>
-                    <input type="password"id="password_1" name="password_1">
-                </div>
                 <div class="clearfix"></div>
+
             </div>
             <input class="register-but" type="submit" value="提交">
 

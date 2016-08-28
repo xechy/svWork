@@ -20,7 +20,7 @@
 </head>
 
 <body>
-<%@ include file="../business/colunm.jsp"%>
+<%@ include file="../business/colunm.jsp"%>、
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
@@ -41,12 +41,13 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     个人详细信息 |
-                    <a href="${pageContext.request.contextPath}/business/updatePasswordUI" class="btn btn-primary">修改密码</a>
+                    <a href="${pageContext.request.contextPath}/business/updatePasswordUI" class="btn btn-primary" >修改密码</a>
+                    <div style="float:right;color: #bf800c" id="msg">${updateMsg}</div>
                 </div>
                 <div class="panel-body">
                     <div class="col-md-6">
                         <form role="form" action="${pageContext.request.contextPath}/business/update" method="post"
-                              enctype="multipart/form-data">
+                              enctype="multipart/form-data" id="showForm">
                             <input type="hidden" name="bid" value="${loginBusiness.bid}">
                             <div class="form-group">
                                 <label>用户名</label>
@@ -58,19 +59,19 @@
                             </div>
                             <div class="form-group">
                                 <label>电话</label>
-                                <input type="text" name="bphone" class="form-control" placeholder="${businessShow.bphone}"/>
+                                <input type="text" name="bphone" class="form-control" placeholder="${businessShow.bphone}" disabled="true"/>
                             </div>
                             <div class="form-group">
                                 <label>电子邮箱</label>
-                                <input type="text" name="bmail" class="form-control" placeholder="${businessShow.bmail}"/>
-                            </div>
-                            <div class="form-group">
-                                <label>详细地址</label>
-                                <input type="text" name="baddress" class="form-control" placeholder="${businessShow.baddress}"/>
+                                <input type="text" name="bmail" class="form-control" placeholder="${businessShow.bmail}" disabled="true"/>
                             </div>
                             <div class="form-group">
                                 <label>入驻日期</label>
                                 <input type="text" name="bdate" class="form-control" placeholder="${businessShow.bdate}" disabled="true"/>
+                            </div>
+                            <div class="form-group">
+                                <label>修改详细地址</label>
+                                <input type="text" name="baddress" class="form-control" value="${businessShow.baddress}"/>
                             </div>
                             <div style="float: right">
                             <button type="submit" class="btn btn-primary">修改</button>
@@ -87,9 +88,9 @@
 <script src="${pageContext.request.contextPath}/resources/admin_js/jquery-1.11.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/admin_js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/admin_js/chart.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/admin_js/chart-data.js"></script>
-<script src="${pageContext.request.contextPath}/resources/admin_js/easypiechart.js"></script>
-<script src="${pageContext.request.contextPath}/resources/admin_js/easypiechart-data.js"></script>
+<%--<script src="${pageContext.request.contextPath}/resources/admin_js/chart-data.js"></script>--%>
+<%--<script src="${pageContext.request.contextPath}/resources/admin_js/easypiechart.js"></script>--%>
+<%--<script src="${pageContext.request.contextPath}/resources/admin_js/easypiechart-data.js"></script>--%>
 <script src="${pageContext.request.contextPath}/resources/admin_js/bootstrap-datepicker.js"></script>
 
 </body>

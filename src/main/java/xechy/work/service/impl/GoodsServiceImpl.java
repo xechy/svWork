@@ -26,6 +26,8 @@ public class GoodsServiceImpl extends BaseServiceImpl<Goods> implements GoodsSer
 
     @Override
     public void deleteById(long id) {
+        Goods goods =  goodsMapper.searchByOId(id);
+        FileUploadUtil.deleteGoodsPicture(goods.getPicture());
         this.goodsMapper.deleteById(id);
     }
 
@@ -42,7 +44,7 @@ public class GoodsServiceImpl extends BaseServiceImpl<Goods> implements GoodsSer
 
     @Override
     public List<Goods> searchsById(long id) {
-        return  this.goodsMapper.searchsById(id);
+        return this.goodsMapper.searchsById(id);
     }
 
     @Override
@@ -66,21 +68,21 @@ public class GoodsServiceImpl extends BaseServiceImpl<Goods> implements GoodsSer
     }
 
     @Override
-    public Page<Goods> showProductsByPage(Integer bid,HttpServletRequest request, HttpServletResponse response) {
+    public Page<Goods> showProductsByPage(Integer bid, HttpServletRequest request, HttpServletResponse response) {
         String pageNow = request.getParameter("pageNow");
 
         Page<Goods> page = null;
 
         List<Goods> goods = new ArrayList<Goods>();
 
-        int totalCount =  goodsMapper.getProductsCount(bid);
+        int totalCount = goodsMapper.getProductsCount(bid);
 
         if (pageNow != null) {
             page = new Page(totalCount, Integer.parseInt(pageNow));
-            goods = this.goodsMapper.selectProductsByPage(bid,page.getStartPos(), page.getPageSize());
+            goods = this.goodsMapper.selectProductsByPage(bid, page.getStartPos(), page.getPageSize());
         } else {
             page = new Page(totalCount, 1);
-            goods = this.goodsMapper.selectProductsByPage(bid,page.getStartPos(), page.getPageSize());
+            goods = this.goodsMapper.selectProductsByPage(bid, page.getStartPos(), page.getPageSize());
         }
 
         request.setAttribute("goods", goods);

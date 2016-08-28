@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -46,7 +45,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 |
                 <li><a href="${pageContext.request.contextPath}/user/show/${loginUser.id}">查看个人资料</a></li>
                 |
-                <li><a href="${pageContext.request.contextPath}/order/searchOrder/${loginUser.id}">查看我的订单</a></li>|
+                <li><a href="${pageContext.request.contextPath}/order/searchOrder/${loginUser.id}">查看我的订单</a></li>
+                |
                 <li><a href="${pageContext.request.contextPath}/user/logout">登出</a></li>
             </ul>
         </div>
@@ -59,7 +59,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="single_box1">
             <div class="col-sm-7 col_6">
                 <ul class="size">
-                    <h1><div style="color: #6ce26c">我的订单信息</div></h1>
+                    <h1>
+                        <div style="color: #6ce26c">我的订单信息</div>
+                    </h1>
                 </ul>
                 <p class="movie_option"><strong>
                     <div id="addIDMsg" style="color: #bf800c"></div>
@@ -68,20 +70,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="clearfix"></div>
         </div>
         <div class="tags">
-            <table class="table table-bordered table-striped" style="border-style:none" >
+            <table class="table table-bordered table-striped" style="border-style:none">
                 <tr>
-                    <th style="border-style:none" ></th>
+                    <th style="border-style:none"></th>
                 </tr>
                 <c:forEach items="${pageList.recordList }" var="order">
                     <tr>
-                        <td style="border-style:none;height: 10px" >
-                        ${order.gname} &nbsp;&nbsp;&nbsp; ${order.state} &nbsp;&nbsp;&nbsp; ${order.price} &nbsp;${order.odate}
-                            <div style="float: right;"><a href="${pageContext.request.contextPath}/order/endOrder/${order.oid}" style="width:200spx;height:50px" class="btn_3">收货</a></div>
+                        <td style="border-style:none;height: 10px">
+                                ${order.gname} &nbsp;&nbsp;&nbsp; <span style="color:olive">状态 ：</span> ${order.state}
+                            &nbsp;&nbsp;&nbsp; <span style="color:olive">价格 ： </span> ${order.price} <span style="color:olive">下单日期 ： </span> &nbsp;${order.odate}
+                            <div style="float: right;"><a
+                                    href="${pageContext.request.contextPath}/order/endOrder/${order.oid}"
+                                    style="width:1150px;height:60px" class="btn_3"><span style="float:left; padding:5px 20px;width:100%;text-align:center;">收货</span></a></div>
 
                         </td>
                     </tr>
                     <tr>
-                        <td style="border-style:none" ></td>
+                        <td style="border-style:none"></td>
                     </tr>
                 </c:forEach>
 

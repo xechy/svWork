@@ -40,7 +40,7 @@
     </insert>
 
     <update id="updateBooking" parameterType="xechy.work.model.Order">
-        UPDATE orders SET state=#{state} WHERE oid=#{oid} AND bid=#{bid};
+        UPDATE orders SET state=#{state} WHERE oid=#{oid};
     </update>
 
     <select id="searchById" resultMap="BaseResultMap" parameterType="Long">

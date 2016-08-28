@@ -23,7 +23,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 </head>
 <body>
-
 <div class="header">
     <div class="container">
         <div class="logo">
@@ -43,25 +42,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="register">
     <div class="container">
 
-        <form action="${pageContext.request.contextPath}/user/update" method="post">
+        <form action="${pageContext.request.contextPath}/user/update" method="post" id="signupForm">
             <div class="register-top-grid">
                 <h1>查看个人信息</h1>
+                <input type="hidden" value="${showUser.id}" name="id">
                 <div>
                     <span>用户名<label>*</label></span>
                     <input type="text" name="name" id="name" value="${showUser.name}" disabled="true "/>
-                    <div id="showResult" style="font-size:xx-small;float: right" ></div>
                 </div>
                 <div>
                     <span>电话号码<label>*</label></span>
-                    <input type="text" name="phone" value="${showUser.phone}"/>
-                </div>
-                <div>
-                    <span>所在地址<label>*</label></span>
-                    <input type="text" name="address" value="${showUser.address}">
+                    <input type="text" name="phone" id="phone" value="${showUser.phone}" disabled="true "/>
                 </div>
                 <div>
                     <span>电子邮箱<label>*</label></span>
-                    <input type="text" name="mail" value="${showUser.mail}">
+                    <input type="text" name="mail" id="mail" value="${showUser.mail}" disabled="true ">
                 </div>
                 <div>
                     <span>注册日期<label>*</label></span>
@@ -69,10 +64,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </div>
                 <div>
                     <span>性别<label>*</label></span>
-                    <input type="text" name="sex" value="${showUser.sex}">
-                    </select>
+                    <input type="text" name="sex" value="${showUser.sex}" disabled="true ">
                 </div>
-
+                <div>
+                    <span>修改收货地址<label>*</label></span>
+                    <input type="text" name="address" value="${showUser.address}">
+                </div>
 
             </div>
             <div class="register-bottom-grid">

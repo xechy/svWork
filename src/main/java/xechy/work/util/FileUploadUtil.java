@@ -36,6 +36,9 @@ public class FileUploadUtil {
         }
     }
 
+    public static void deleteGoodsPicture(String picture){
+        deleteFile(GOODS_PATH,picture);
+    }
     /**
      * 上传食物图片
      * @param uploadFile

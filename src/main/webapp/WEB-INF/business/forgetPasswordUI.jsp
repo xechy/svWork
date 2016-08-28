@@ -70,9 +70,9 @@
 <script src="${pageContext.request.contextPath}/resources/admin_js/jquery-1.11.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/admin_js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/admin_js/chart.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/admin_js/chart-data.js"></script>
-<script src="${pageContext.request.contextPath}/resources/admin_js/easypiechart.js"></script>
-<script src="${pageContext.request.contextPath}/resources/admin_js/easypiechart-data.js"></script>
+<%--<script src="${pageContext.request.contextPath}/resources/admin_js/chart-data.js"></script>--%>
+<%--<script src="${pageContext.request.contextPath}/resources/admin_js/easypiechart.js"></script>--%>
+<%--<script src="${pageContext.request.contextPath}/resources/admin_js/easypiechart-data.js"></script>--%>
 <script src="${pageContext.request.contextPath}/resources/admin_js/bootstrap-datepicker.js"></script>
 
 </body>

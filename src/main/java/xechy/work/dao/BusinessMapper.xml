@@ -46,8 +46,7 @@
     </update>
 
     <update id="update" parameterType="xechy.work.model.Business">
-        UPDATE business SET bname=#{bname},bmail=#{bmail},baddress=#{baddress},
-        bphone=#{bphone} WHERE bid=#{bid};
+        UPDATE business SET baddress=#{baddress} WHERE bid=#{bid};
     </update>
 
     <select id="receivePassword" resultMap="BaseResultMap" parameterType="xechy.work.model.Business">

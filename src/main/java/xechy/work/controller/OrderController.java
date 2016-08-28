@@ -6,11 +6,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import xechy.work.model.Order;
+import xechy.work.model.User;
 import xechy.work.service.OrderService;
 import xechy.work.util.Page;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 /**
@@ -23,11 +25,12 @@ public class OrderController extends BaseController<Order> {
     @Autowired
     private OrderService orderService;
 
-    @RequestMapping("/updateOrder")
-    public String updateOrder(@Valid Order order, RedirectAttributes redirectAttributes){
-        orderService.update(order);
-        redirectAttributes.addFlashAttribute("msg","修改成功");
-        return REDIRECT_URL+"listUI";
+    @RequestMapping("/endOrder/{id}")
+    public String endOrder(@PathVariable long id, RedirectAttributes redirectAttributes, HttpSession session){
+        User u = (User) session.getAttribute("loginUser");
+        orderService.updateBooking(id);
+        redirectAttributes.addFlashAttribute("msg","收货成功");
+        return REDIRECT_URL+"searchOrder/"+u.getId();
     }
 
 

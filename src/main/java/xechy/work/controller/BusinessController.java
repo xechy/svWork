@@ -223,4 +223,11 @@ public class BusinessController extends BaseController<Business> {
         return REDIRECT_URL+"showMyOrder/"+b.getBid();
     }
 
+    @RequestMapping("/update")
+    public String update(@Valid Business business,RedirectAttributes redirectAttributes,HttpSession session){
+        Business b = (Business) session.getAttribute("loginBusiness");
+        businessService.update(business);
+        redirectAttributes.addFlashAttribute("updateMsg","修改地址成功");
+        return  REDIRECT_URL+"show/"+b.getBid();
+    }
 }

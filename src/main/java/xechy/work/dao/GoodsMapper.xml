@@ -44,8 +44,8 @@
         SELECT gid,gname,price,bid FROM goods WHERE id=#{id};
     </select>
 
-    <select id="searchByBid" resultMap="BaseResultMap" parameterType="long">
-        SELECT gid,gname,picture,gdescribe FROM goods WHERE bid=#{bid};
+    <select id="searchByOId" resultMap="BaseResultMap" parameterType="long">
+        SELECT picture FROM goods WHERE gid=#{gid};
     </select>
 
     <update id="addID" parameterType="xechy.work.model.Goods">
