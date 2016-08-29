@@ -46,62 +46,41 @@
         <property name="defaultLocale" value="zh_CN"/>
     </bean>
 
-    <!--<mvc:interceptors>-->
-        <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="/user/**" />-->
-            <!--<bean class="xechy.work.interceptors.UserSessionInterceptor">-->
-                <!--&lt;!&ndash; 不需要session验证的地址 &ndash;&gt;-->
-                <!--<property name="excludeUrls">-->
-                    <!--<list>-->
-                        <!--<value>/user/user/login</value>-->
-                        <!--<value>/user/user/loginUI</value>-->
-                        <!--<value>/user/apply/addUI</value>-->
-                        <!--<value>/user/apply/add</value>-->
-                    <!--</list>-->
-                <!--</property>-->
-            <!--</bean>-->
-        <!--</mvc:interceptor>-->
-    <!--</mvc:interceptors>-->
-    <!--&lt;!&ndash;<mvc:interceptors>-->
-        <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="/user/**" />-->
-            <!--<bean class="xechy.work.interceptors.IdSessionInterceptor">-->
-                <!--<property name="idexcludeUrls">-->
-                        <!--<value>/user/user/list</value>-->
-                <!--</property>-->
-            <!--</bean>-->
-        <!--</mvc:interceptor>-->
-    <!--</mvc:interceptors>&ndash;&gt;-->
-    <!--&lt;!&ndash;管理员端session验证地址 &ndash;&gt;-->
-    <!--<mvc:interceptors>-->
-        <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="/admin/**" />-->
-            <!--<mvc:exclude-mapping path="/admin/course/checkinSign/*"/>-->
-            <!--<mvc:exclude-mapping path="/admin/course/checkinSub/*"/>-->
-            <!--<mvc:exclude-mapping path="/admin/course/checkout/**"/>-->
-            <!--<mvc:exclude-mapping path="/admin/course/otAdd/*"/>-->
-            <!--<bean class="xechy.work.interceptors.AdminSessionInterceptor">-->
-                <!--<property name="excludeUrls">-->
-                    <!--<list>-->
-                        <!--<value>/admin/admin/loginUI</value>-->
-                        <!--<value>/admin/admin/login</value>-->
-                    <!--</list>-->
-                <!--</property>-->
-                <!--<property name="idexcludeUrls">-->
-                    <!--<list>-->
-                        <!--<value>/admin/course/showDay/1</value>-->
-                        <!--<value>/admin/course/showDay/2</value>-->
-                        <!--<value>/admin/course/showDay/3</value>-->
-                        <!--<value>/admin/course/showDay/4</value>-->
-                        <!--<value>/admin/course/showDay/5</value>-->
-                        <!--<value>/admin/course/showDay/6</value>-->
-                        <!--<value>/admin/course/showDay/7</value>-->
-                        <!--<value>/admin/admin/logout</value>-->
-                    <!--</list>-->
-                <!--</property>-->
-            <!--</bean>-->
-        <!--</mvc:interceptor>-->
-    <!--</mvc:interceptors>-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/user/**" />
+            <bean class="xechy.work.interceptors.UserSessionInterceptor">
+                <!-- 不需要session验证的地址 -->
+                <property name="excludeUrls">
+                    <list>
+                        <value>/user/homeUI</value>
+                        <value>/user/login</value>
+                        <value>/user/forgetUI</value>
+                        <value>/user/registerUI</value>
+                        <value>/user/updatePassword</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/business/**" />
+            <bean class="xechy.work.interceptors.BusinessSessionInterceptor">
+                <!-- 不需要session验证的地址 -->
+                <property name="excludeUrls">
+                    <list>
+                        <value>/business/loginUI</value>
+                        <value>/business/login</value>
+                        <value>/business/forgetPasswordUI</value>
+                        <value>/business/saveBusiness</value>
+                        <value>/business/receivePassword</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
 
 
     <!-- 支持返回json(避免IE在ajax请求时，返回json出现下载 ) -->
