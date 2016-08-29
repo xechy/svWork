@@ -38,9 +38,10 @@ public class AdminController extends BaseController<Admin> {
     private GoodsService goodsService;
 
     @RequestMapping("/login")
-    public String login(@Valid Admin admin, HttpSession session){
+    public String login(@Valid Admin admin, HttpSession session,RedirectAttributes redirectAttributes){
         Admin a = adminService.login(admin);
         if(a == null){
+            redirectAttributes.addFlashAttribute("result","用户或密码错误");
             return REDIRECT_URL+"loginUI";
         }
         session.setAttribute("loginAdmin",a);

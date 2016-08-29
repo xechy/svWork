@@ -132,12 +132,7 @@ public class BusinessController extends BaseController<Business> {
         return TEMPLATE_PATH+"loginUI";
     }
 
-    @RequestMapping("/searchByAddress/{baddress}")
-    @ResponseBody
-    public List<Business> searchByAddress(@PathVariable String baddress){
-        List<Business> bs = businessService.searchByAddress(baddress);
-        return bs;
-    }
+
 
 
     @RequestMapping("/searchByAddressUI")

@@ -6,8 +6,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import xechy.work.model.Business;
 import xechy.work.model.User;
+import xechy.work.service.BusinessService;
 import xechy.work.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +20,7 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Japa xie on 2016/8/5.
@@ -27,6 +31,9 @@ public class UserController extends BaseController<User> {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private BusinessService businessService;
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public String login(@Valid User user, HttpSession session,RedirectAttributes redirectAttributes){
@@ -163,4 +170,11 @@ public class UserController extends BaseController<User> {
         return TEMPLATE_PATH+"showUI";
     }
 
+
+    @RequestMapping("/searchByAddress/{baddress}")
+    @ResponseBody
+    public List<Business> searchByAddress(@PathVariable String baddress){
+        List<Business> bs = businessService.searchByAddress(baddress);
+        return bs;
+    }
 }

@@ -39,7 +39,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     $(document).ready(function () {
         var tbody = "";
         $.ajax({
-            url: "${pageContext.request.contextPath}/business/searchByAddress/${baddress}",
+            url: "${pageContext.request.contextPath}/user/searchByAddress/${baddress}",
             type: 'GET',
             cache: false,
             dataType: 'json',

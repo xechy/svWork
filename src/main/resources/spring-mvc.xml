@@ -75,13 +75,27 @@
                         <value>/business/forgetPasswordUI</value>
                         <value>/business/saveBusiness</value>
                         <value>/business/receivePassword</value>
+                        <value>/business/searchByAddressUI</value>
                     </list>
                 </property>
             </bean>
         </mvc:interceptor>
     </mvc:interceptors>
 
-
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/admin/**" />
+            <bean class="xechy.work.interceptors.AdminSessionInterceptor">
+                <!-- 不需要session验证的地址 -->
+                <property name="excludeUrls">
+                    <list>
+                        <value>/admin/loginUI</value>
+                        <value>/admin/login</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
     <!-- 支持返回json(避免IE在ajax请求时，返回json出现下载 ) -->
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
