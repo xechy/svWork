@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-ear" name="svWorkl ">
+    <output-path>$PROJECT_DIR$/out/artifacts/svWorkl_</output-path>
+    <root id="root">
+      <element id="artifact" artifact-name="svWork:war exploded" />
+    </root>
+  </artifact>
+</component>

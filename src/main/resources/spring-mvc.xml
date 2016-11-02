@@ -55,6 +55,7 @@
                     <list>
                         <value>/user/homeUI</value>
                         <value>/user/login</value>
+                        <value>/user/saveUser</value>
                         <value>/user/forgetUI</value>
                         <value>/user/registerUI</value>
                         <value>/user/updatePassword</value>
